@@ -1,0 +1,808 @@
+:root{
+    --background-color: #FFEFDD;
+    --main-color: #2A2624;
+    --secondary-color: #F6E6D5;
+    --orange-accent-color: #FF643E;
+
+    --margin-horizontal: 86px;
+    /* --margin-vertical: 50px; */
+}
+
+
+@font-face {
+    font-family: 'NeutralSans';
+    font-weight: 400;
+    font-style: normal;
+    src: url("source/font/NeutralSans-Regular.woff2") format('woff2');
+}
+@font-face {
+    font-family: 'NeutralSans';
+    font-weight: 500;
+    font-style: normal;
+    src: url("source/font/NeutralSans-Meidum.woff2") format('woff2');
+}
+@font-face {
+    font-family: 'NeutralSans';
+    font-weight: 700;
+    font-style: normal;
+    src: url("source/font/NeutralSans-Bold.woff2") format('woff2');
+}
+@font-face {
+    font-family: 'NeutralSans';
+    font-weight: 900;
+    font-style: normal;
+    src: url("source/font/NeutralSans-Black.woff2") format('woff2');
+}
+
+
+.flex{
+    display: flex;
+}
+.flex-cl{
+    display: flex;
+    flex-direction: column;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between{
+    justify-content: space-between;
+}
+
+.gap-64{
+    gap: 64px;
+}
+.gap-24{
+    gap: 24px;
+}
+.gap-18{
+    gap: 18px;
+}
+.gap-12{
+    gap: 12px;
+}
+.gap-8{
+    gap: 8px;
+}
+
+
+.vspacer-8{
+    height: 8px;
+}
+.vspacer-12{
+    height: 12px;
+}
+.vspacer-24{
+    height: 24px;
+}
+.hspacer{
+    width: 100%;
+}
+
+
+
+h1,h2,h3,h4,h5,h6, p{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-size: 82px;
+    font-weight: 700;
+    line-height: 100%;
+}
+h2{
+    font-size: 48px;
+    font-weight: 700;
+}
+h3{
+    font-size: 24px;
+}
+p{
+    font-size: 18px;
+}
+
+a{
+    text-decoration: none;
+    color: initial;
+}
+a.button-like{
+    transition: scale 0.3s, opacity 0.3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    gap: 10px;
+
+    padding: 18px 20px;
+
+    border-radius: 18px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+a.button-like.fill{
+    background-color: var(--main-color);
+    color: var(--background-color);
+}
+a.button-like.wide{
+    padding: 18px 64px;
+}
+a.button-like:hover{
+    transition: 0.3s;
+    scale: 1.05;
+    opacity: 0.8;
+}
+
+a.browser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    /* height: 32px; */
+    padding: 6px 9px;
+    padding-right: 12px;
+    width: fit-content;
+
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+*::selection {
+    background: var(--orange-accent-color);
+    color: #ffffff;
+}
+*::-moz-selection {
+    background: var(--orange-accent-color);
+    color: #ffffff;
+}
+*::-webkit-selection {
+    background: var(--orange-accent-color);
+    color: #ffffff;
+}
+
+
+
+html{
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    
+    background-color: var(--background-color);
+    color: var(--main-color);
+
+    font-family: NeutralSans;
+
+    box-sizing: border-box;
+}
+
+header{
+    transition: 0.4s;
+
+    opacity: 0;
+    z-index: -10;
+    transform: translatey(-160px);
+}
+
+header{
+    position: fixed;
+    
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    
+    border-bottom: 2px solid #F6E6D5;
+    background: rgba(255, 239, 221, 0.85);
+    backdrop-filter: blur(18px);
+
+    .content{
+        max-width: 680px;
+        width: 100%;
+
+        padding: 0 24px;
+    }
+}
+
+header.active{
+    transition: 0.5s;
+    opacity: initial;
+    z-index: 999;
+    transform: initial;
+
+}
+
+.lbpage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    padding: var(--margin-horizontal) 0;
+
+    background-color: var(--background-color);
+
+    text-align: center;
+}
+
+
+.lbpage.projects{
+    padding: 0 32px;
+
+    .mac-wrapper{
+        position: relative;
+        width: 100%;
+
+        background-image: url(/source/background.png);
+        border-radius: 32px;
+
+        h2{
+            position: absolute;
+            top: 64px;
+            width: 100%;
+        }
+    }
+}
+
+.project-wrapper{
+    position: relative;
+    overflow: hidden;
+
+    height: 1920px;
+    height: 100vh;
+}
+.project{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    max-width: 540px;
+    max-height: 650px;
+    border-radius: 24px;
+    background: rgba(46, 46, 46, 0.40);
+    backdrop-filter: blur(32px);
+    color: white;
+    
+    .head{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+
+        padding: 12px 24px 8px 18px;
+
+        border-bottom: 1px solid black;
+
+        h3{
+            font-size: 18px;
+        }
+        a{
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+    }
+}
+
+
+
+p span{
+    background-color: var(--orange-accent-color);
+    border-radius: 99px;
+    padding: 0 6px;
+}
+
+p:hover{
+    transition: 0.4s;
+    background-color: var(--secondary-color);
+    border-radius: 99px;
+    padding: 0 6px;
+}
+p.smaller{
+    font-size: 16px;
+}
+
+
+
+
+
+
+.scroll-page{
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.scroll-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    width: 100%;
+    height: fit-content;
+    gap: 32px;
+    padding-top: 30px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 50%;
+
+    box-sizing: border-box;
+}
+
+
+
+.card em {
+    font-weight: 600;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.card h3 {
+    font-size: 32px;
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-container {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.card:nth-child(odd) {
+    margin-bottom: 140px;
+}
+
+.what-i-love {
+    background: #fef1e1;
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.what-i-love h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 80px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    transform: perspective(1000px);
+    perspective: 1000px;
+}
+
+.card {
+    background: var(--secondary-color);
+    backdrop-filter: blur(10px);
+    padding: 20px 30px;
+    border-radius: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.project {
+    cursor: grab;
+    transition: all 0.2s ease;
+  }
+  
+  .project.dragging {
+    cursor: grabbing;
+    z-index: 9999;
+    scale: 1.05;
+  }
+
+
+/* Стили для кнопки скрытия */
+.hide-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    padding: 0;
+    transition: background-color 0.2s;
+  }
+  
+  .hide-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .app-icon:hover {
+    transform: scale(1.1);
+    background: rgba(46, 46, 46, 0.8);
+  }
+  
+  /* Анимация для проектов */
+  .project {
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project .head {
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .project.dragging {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    opacity: 0.95;
+  }
+  
+  .project.dragging .head {
+    cursor: grabbing;
+  }
+  
+  /* Скрытие/показ проектов с анимацией */
+  .project {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .project.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none;
+  }
+
+
+
+
+
+
+
+/* Стили для кнопки скрытия */
+.hide-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    padding: 0;
+    transition: background-color 0.2s;
+  }
+  
+  .hide-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Стили для дока с иконками */
+  .app-dock {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    z-index: 1000;
+    padding: 8px;
+    border-radius: 10px;
+    background: rgba(46, 46, 46, 0.4);
+    backdrop-filter: blur(8px);
+  }
+  
+  
+  .app-icon:hover {
+    transform: scale(1.1);
+    background: rgba(46, 46, 46, 0.8);
+  }
+  
+  /* Стили для кнопки перезапуска */
+  .reset-button {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 100, 62, 0.5); /* Используем оранжевый из ваших переменных */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .reset-button:hover {
+    transform: scale(1.1) rotate(45deg);
+    background: rgba(255, 100, 62, 0.8);
+  }
+  
+  /* Анимация для проектов */
+  .project {
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .project .head {
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .project.dragging {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    opacity: 0.95;
+  }
+  
+  .project.dragging .head {
+    cursor: grabbing;
+  }
+  
+  /* Скрытие/показ проектов с анимацией */
+  .project.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none;
+  }
+  
+  /* Добавляем подсветку заголовка при наведении для удобства */
+  .project .head:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Улучшенные стили для проектов чтобы они выглядели как окна ОС */
+  .project {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Добавляем небольшой эффект наведения */
+  .project:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  }
+
+
+
+
+
+
+
+
+
+
+  /* Add these styles to your existing CSS */
+
+/* Dock styling */
+.app-dock {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    width: fit-content;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    z-index: 1000;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(46, 46, 46, 0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* App icons styling */
+  .app-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(46, 46, 46, 0.8);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    img{
+        width: 100%;
+    }
+  }
+  
+  .app-icon:hover {
+    transform: scale(1.15);
+    background: rgba(56, 56, 56, 0.9);
+  }
+  
+  .app-icon:active {
+    transform: scale(0.95);
+  }
+  
+  /* Dock icon bounce animation */
+  .app-icon.bounce {
+    animation: bounce 0.5s ease;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.3); }
+    60% { transform: scale(0.9); }
+    80% { transform: scale(1.1); }
+  }
+  
+  /* Reset button styling */
+  .reset-button {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 100, 62, 0.7);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .reset-button:hover {
+    transform: scale(1.15) rotate(30deg);
+    background: rgba(255, 100, 62, 0.9);
+  }
+  
+  .reset-button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Animation for minimizing projects */
+  .project.minimizing {
+    pointer-events: none;
+  }
+  
+  /* Improved project styling to match macOS windows */
+  .project {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    will-change: transform, opacity, left, top;
+  }
+  
+  .project .head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 8px 12px;
+    user-select: none;
+  }
+  
+  /* Window buttons */
+  .hide-button {
+    width: 16px;
+    height: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    background: #ffffff4d;
+    border: none;
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0);
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hide-button:hover {
+    color: rgba(0, 0, 0, 0.12);
+    background: #ffbd2e;
+
+  }
+
+  .head:hover{
+    .hide-button {
+        color: rgba(0, 0, 0, 0.12);
+        background: #ffbd2e;
+      }
+        
+  .hide-button:before {
+    opacity: 1;
+  }
+  }
+  
+  .hide-button:before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: 2px;
+  }
+  
+  .hide-button:hover:before {
+    opacity: 1;
+  }
+  
+  /* Project highlight effect */
+  .project:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Optimize for mobile
+  @media (max-width: 768px) {
+    .app-dock {
+      padding: 8px 12px;
+    }
+    
+    .app-icon, .reset-button {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  } */
