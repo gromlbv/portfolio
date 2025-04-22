@@ -50,6 +50,9 @@
 .flex-between{
     justify-content: space-between;
 }
+.flex-reverse{
+  flex-direction: row-reverse;
+}
 
 .gap-64{
     gap: 64px;
@@ -161,15 +164,15 @@ a.browser{
 
 *::selection {
     background: var(--orange-accent-color);
-    color: #ffffff;
+    color: var(--background-color);
 }
 *::-moz-selection {
     background: var(--orange-accent-color);
-    color: #ffffff;
+    color: var(--background-color);
 }
 *::-webkit-selection {
     background: var(--orange-accent-color);
-    color: #ffffff;
+    color: var(--background-color);
 }
 
 
@@ -194,6 +197,7 @@ body{
     font-family: NeutralSans;
 
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 header{
@@ -245,6 +249,47 @@ header.active{
     text-align: center;
 }
 
+.middle-text{
+  flex-shrink: 1;
+  width: 100%;
+}
+.addit-blocks{
+  width: 0px;
+
+  flex: 1;
+  flex-grow: 1;
+  gap: -24px;
+
+  .block{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 16px 16px 14px 16px;
+    height: fit-content;
+
+    border-radius: 12px;
+    background: #F6E6D5;
+    color: #CCBFB0;
+
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+
+  }
+  .block.rotate1{
+    transform: rotate(-15deg);
+  }
+  .block.rotate2{
+    transform: rotate(5.103deg);
+    margin-top: 90px;
+  }
+  .block.rotate3{
+    transform: rotate(-6.603deg);
+  }
+}
+
 
 .lbpage.projects{
     padding: 0 32px;
@@ -254,22 +299,26 @@ header.active{
         width: 100%;
 
         background-image: url(/source/background.png);
+        background-size: cover;
         border-radius: 32px;
 
         h2{
             position: absolute;
             top: 64px;
             width: 100%;
+
+            z-index: 5;
         }
     }
 }
+
 
 .project-wrapper{
     position: relative;
     overflow: hidden;
 
     height: 1920px;
-    height: 100vh;
+    height: 95vh;
 }
 .project{
     position: absolute;
@@ -277,13 +326,23 @@ header.active{
     flex-direction: column;
     overflow: hidden;
 
-    max-width: 540px;
-    max-height: 650px;
+    max-width: 1540px;
+    max-height: 1650px;
     border-radius: 24px;
     background: rgba(46, 46, 46, 0.40);
     backdrop-filter: blur(32px);
     color: white;
     
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+
+      user-select: none;
+      user-drag: none;
+      -webkit-user-drag: none;
+    }
     .head{
         display: flex;
         justify-content: space-between;
@@ -291,16 +350,25 @@ header.active{
         flex: 1;
 
         padding: 12px 24px 8px 18px;
+        max-height: 32px;
 
         border-bottom: 1px solid black;
 
         h3{
             font-size: 18px;
+
+            display: -webkit-box;            /* Использование flex-контейнера для текста */
+            -webkit-box-orient: vertical;    /* Указываем вертикальную ориентацию */
+            -webkit-line-clamp: 1;           /* Ограничиваем текст двумя строками */
+            overflow: hidden;                /* Скрываем текст, который выходит за пределы */
         }
         a{
             font-size: 16px;
             font-weight: 500;
             opacity: 0.6;
+        }
+        .toolbar{
+
         }
     }
 }
@@ -309,11 +377,13 @@ header.active{
 
 p span{
     background-color: var(--orange-accent-color);
+    color: var(--background-color);
     border-radius: 99px;
     padding: 0 6px;
+    padding-bottom: 2px;
 }
 
-p:hover{
+p.clickable:hover{
     transition: 0.4s;
     background-color: var(--secondary-color);
     border-radius: 99px;
@@ -340,6 +410,7 @@ p.smaller{
     justify-content: center;
     align-items: center;
     overflow-x: auto;
+    overflow-y: visible;
     white-space: nowrap;
 
     width: 100%;
@@ -430,9 +501,11 @@ p.smaller{
 .project {
     cursor: grab;
     transition: all 0.2s ease;
+    z-index: 6;
   }
   
   .project.dragging {
+    transition: 0.6s;
     cursor: grabbing;
     z-index: 9999;
     scale: 1.05;
@@ -685,9 +758,8 @@ p.smaller{
   
   @keyframes bounce {
     0%, 100% { transform: scale(1); }
-    40% { transform: scale(1.3); }
-    60% { transform: scale(0.9); }
-    80% { transform: scale(1.1); }
+    40% { transform: scale(1.25); }
+    80% { transform: scale(1); }
   }
   
   /* Reset button styling */
