@@ -1,929 +1,949 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dima Gromov</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dima Gromov</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header class="flex-center" id="header">
-        <div class="content flex-center flex-between">
-            <a href="#start">
-                <svg xmlns="http://www.w3.org/2000/svg" width="89" height="20" viewBox="0 0 89 20" fill="none">
-                    <path d="M7.98579 2.0189C7.76379 3.0549 6.69079 15.3759 8.39279 17.1519C8.72579 17.5219 9.16979 17.6329 9.09579 18.0769C8.94779 19.1869 6.09879 19.3719 4.65579 19.3719C3.21279 19.3719 0.51179 19.1869 0.36379 18.0769C0.28979 17.5959 0.69679 17.4109 1.02979 17.0779C1.80679 16.3749 1.84379 13.3779 1.84379 11.2689C1.84379 8.8639 1.95479 6.9769 1.17779 5.9779C0.80779 5.4599 0.28979 5.2009 0.36379 4.6089C0.51179 3.4989 2.43579 2.7589 3.73079 2.0929C5.02579 1.4269 8.54079 -0.386104 7.98579 2.0189Z" fill="#CEB9B0"/>
-                    <path d="M19.8336 6.5329C22.8676 6.5329 25.3836 9.4189 25.3836 12.9709C25.3836 16.4859 22.5346 19.3719 19.8336 19.3719C17.3916 19.3719 16.7256 18.9649 15.8006 18.9649C14.8386 18.9649 12.3596 19.3719 11.8416 19.3719C10.7316 19.3719 9.43659 19.1869 9.28859 18.0769C9.21459 17.5959 9.62159 17.4109 9.95459 17.0779C10.7316 16.3749 10.7686 13.3779 10.7686 11.2689C10.7686 8.8639 10.8796 6.9769 10.1026 5.9779C9.73259 5.4599 9.21459 5.2009 9.28859 4.6089C9.43659 3.4989 11.3606 2.7589 12.6556 2.0929C13.9506 1.4269 17.4656 -0.386104 16.9106 2.0189C16.8366 2.4629 16.5776 4.9789 16.4666 7.8649C17.3916 7.0509 18.5756 6.5329 19.8336 6.5329ZM17.8726 17.6329C21.7576 15.7829 19.9446 6.2739 17.2066 8.7159C16.5036 9.3079 16.3926 10.3069 16.3926 12.8229C16.3926 16.8559 16.9846 18.0399 17.8726 17.6329Z" fill="#CEB9B0"/>
-                    <path d="M40.6626 6.5329C42.0316 6.5329 43.4006 7.0509 42.9566 7.7539C42.7346 8.0499 42.4016 8.3089 41.9206 8.6049C40.1816 9.7889 38.7386 14.3769 36.1856 17.1889C35.0756 18.4099 33.7066 19.3719 32.3746 19.3719C31.4866 19.3719 30.6356 18.8539 30.4136 17.5959C29.7106 13.8219 27.2316 9.7519 25.8996 8.7529C25.4186 8.4199 24.9376 8.2719 24.8266 7.8279C24.4936 6.7179 27.2686 6.5329 28.7116 6.5329C30.1546 6.5329 33.2256 6.7179 33.8176 7.8279C34.1136 8.3089 33.7806 8.4939 33.5586 8.8269C33.1146 9.5299 35.1126 13.1189 35.3716 15.1539C37.0366 12.4899 37.7766 9.5669 37.2956 8.6049C37.1476 8.3089 37.0736 8.0499 37.1846 7.7539C37.4436 7.0509 39.3306 6.5329 40.6626 6.5329Z" fill="#CEB9B0"/>
-                    <path d="M57.4178 17.0779C57.7508 17.4109 58.1208 17.5959 58.0838 18.0769C57.9358 19.1869 56.6408 19.3719 55.5308 19.3719C55.0128 19.3719 52.4968 18.9649 51.5718 18.9649C50.6468 18.9649 49.9438 19.3719 47.5388 19.3719C44.8008 19.3719 41.9888 16.4859 41.9888 12.9709C41.9888 9.4189 44.4678 6.5329 47.5388 6.5329C48.7968 6.5329 49.9808 7.0509 50.9058 7.8649C50.8318 7.0879 50.7578 6.5329 50.3138 5.9779C49.9438 5.4599 49.4258 5.2009 49.4998 4.6089C49.6478 3.4989 51.7198 2.7589 53.0148 2.0929C54.2728 1.4269 57.6398 -0.386104 57.1218 2.0189C57.0478 2.4629 56.8628 4.9789 56.6778 7.8649C56.6038 8.8269 56.6038 9.9739 56.6038 11.2689C56.6038 13.3779 56.6408 16.3749 57.4178 17.0779ZM49.4998 17.6329C50.3508 18.0399 50.9798 16.8559 50.9798 12.8229C50.9798 10.3069 50.8688 9.3079 50.1658 8.7159C47.4278 6.2739 45.6148 15.7829 49.4998 17.6329Z" fill="#CEB9B0"/>
-                    <path d="M70.2883 13.5629C70.8433 12.9339 71.3983 13.3409 71.3243 13.9699L71.2503 14.3399C70.5843 17.2259 67.8093 19.3719 64.5163 19.3719C60.7423 19.3719 57.6343 16.4859 57.6343 12.9709C57.6343 9.4189 60.7423 6.5329 64.5163 6.5329C66.9953 6.5329 69.2153 7.4949 70.1033 9.2339C71.2133 11.4539 68.0313 14.3769 65.2563 14.3769C64.6273 14.3769 63.9613 14.3029 63.4803 14.0809C64.5903 16.5599 67.9203 16.2269 70.2883 13.5629ZM64.5163 7.9759C63.5543 7.9759 63.1103 10.4549 63.1103 12.0459C63.1103 12.4529 63.1473 12.7859 63.2213 13.1189C63.2583 13.0449 63.3323 13.0079 63.4433 12.9709C65.6633 11.6019 65.4413 7.9759 64.5163 7.9759Z" fill="#CEB9B0"/>
-                    <path d="M86.0093 6.5329C87.3783 6.5329 88.7473 7.0509 88.3033 7.7539C88.0813 8.0499 87.7482 8.3089 87.2673 8.6049C85.5282 9.7889 84.0852 14.3769 81.5322 17.1889C80.4222 18.4099 79.0533 19.3719 77.7213 19.3719C76.8333 19.3719 75.9823 18.8539 75.7603 17.5959C75.0573 13.8219 72.5783 9.7519 71.2463 8.7529C70.7653 8.4199 70.2842 8.2719 70.1732 7.8279C69.8402 6.7179 72.6153 6.5329 74.0583 6.5329C75.5013 6.5329 78.5723 6.7179 79.1643 7.8279C79.4603 8.3089 79.1273 8.4939 78.9053 8.8269C78.4613 9.5299 80.4593 13.1189 80.7183 15.1539C82.3833 12.4899 83.1232 9.5669 82.6423 8.6049C82.4942 8.3089 82.4203 8.0499 82.5312 7.7539C82.7902 7.0509 84.6773 6.5329 86.0093 6.5329Z" fill="#CEB9B0"/>
-                  </svg>    
-            </a>
-            <a class="button-like" href="#contacts">
-                Get in touch
-            </a>
-        </div>
+  <header class="flex-center" id="header">
+    <div class="content flex-center flex-between">
+      <a href="#start">
+        <svg xmlns="http://www.w3.org/2000/svg" width="89" height="20" viewBox="0 0 89 20" fill="none">
+          <path
+            d="M7.98579 2.0189C7.76379 3.0549 6.69079 15.3759 8.39279 17.1519C8.72579 17.5219 9.16979 17.6329 9.09579 18.0769C8.94779 19.1869 6.09879 19.3719 4.65579 19.3719C3.21279 19.3719 0.51179 19.1869 0.36379 18.0769C0.28979 17.5959 0.69679 17.4109 1.02979 17.0779C1.80679 16.3749 1.84379 13.3779 1.84379 11.2689C1.84379 8.8639 1.95479 6.9769 1.17779 5.9779C0.80779 5.4599 0.28979 5.2009 0.36379 4.6089C0.51179 3.4989 2.43579 2.7589 3.73079 2.0929C5.02579 1.4269 8.54079 -0.386104 7.98579 2.0189Z"
+            fill="#CEB9B0" />
+          <path
+            d="M19.8336 6.5329C22.8676 6.5329 25.3836 9.4189 25.3836 12.9709C25.3836 16.4859 22.5346 19.3719 19.8336 19.3719C17.3916 19.3719 16.7256 18.9649 15.8006 18.9649C14.8386 18.9649 12.3596 19.3719 11.8416 19.3719C10.7316 19.3719 9.43659 19.1869 9.28859 18.0769C9.21459 17.5959 9.62159 17.4109 9.95459 17.0779C10.7316 16.3749 10.7686 13.3779 10.7686 11.2689C10.7686 8.8639 10.8796 6.9769 10.1026 5.9779C9.73259 5.4599 9.21459 5.2009 9.28859 4.6089C9.43659 3.4989 11.3606 2.7589 12.6556 2.0929C13.9506 1.4269 17.4656 -0.386104 16.9106 2.0189C16.8366 2.4629 16.5776 4.9789 16.4666 7.8649C17.3916 7.0509 18.5756 6.5329 19.8336 6.5329ZM17.8726 17.6329C21.7576 15.7829 19.9446 6.2739 17.2066 8.7159C16.5036 9.3079 16.3926 10.3069 16.3926 12.8229C16.3926 16.8559 16.9846 18.0399 17.8726 17.6329Z"
+            fill="#CEB9B0" />
+          <path
+            d="M40.6626 6.5329C42.0316 6.5329 43.4006 7.0509 42.9566 7.7539C42.7346 8.0499 42.4016 8.3089 41.9206 8.6049C40.1816 9.7889 38.7386 14.3769 36.1856 17.1889C35.0756 18.4099 33.7066 19.3719 32.3746 19.3719C31.4866 19.3719 30.6356 18.8539 30.4136 17.5959C29.7106 13.8219 27.2316 9.7519 25.8996 8.7529C25.4186 8.4199 24.9376 8.2719 24.8266 7.8279C24.4936 6.7179 27.2686 6.5329 28.7116 6.5329C30.1546 6.5329 33.2256 6.7179 33.8176 7.8279C34.1136 8.3089 33.7806 8.4939 33.5586 8.8269C33.1146 9.5299 35.1126 13.1189 35.3716 15.1539C37.0366 12.4899 37.7766 9.5669 37.2956 8.6049C37.1476 8.3089 37.0736 8.0499 37.1846 7.7539C37.4436 7.0509 39.3306 6.5329 40.6626 6.5329Z"
+            fill="#CEB9B0" />
+          <path
+            d="M57.4178 17.0779C57.7508 17.4109 58.1208 17.5959 58.0838 18.0769C57.9358 19.1869 56.6408 19.3719 55.5308 19.3719C55.0128 19.3719 52.4968 18.9649 51.5718 18.9649C50.6468 18.9649 49.9438 19.3719 47.5388 19.3719C44.8008 19.3719 41.9888 16.4859 41.9888 12.9709C41.9888 9.4189 44.4678 6.5329 47.5388 6.5329C48.7968 6.5329 49.9808 7.0509 50.9058 7.8649C50.8318 7.0879 50.7578 6.5329 50.3138 5.9779C49.9438 5.4599 49.4258 5.2009 49.4998 4.6089C49.6478 3.4989 51.7198 2.7589 53.0148 2.0929C54.2728 1.4269 57.6398 -0.386104 57.1218 2.0189C57.0478 2.4629 56.8628 4.9789 56.6778 7.8649C56.6038 8.8269 56.6038 9.9739 56.6038 11.2689C56.6038 13.3779 56.6408 16.3749 57.4178 17.0779ZM49.4998 17.6329C50.3508 18.0399 50.9798 16.8559 50.9798 12.8229C50.9798 10.3069 50.8688 9.3079 50.1658 8.7159C47.4278 6.2739 45.6148 15.7829 49.4998 17.6329Z"
+            fill="#CEB9B0" />
+          <path
+            d="M70.2883 13.5629C70.8433 12.9339 71.3983 13.3409 71.3243 13.9699L71.2503 14.3399C70.5843 17.2259 67.8093 19.3719 64.5163 19.3719C60.7423 19.3719 57.6343 16.4859 57.6343 12.9709C57.6343 9.4189 60.7423 6.5329 64.5163 6.5329C66.9953 6.5329 69.2153 7.4949 70.1033 9.2339C71.2133 11.4539 68.0313 14.3769 65.2563 14.3769C64.6273 14.3769 63.9613 14.3029 63.4803 14.0809C64.5903 16.5599 67.9203 16.2269 70.2883 13.5629ZM64.5163 7.9759C63.5543 7.9759 63.1103 10.4549 63.1103 12.0459C63.1103 12.4529 63.1473 12.7859 63.2213 13.1189C63.2583 13.0449 63.3323 13.0079 63.4433 12.9709C65.6633 11.6019 65.4413 7.9759 64.5163 7.9759Z"
+            fill="#CEB9B0" />
+          <path
+            d="M86.0093 6.5329C87.3783 6.5329 88.7473 7.0509 88.3033 7.7539C88.0813 8.0499 87.7482 8.3089 87.2673 8.6049C85.5282 9.7889 84.0852 14.3769 81.5322 17.1889C80.4222 18.4099 79.0533 19.3719 77.7213 19.3719C76.8333 19.3719 75.9823 18.8539 75.7603 17.5959C75.0573 13.8219 72.5783 9.7519 71.2463 8.7529C70.7653 8.4199 70.2842 8.2719 70.1732 7.8279C69.8402 6.7179 72.6153 6.5329 74.0583 6.5329C75.5013 6.5329 78.5723 6.7179 79.1643 7.8279C79.4603 8.3089 79.1273 8.4939 78.9053 8.8269C78.4613 9.5299 80.4593 13.1189 80.7183 15.1539C82.3833 12.4899 83.1232 9.5669 82.6423 8.6049C82.4942 8.3089 82.4203 8.0499 82.5312 7.7539C82.7902 7.0509 84.6773 6.5329 86.0093 6.5329Z"
+            fill="#CEB9B0" />
+        </svg>
+      </a>
+      <a class="button-like" href="#contacts">
+        Get in touch
+      </a>
+    </div>
 
-    </header>
-    <div class="lbpage gap-18" id="start">
+  </header>
+  <div class="lbpage gap-18" id="start">
 
-        <div class="horiz-block flex-center gap-64">
+    <div class="horiz-block flex-center gap-64">
 
-          <div class="addit-blocks flex flex-reverse">
-            <a class="block rotate1" href="/">
-              <img src="source/icons/map.svg" alt="">
-              <p>
-                located in <b>Russia,<br>Simferopol</b>
-              </p>
-            </a>
-            <!-- <div class="img-block">
+      <div class="addit-blocks flex flex-reverse">
+        <a class="block rotate1" href="/">
+          <img src="source/icons/map.svg" alt="">
+          <p>
+            located in <b>Russia,<br>Simferopol</b>
+          </p>
+        </a>
+        <!-- <div class="img-block">
               <img src="source/me.png">
             </div> -->
-          </div>
+      </div>
 
-          <div class="flex-cl middle-text">
-            <h1>i’m Dima <br> Gromov </h1>
-            <p>middle <span>ux/ui designer</span> & <br> intern ios developer</p>
-          </div>
+      <div class="flex-cl middle-text">
+        <h1>i’m Dima <br> Gromov </h1>
+        <p>middle <span>ux/ui designer</span> & <br> intern ios developer</p>
+      </div>
 
-          <div class="addit-blocks flex">
-            <!-- <a class="block rotate1" href="/">
+      <div class="addit-blocks flex">
+        <!-- <a class="block rotate1" href="/">
               <img src="source/icons/map.svg" alt="">
               <p>
                 located in <b>Russia,<br>Simferopol</b>
               </p>
             </a> -->
 
-            <a class="block rotate2" href="/">
-              <img src="source/icons/airpod.svg" alt="">
-              <p>
-                listening now <br> <b>Ocean - Frank Iero<br>
-                  and the Patience</b>
-              </p>
+        <a class="block rotate2" href="/">
+          <img src="source/icons/airpod.svg" alt="">
+          <p>
+            listening now <br> <b>Ocean - Frank Iero<br>
+              and the Patience</b>
+          </p>
+        </a>
+
+        <a class="block rotate3" href="/">
+          <img src="source/icons/bone.svg" alt="">
+          <p>
+            my pet photos
+          </p>
+        </a>
+      </div>
+
+    </div>
+
+
+    <div class="vspacer-8"></div>
+
+    <div class="flex gap-18">
+      <a href="https://www.linkedin.com/in/lbvdev/">
+        <img src="source/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://t.me/lbv_dev">
+        <img src="source/telegram.svg" alt="Telegram">
+      </a>
+      <a href="https://github.com/gromlbv">
+        <img src="source/github.svg" alt="GitHub">
+      </a>
+    </div>
+  </div>
+
+  <div class="lbpage gap-64 scroll-page">
+    <h2>what i love</h2>
+    <div class="scroll-container" style="scroll-padding-left: 50%;">
+      <div class="card">
+        <h3>.html+ .css</h3>
+      </div>
+      <div class="card">
+        <h3>Figma</h3>
+      </div>
+      <div class="card">
+        <h3>Swift UI</h3>
+      </div>
+      <div class="card">designing fun <em> user<br>interactions </em></div>
+      <div class="card">creating <em>new</em> and<br><em>fresh ui</em></div>
+    </div>
+    <p>i’ll fix scroll lag anytime</p>
+  </div>
+
+  <div class="lbpage gap-64" id="target">
+    <h2>places where i <br> gathered experience</h2>
+    <div class="flex-cl gap-24">
+      <a href="https://seniwave.com/" target="_blank">
+        <p class="smaller clickable">SeniWave ......................................... now</p>
+      </a>
+      <a href="https://dges.io/" target="_blank">
+        <p class="smaller clickable">DGES ................................................ 2025</p>
+      </a>
+      <a href="https://arspatially.com" target="_blank">
+        <p class="smaller clickable">ARSpatially .................................... 2025</p>
+      </a>
+      <a href="#" target="_blank">
+        <p class="smaller clickable">Tatneft ............................................ 2024</p>
+      </a>
+      <a href="https://www.gazprom-spka.ru/ru/" target="_blank">
+        <p class="smaller clickable">Gazprom ........................................ 2024</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="lbpage projects">
+    <div class="mac-wrapper">
+      <h2>recent projects</h2>
+      <div class="project-wrapper flex-cl flex-center gap-12">
+
+        <div class="project">
+          <div class="head">
+
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
+
+            <h3>AR Spatially Landing</h3>
+
+            <a class="browser" href="https://arspatially.com" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              arspatially.com
             </a>
 
-            <a class="block rotate3" href="/">
-              <img src="source/icons/bone.svg" alt="">
-              <p>
-                my pet photos
-              </p>
-            </a>
           </div>
-          
+          <img src="source/screenshots/arspatially.png">
         </div>
 
+        <div class="project">
+          <div class="head">
 
-        <div class="vspacer-8"></div>
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
 
-        <div class="flex gap-18">
-            <a href="https://www.linkedin.com/in/lbvdev/">
-                <img src="source/linkedin.svg" alt="LinkedIn">
-            </a>
-            <a href="https://t.me/lbv_dev">
-                <img src="source/telegram.svg" alt="Telegram">
-            </a>
-            <a href="https://github.com/gromlbv">
-                <img src="source/github.svg" alt="GitHub">
-            </a>
-        </div>
-    </div>
+            <h3>Simferopol College of Radioelectronics</h3>
 
-    <div class="lbpage gap-64 scroll-page">
-        <h2>what i love</h2>
-        <div class="scroll-container" style="scroll-padding-left: 50%;">
-            <div class="card"><h3>.html+ .css</h3></div>
-            <div class="card"><h3>Figma</h3></div>
-            <div class="card"><h3>Swift UI</h3></div>
-            <div class="card">designing fun <em> user<br>interactions </em></div>
-            <div class="card">creating <em>new</em> and<br><em>fresh ui</em></div>
+            <a class="browser" href="https://simfscr.ru" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              simfscr.ru
+            </a>
+
           </div>
-          <p>i’ll fix scroll lag anytime</p>
-    </div>
-
-    <div class="lbpage gap-64" id="target">
-        <h2>places where i <br> gathered experience</h2>
-        <div class="flex-cl gap-24">
-            <a href="https://seniwave.com/" target="_blank">
-                <p class="smaller clickable">SeniWave ......................................... now</p>
-            </a>
-            <a href="https://dges.io/" target="_blank">
-                <p class="smaller clickable">DGES ................................................ 2025</p>
-            </a>
-            <a href="https://arspatially.com" target="_blank">
-                <p class="smaller clickable">ARSpatially .................................... 2025</p>
-            </a>
-            <a href="#" target="_blank">
-                <p class="smaller clickable">Tatneft ............................................ 2024</p>
-            </a>
-            <a href="https://www.gazprom-spka.ru/ru/" target="_blank">
-                <p class="smaller clickable">Gazprom ........................................ 2024</p>
-            </a>
+          <img src="source/screenshots/simfscr.png">
         </div>
-    </div>
 
-    <div class="lbpage projects">
-        <div class="mac-wrapper">
-            <h2>recent projects</h2>
-            <div class="project-wrapper flex-cl flex-center gap-12">
+        <div class="project">
+          <div class="head">
 
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>AR Spatially Landing</h3>
-            
-                  <a class="browser" href="https://arspatially.com" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    arspatially.com
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/arspatially.png">
-              </div>
-            
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>Simferopol College of Radioelectronics</h3>
-            
-                  <a class="browser" href="https://simfscr.ru" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    simfscr.ru
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/simfscr.png">
-              </div>
-            
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>LbvShopBot</h3>
-            
-                  <a class="browser" href="#" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    —
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/lbvshopbot.png">
-              </div>
-            
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>Jadan Dental</h3>
-            
-                  <a class="browser" href="https://jadan.lbvo.ru" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    jadan.lbvo.ru
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/jadan.png">
-              </div>
-            
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>1000 Dice</h3>
-            
-                  <a class="browser" href="#" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    —
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/1000dice.png">
-              </div>
-            
-              <div class="project">
-                <div class="head">
-            
-                  <div class="toolbar">
-                    <!-- авто-заполняшка -->
-                  </div>
-            
-                  <h3>Antarctis</h3>
-            
-                  <a class="browser" href="https://app.antarctis.ru" target="_blank">
-                    <img src="source/globe.svg" width="15" height="14">
-                    app.antarctis.ru
-                  </a>
-            
-                </div>
-                <img src="source/screenshots/antarctis.png">
-              </div>
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
 
-            </div>            
+            <h3>LbvShopBot</h3>
+
+            <a class="browser" href="#" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              —
+            </a>
+
+          </div>
+          <img src="source/screenshots/lbvshopbot.png">
+        </div>
+
+        <div class="project">
+          <div class="head">
+
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
+
+            <h3>Jadan Dental</h3>
+
+            <a class="browser" href="https://jadan.lbvo.ru" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              jadan.lbvo.ru
+            </a>
+
+          </div>
+          <img src="source/screenshots/jadan.png">
+        </div>
+
+        <div class="project">
+          <div class="head">
+
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
+
+            <h3>1000 Dice</h3>
+
+            <a class="browser" href="#" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              —
+            </a>
+
+          </div>
+          <img src="source/screenshots/1000dice.png">
+        </div>
+
+        <div class="project">
+          <div class="head">
+
+            <div class="toolbar">
+              <!-- авто-заполняшка -->
+            </div>
+
+            <h3>Antarctis</h3>
+
+            <a class="browser" href="https://app.antarctis.ru" target="_blank">
+              <img src="source/globe.svg" width="15" height="14">
+              app.antarctis.ru
+            </a>
+
+          </div>
+          <img src="source/screenshots/antarctis.png">
+        </div>
+
+      </div>
 
     </div>
 
     <div class="lbpage gap-24" id="contacts">
-        <h2>let's get in touch</h2>
-        <p>i'm wide open for new projects</p>
-        <div class="spacer-24"></div>
-        <div class="flex-cl gap-12">
-            <a class="button-like fill wide" href="https://t.me/lbv_dev">
-                <img src="source/telegram-btn.svg" alt="Telegram">
-                Telegram
-            </a>
-            <a class="button-like wide" href="mailto:me@lbvo.ru">
-                <img src="source/email-btn.svg" alt="Telegram">
-                Email
-            </a>
-        </div>
+      <h2>let's get in touch</h2>
+      <p>i'm wide open for new projects</p>
+      <div class="spacer-24"></div>
+      <div class="flex-cl gap-12">
+        <a class="button-like fill wide" href="https://t.me/lbv_dev">
+          <img src="source/telegram-btn.svg" alt="Telegram">
+          Telegram
+        </a>
+        <a class="button-like wide" href="mailto:me@lbvo.ru">
+          <img src="source/email-btn.svg" alt="Telegram">
+          Email
+        </a>
+      </div>
     </div>
-  <script>
+    <script>
 
 
-const header = document.getElementById('header');
-const target = document.getElementById('target');
+      const header = document.getElementById('header');
+      const target = document.getElementById('target');
 
-const observer = new IntersectionObserver(([entry]) => {
-  if (entry.isIntersecting) {
-    header.classList.add('active');
-  } else {
-    header.classList.remove('active');
-  }
-}, {
-  threshold: 0.1 // можно менять чувствительность
-});
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          header.classList.add('active');
+        } else {
+          header.classList.remove('active');
+        }
+      }, {
+        threshold: 0.1 // можно менять чувствительность
+      });
 
-observer.observe(target);
-
-
+      observer.observe(target);
 
 
 
-    const container = document.querySelector('.scroll-container');
-        const cards = Array.from(container.children);
 
-        // Генерируем случайный угол поворота от -12 до +12
-        function getRandomRotation() {
-            return Math.floor(Math.random() * 50) - 12;
+
+      const container = document.querySelector('.scroll-container');
+      const cards = Array.from(container.children);
+
+      // Генерируем случайный угол поворота от -12 до +12
+      function getRandomRotation() {
+        return Math.floor(Math.random() * 50) - 12;
+      }
+
+      // Применяем случайные повороты и клонируем карточки
+      cards.forEach(card => {
+        const rotation = getRandomRotation();
+        card.style.transform = `rotate(${rotation}deg)`;
+
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.style.transform = `rotate(${getRandomRotation()}deg)`;
+        container.appendChild(clone);
+      });
+
+      // Функция для обновления скорости анимации на основе ширины экрана
+      function updateScrollSpeed() {
+        const containerWidth = container.offsetWidth;
+        const baseSpeed = 50; // скорость прокрутки в пикселях в секунду
+        const duration = containerWidth / baseSpeed;
+
+        const minDuration = 8; // минимальная продолжительность анимации
+        const maxDuration = 35; // максимальная продолжительность анимации
+        const finalDuration = Math.min(Math.max(duration, minDuration), maxDuration);
+
+        const adjustmentFactor = window.innerWidth > 1400 ? 0.998 : 0.999;
+        container.style.animationDuration = finalDuration * adjustmentFactor + "s";
+      }
+
+      // Обновляем анимацию при загрузке, изменении размера окна и ориентации экрана
+      window.addEventListener("load", updateScrollSpeed);
+      window.addEventListener("resize", updateScrollSpeed);
+      window.addEventListener("orientationchange", updateScrollSpeed);
+
+      // Анимация для бесконечного скроллинга
+      function startInfiniteScroll() {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        container.style.animation = `scrollLeft infinite ${container.style.animationDuration} linear`;
+
+        // Делаем зацикливание прокрутки
+        container.addEventListener('scroll', () => {
+          if (container.scrollLeft >= maxScroll) {
+            container.scrollLeft = 0;
+          }
+        });
+      }
+
+      // Инициализируем анимацию
+      startInfiniteScroll();
+
+
+      const projects = document.querySelectorAll('.project');
+      const wrapper = document.querySelector('.project-wrapper');
+
+      const wrapperWidth = wrapper.clientWidth;
+      const wrapperHeight = wrapper.clientHeight;
+
+      projects.forEach(project => {
+        const projectWidth = project.offsetWidth;
+        const projectHeight = project.offsetHeight;
+
+        const x = Math.random() * (wrapperWidth - projectWidth);
+        const y = Math.random() * (wrapperHeight - projectHeight);
+        const scale = 0.8 + Math.random() * 0.6;
+
+        project.style.left = `${x}px`;
+        project.style.top = `${y}px`;
+        project.style.transform = `scale(${scale})`;
+        project.dataset.scale = scale;
+      });
+
+
+
+      // Add this code to your existing JavaScript or replace the dock-related code
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const projects = document.querySelectorAll('.project');
+        let activeProject = null;
+        let initialX, initialY;
+        let zIndexCounter = 10;
+
+        // Create container for dock icons at the bottom
+        const iconDock = document.createElement('div');
+        iconDock.className = 'app-dock';
+        document.querySelector('.project-wrapper').appendChild(iconDock);
+
+        // Add reset button
+        const resetButton = document.createElement('button');
+        resetButton.className = 'reset-button';
+        resetButton.innerHTML = '↻';
+        resetButton.title = 'Reset all projects';
+        iconDock.appendChild(resetButton);
+
+        // Function to randomize project positions
+        function randomizeProjectPositions() {
+          projects.forEach((project) => {
+            const wrapper = document.querySelector('.project-wrapper');
+            const wrapperWidth = wrapper.clientWidth;
+            const wrapperHeight = wrapper.clientHeight;
+
+            // Set random width between 200px and 400px
+            const randomWidth = 350 + Math.floor(Math.random() * 1);
+
+
+            project.style.width = `${randomWidth}px`;
+
+            // const randomHeight = 350 + Math.floor(Math.random() * 1);
+            // project.style.height = `${randomHeight}px`;
+
+            // Use header height for proper constraints
+            const headerHeight = project.querySelector('.head').offsetHeight;
+
+            const maxX = wrapperWidth - project.offsetWidth;
+            const maxY = wrapperHeight - headerHeight;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            const scale = 1; // Keep scale at 1 (no scaling)
+
+            // Animate movement with slight delay
+            project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
+
+            setTimeout(() => {
+              project.style.left = `${x}px`;
+              project.style.top = `${y}px`;
+              project.style.transform = `scale(${scale})`;
+              project.style.display = 'flex';
+              project.classList.remove('hidden');
+              project.dataset.originalX = x;
+              project.dataset.originalY = y;
+              project.dataset.originalScale = scale;
+
+              // Hide corresponding dock icon
+              const icon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
+              if (icon) {
+                icon.style.display = 'none';
+              }
+            }, Math.random() * 300);
+          });
         }
 
-        // Применяем случайные повороты и клонируем карточки
-        cards.forEach(card => {
-            const rotation = getRandomRotation();
-            card.style.transform = `rotate(${rotation}deg)`;
+        // Reset button handler
+        resetButton.addEventListener('click', function () {
+          // First bring back all hidden projects
+          const hiddenProjects = document.querySelectorAll('.project.hidden');
+          hiddenProjects.forEach(project => {
+            // Remove hidden class and make visible
+            project.classList.remove('hidden', 'minimizing');
+            project.style.display = 'flex';
+            project.style.opacity = '1';
 
-            const clone = card.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            clone.style.transform = `rotate(${getRandomRotation()}deg)`;
-            container.appendChild(clone);
+            // Find and hide corresponding dock icon
+            const projectId = project.id;
+            const dockIcon = document.querySelector(`.app-icon[data-target="${projectId}"]`);
+            if (dockIcon) {
+              dockIcon.style.display = 'none';
+            }
+          });
+          projects.forEach((project) => {
+            const wrapper = document.querySelector('.project-wrapper');
+            const wrapperWidth = wrapper.clientWidth;
+            const wrapperHeight = wrapper.clientHeight;
+
+            // Use header height for proper constraints
+            const headerHeight = project.querySelector('.head').offsetHeight;
+
+            const maxX = wrapperWidth - project.offsetWidth;
+            const maxY = wrapperHeight - headerHeight;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            const scale = 0.8 + Math.random() * 0.3;
+
+            // Animate movement with slight delay
+            project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
+
+            // For better animation, first ensure element is visible with current position
+            if (project.classList.contains('hidden')) {
+              project.style.transition = 'none';
+              project.classList.remove('hidden');
+              project.style.display = 'flex';
+              project.style.opacity = '1';
+            }
+
+            setTimeout(() => {
+              project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
+              project.style.left = `${x}px`;
+              project.style.top = `${y}px`;
+              project.style.transform = `scale(${scale})`;
+              project.dataset.originalX = x;
+              project.dataset.originalY = y;
+              project.dataset.originalScale = scale;
+            }, Math.random() * 300);
+          });
+
+          // Hide all dock icons since all projects are now visible
+          const dockIcons = document.querySelectorAll('.app-icon');
+          dockIcons.forEach(icon => {
+            icon.style.display = 'none';
+          });
+        });
+        // Process projects and create icons
+        projects.forEach((project, index) => {
+          // Add unique ID to project
+          project.id = 'project-' + index;
+
+          // Add minimize button to header
+          const header = project.querySelector('.head');
+          const toolbar = project.querySelector('.toolbar')
+          const hideButton = document.createElement('button');
+          hideButton.className = 'hide-button';
+          hideButton.innerHTML = '—';
+          hideButton.title = 'Minimize';
+          toolbar.appendChild(hideButton);
+
+          // Create dock icon for minimized project
+          const projectIcon = document.createElement('div');
+          projectIcon.className = 'app-icon';
+          projectIcon.dataset.target = 'project-' + index;
+
+          // Use project title to create the image src
+          const projectImg = project.querySelector('img[src^="source/screenshots/"]');
+          const faviconSrc = projectImg.src.replace('.png', '-fav.png');
+
+          // Create img element for favicon
+          const faviconImage = document.createElement('img');
+
+          faviconImage.src = faviconSrc;  // Путь к фавиконке
+
+          projectIcon.appendChild(faviconImage);  // Добавляем картинку в иконку
+
+          // Set title and hide icon by default
+          projectIcon.style.display = 'none';
+          iconDock.appendChild(projectIcon);
+
+          // Minimize button handler
+          hideButton.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            // Save current position for animation
+            const rect = project.getBoundingClientRect();
+            const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
+
+            // Find the target dock icon
+            const targetIcon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
+            const iconRect = targetIcon.getBoundingClientRect();
+
+            // Calculate flying animation - FIXED to use proper coordinates
+            const currentX = parseInt(project.style.left) || 0;
+            const currentY = parseInt(project.style.top) || 0;
+
+            // Calculate target position relative to the wrapper
+            // This targets the center of the dock icon
+            const targetX = (iconRect.left + iconRect.width / 2) - wrapperRect.left - (project.offsetWidth / 2);
+            const targetY = wrapperRect.height - iconDock.offsetHeight; // Bottom of wrapper minus dock height
+
+            // Set animation properties
+            project.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
+            project.style.transformOrigin = 'center center';
+
+            // Animate flying to dock
+            project.classList.add('minimizing');
+            project.style.left = `${targetX}px`;
+            project.style.top = `${targetY}px`;
+            project.style.transform = 'scale(0.1)';
+            project.style.opacity = '0';
+
+            // Show dock icon after animation
+            setTimeout(() => {
+              project.classList.add('hidden');
+              targetIcon.style.display = 'flex';
+              targetIcon.classList.add('bounce');
+              setTimeout(() => targetIcon.classList.remove('bounce'), 500);
+
+              // Delay before hiding the project completely
+              setTimeout(() => {
+                project.style.display = 'none';
+              }, 100);
+            }, 400);
+          });
+
+          // Dock icon click handler to restore project
+          projectIcon.addEventListener('click', function () {
+            const targetProject = document.getElementById(this.dataset.target);
+
+            // Get icon position for animation
+            const iconRect = this.getBoundingClientRect();
+            const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
+
+            // Get original position from data attributes
+            const originalX = parseFloat(targetProject.dataset.originalX) || 100;
+            const originalY = parseFloat(targetProject.dataset.originalY) || 100;
+            const originalScale = parseFloat(targetProject.dataset.originalScale) || 1;
+
+            // Set starting position (at the icon)
+            targetProject.style.left = `${iconRect.left - wrapperRect.left}px`;
+            targetProject.style.top = `${iconRect.top - wrapperRect.top}px`;
+            targetProject.style.transform = 'scale(0.1)';
+            targetProject.style.opacity = '0';
+            targetProject.style.display = 'flex';
+
+            // Start animation
+            requestAnimationFrame(() => {
+              targetProject.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
+              targetProject.style.transform = `scale(${originalScale})`;
+              targetProject.style.left = `${originalX}px`;
+              targetProject.style.top = `${originalY}px`;
+              targetProject.style.opacity = '1';
+
+              // Remove hidden class after small delay
+              setTimeout(() => {
+                targetProject.classList.remove('hidden', 'minimizing');
+              }, 50);
+            });
+
+            // Bring project to top layer
+            targetProject.style.zIndex = zIndexCounter++;
+
+            // Hide dock icon
+            this.style.display = 'none';
+          });
+
+          // Drag handlers
+          header.addEventListener('mousedown', function (e) {
+            // Skip if minimize button was clicked
+            if (e.target === hideButton) return;
+
+            e.preventDefault();
+            activeProject = project;
+            project.style.zIndex = zIndexCounter++;
+            project.classList.add('dragging');
+
+            const rect = project.getBoundingClientRect();
+            initialX = e.clientX - rect.left;
+            initialY = e.clientY - rect.top;
+
+            document.addEventListener('mousemove', handleDrag);
+            document.addEventListener('mouseup', stopDrag);
+          });
+
+          // Touch device support
+          header.addEventListener('touchstart', function (e) {
+            // Skip if minimize button was clicked
+            if (e.target === hideButton) return;
+
+            e.preventDefault();
+            activeProject = project;
+            project.style.zIndex = zIndexCounter++;
+            project.classList.add('dragging');
+
+            const touch = e.touches[0];
+            const rect = project.getBoundingClientRect();
+            initialX = touch.clientX - rect.left;
+            initialY = touch.clientY - rect.top;
+
+            document.addEventListener('touchmove', handleTouchDrag);
+            document.addEventListener('touchend', stopTouchDrag);
+          });
         });
 
-        // Функция для обновления скорости анимации на основе ширины экрана
-        function updateScrollSpeed() {
-            const containerWidth = container.offsetWidth;
-            const baseSpeed = 50; // скорость прокрутки в пикселях в секунду
-            const duration = containerWidth / baseSpeed;
+        // Mouse drag handler
+        function handleDrag(e) {
+          if (!activeProject) return;
 
-            const minDuration = 8; // минимальная продолжительность анимации
-            const maxDuration = 35; // максимальная продолжительность анимации
-            const finalDuration = Math.min(Math.max(duration, minDuration), maxDuration);
+          const wrapper = document.querySelector('.project-wrapper');
+          const wrapperRect = wrapper.getBoundingClientRect();
 
-            const adjustmentFactor = window.innerWidth > 1400 ? 0.998 : 0.999;
-            container.style.animationDuration = finalDuration * adjustmentFactor + "s";
+          const headerHeight = activeProject.querySelector('.head').offsetHeight;
+
+          let newX = e.clientX - wrapperRect.left - initialX;
+          let newY = e.clientY - wrapperRect.top - initialY;
+
+          // Constrain boundaries
+          const maxX = wrapperRect.width - activeProject.offsetWidth;
+          const maxY = wrapperRect.height - headerHeight;
+
+          newX = Math.max(0, Math.min(newX, maxX));
+          newY = Math.max(0, Math.min(newY, maxY));
+
+          // Disable transitions for smooth dragging
+          activeProject.style.transition = 'none';
+          activeProject.style.left = `${newX}px`;
+          activeProject.style.top = `${newY}px`;
+
+          // Update original position data
+          activeProject.dataset.originalX = newX;
+          activeProject.dataset.originalY = newY;
         }
 
-        // Обновляем анимацию при загрузке, изменении размера окна и ориентации экрана
-        window.addEventListener("load", updateScrollSpeed);
-        window.addEventListener("resize", updateScrollSpeed);
-        window.addEventListener("orientationchange", updateScrollSpeed);
+        // Touch drag handler
+        function handleTouchDrag(e) {
+          if (!activeProject) return;
 
-        // Анимация для бесконечного скроллинга
-        function startInfiniteScroll() {
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            container.style.animation = `scrollLeft infinite ${container.style.animationDuration} linear`;
+          const touch = e.touches[0];
+          const wrapper = document.querySelector('.project-wrapper');
+          const wrapperRect = wrapper.getBoundingClientRect();
 
-            // Делаем зацикливание прокрутки
-            container.addEventListener('scroll', () => {
-                if (container.scrollLeft >= maxScroll) {
-                    container.scrollLeft = 0;
-                }
-            });
+          const headerHeight = activeProject.querySelector('.head').offsetHeight;
+
+          let newX = touch.clientX - wrapperRect.left - initialX;
+          let newY = touch.clientY - wrapperRect.top - initialY;
+
+          // Constrain boundaries
+          const maxX = wrapperRect.width - activeProject.offsetWidth;
+          const maxY = wrapperRect.height - headerHeight;
+
+          newX = Math.max(0, Math.min(newX, maxX));
+          newY = Math.max(0, Math.min(newY, maxY));
+
+          // Disable transitions for smooth dragging
+          activeProject.style.transition = 'none';
+          activeProject.style.left = `${newX}px`;
+          activeProject.style.top = `${newY}px`;
+
+          // Update original position data
+          activeProject.dataset.originalX = newX;
+          activeProject.dataset.originalY = newY;
         }
 
-        // Инициализируем анимацию
-        startInfiniteScroll();
+        // End drag
+        function stopDrag() {
+          if (activeProject) {
+            // Restore transitions
+            activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            activeProject.classList.remove('dragging');
+            activeProject = null;
+          }
+
+          document.removeEventListener('mousemove', handleDrag);
+          document.removeEventListener('mouseup', stopDrag);
+        }
+
+        // End touch drag
+        function stopTouchDrag() {
+          if (activeProject) {
+            // Restore transitions
+            activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            activeProject.classList.remove('dragging');
+            activeProject = null;
+          }
+
+          document.removeEventListener('touchmove', handleTouchDrag);
+          document.removeEventListener('touchend', stopTouchDrag);
+        }
+
+        // Function to position dock at bottom
+        function positionDockAtBottom() {
+          const wrapper = document.querySelector('.project-wrapper');
+          const wrapperRect = wrapper.getBoundingClientRect();
+          iconDock.style.bottom = '16px';
+          iconDock.style.top = 'auto';
+          iconDock.style.left = '50%';
+          iconDock.style.transform = 'translateX(-50%)';
+        }
+
+        // Update dock position on resize
+        window.addEventListener('resize', positionDockAtBottom);
 
 
+
+        // Initialize
+        positionDockAtBottom();
+        randomizeProjectPositions();
+      });
+
+
+
+
+
+      // Функция для добавления ресайза окон
+      function addWindowResizeFeature() {
         const projects = document.querySelectorAll('.project');
-        const wrapper = document.querySelector('.project-wrapper');
 
-        const wrapperWidth = wrapper.clientWidth;
-const wrapperHeight = wrapper.clientHeight;
+        projects.forEach(project => {
+          // Создаем элементы для ресайза
+          const resizeHandles = {
+            'e': createResizeHandle('resize-e'),  // правый край
+            'w': createResizeHandle('resize-w'),  // левый край
+            's': createResizeHandle('resize-s'),  // нижний край
+            'se': createResizeHandle('resize-se'), // правый нижний угол
+            'sw': createResizeHandle('resize-sw')  // левый нижний угол
+          };
 
-projects.forEach(project => {
-  const projectWidth = project.offsetWidth;
-  const projectHeight = project.offsetHeight;
+          // Добавляем созданные элементы к проекту
+          Object.values(resizeHandles).forEach(handle => {
+            project.appendChild(handle);
+          });
 
-  const x = Math.random() * (wrapperWidth - projectWidth);
-  const y = Math.random() * (wrapperHeight - projectHeight);
-  const scale = 0.8 + Math.random() * 0.6;
+          // Инициализируем обработчики событий для каждой ручки ресайза
+          setupResizeEvents(project, resizeHandles);
+        });
 
-  project.style.left = `${x}px`;
-  project.style.top = `${y}px`;
-  project.style.transform = `scale(${scale})`;
-  project.dataset.scale = scale;
-});
+        // Функция для создания ручки ресайза
+        function createResizeHandle(className) {
+          const handle = document.createElement('div');
+          handle.className = `resize-handle ${className}`;
+          return handle;
+        }
 
+        // Настройка событий для ресайза
+        function setupResizeEvents(project, handles) {
+          let isResizing = false;
+          let currentHandle = null;
+          let startX, startY, startWidth, startHeight, startLeft, startTop;
 
+          // Добавляем обработчики событий для каждой ручки
+          Object.entries(handles).forEach(([direction, handle]) => {
+            // Обработчик для мыши
+            handle.addEventListener('mousedown', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              startResize(e, direction);
 
-// Add this code to your existing JavaScript or replace the dock-related code
+              document.addEventListener('mousemove', handleMouseMove);
+              document.addEventListener('mouseup', stopResize);
+            });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const projects = document.querySelectorAll('.project');
-  let activeProject = null;
-  let initialX, initialY;
-  let zIndexCounter = 10;
-  
-  // Create container for dock icons at the bottom
-  const iconDock = document.createElement('div');
-  iconDock.className = 'app-dock';
-  document.querySelector('.project-wrapper').appendChild(iconDock);
+            // Обработчик для сенсорных устройств
+            handle.addEventListener('touchstart', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              const touch = e.touches[0];
+              startResize(touch, direction);
 
-  // Add reset button
-  const resetButton = document.createElement('button');
-  resetButton.className = 'reset-button';
-  resetButton.innerHTML = '↻';
-  resetButton.title = 'Reset all projects';
-  iconDock.appendChild(resetButton);
+              document.addEventListener('touchmove', handleTouchMove);
+              document.addEventListener('touchend', stopTouchResize);
+            });
+          });
 
-  // Function to randomize project positions
-  function randomizeProjectPositions() {
-  projects.forEach((project) => {
-    const wrapper = document.querySelector('.project-wrapper');
-    const wrapperWidth = wrapper.clientWidth;
-    const wrapperHeight = wrapper.clientHeight;
-    
-    // Set random width between 200px and 400px
-    const randomWidth = 350 + Math.floor(Math.random() * 1);
+          // Инициализация ресайза
+          function startResize(e, direction) {
+            isResizing = true;
+            currentHandle = direction;
 
+            // Сохраняем начальные значения
+            startX = e.clientX;
+            startY = e.clientY;
+            startWidth = project.offsetWidth;
+            startHeight = project.offsetHeight;
+            startLeft = parseInt(project.style.left) || 0;
+            startTop = parseInt(project.style.top) || 0;
 
-    project.style.width = `${randomWidth}px`;
+            // Отключаем переходы для плавного ресайза
+            project.style.transition = 'none';
+            project.classList.add('resizing');
+          }
 
-    // const randomHeight = 350 + Math.floor(Math.random() * 1);
-    // project.style.height = `${randomHeight}px`;
+          // Обработка перемещения мыши
+          function handleMouseMove(e) {
+            if (!isResizing) return;
+            handleResize(e);
+          }
 
-    // Use header height for proper constraints
-    const headerHeight = project.querySelector('.head').offsetHeight;
-    
-    const maxX = wrapperWidth - project.offsetWidth;
-    const maxY = wrapperHeight - headerHeight; 
-    
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-    const scale = 1; // Keep scale at 1 (no scaling)
-    
-    // Animate movement with slight delay
-    project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
-    
-    setTimeout(() => {
-      project.style.left = `${x}px`;
-      project.style.top = `${y}px`;
-      project.style.transform = `scale(${scale})`;
-      project.style.display = 'flex';
-      project.classList.remove('hidden');
-      project.dataset.originalX = x;
-      project.dataset.originalY = y;
-      project.dataset.originalScale = scale;
-      
-      // Hide corresponding dock icon
-      const icon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
-      if (icon) {
-        icon.style.display = 'none';  
+          // Обработка перемещения для сенсорных устройств
+          function handleTouchMove(e) {
+            if (!isResizing) return;
+            const touch = e.touches[0];
+            handleResize(touch);
+          }
+
+          // Обработка самого ресайза
+          function handleResize(e) {
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            // Минимальные размеры окна, чтобы его можно было ресайзить
+            const minWidth = 200;
+            const minHeight = 100;
+
+            // Максимальные размеры (ограничение размеров контейнера)
+            const wrapper = project.closest('.project-wrapper');
+            const maxWidth = wrapper ? wrapper.clientWidth - startLeft : window.innerWidth;
+            const maxHeight = wrapper ? wrapper.clientHeight - startTop : window.innerHeight;
+
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+            let newLeft = startLeft;
+            let newTop = startTop;
+
+            // Расчет новых размеров и позиции в зависимости от направления
+            switch (currentHandle) {
+              case 'e': // Правый край
+                newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
+                break;
+              case 'w': // Левый край
+                newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
+                newLeft = startLeft + (startWidth - newWidth);
+                break;
+              case 's': // Нижний край
+                newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+                break;
+              case 'se': // Правый нижний угол
+                newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
+                newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+                break;
+              case 'sw': // Левый нижний угол
+                newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
+                newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+                newLeft = startLeft + (startWidth - newWidth);
+                break;
+            }
+
+            // Применяем новые размеры и позицию
+            project.style.width = `${newWidth}px`;
+            project.style.height = `${newHeight}px`;
+            project.style.left = `${newLeft}px`;
+            project.style.top = `${newTop}px`;
+          }
+
+          // Завершение ресайза
+          function stopResize() {
+            if (isResizing) {
+              // Восстанавливаем переходы
+              project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+              project.classList.remove('resizing');
+
+              // Сбрасываем флаги
+              isResizing = false;
+              currentHandle = null;
+            }
+
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', stopResize);
+          }
+
+          // Завершение ресайза для сенсорных устройств
+          function stopTouchResize() {
+            if (isResizing) {
+              // Восстанавливаем переходы
+              project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+              project.classList.remove('resizing');
+
+              // Сбрасываем флаги
+              isResizing = false;
+              currentHandle = null;
+            }
+
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', stopTouchResize);
+          }
+        }
       }
-    }, Math.random() * 300);
-  });
-}
 
-  // Reset button handler
-  resetButton.addEventListener('click', function() {
-  // First bring back all hidden projects
-  const hiddenProjects = document.querySelectorAll('.project.hidden');
-  hiddenProjects.forEach(project => {
-    // Remove hidden class and make visible
-    project.classList.remove('hidden', 'minimizing');
-    project.style.display = 'flex';
-    project.style.opacity = '1';
-    
-    // Find and hide corresponding dock icon
-    const projectId = project.id;
-    const dockIcon = document.querySelector(`.app-icon[data-target="${projectId}"]`);
-    if (dockIcon) {
-      dockIcon.style.display = 'none';
-    }
-  });
-  projects.forEach((project) => {
-    const wrapper = document.querySelector('.project-wrapper');
-    const wrapperWidth = wrapper.clientWidth;
-    const wrapperHeight = wrapper.clientHeight;
-    
-    // Use header height for proper constraints
-    const headerHeight = project.querySelector('.head').offsetHeight;
-    
-    const maxX = wrapperWidth - project.offsetWidth;
-    const maxY = wrapperHeight - headerHeight; 
-    
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-    const scale = 0.8 + Math.random() * 0.3;
-    
-    // Animate movement with slight delay
-    project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
-    
-    // For better animation, first ensure element is visible with current position
-    if (project.classList.contains('hidden')) {
-      project.style.transition = 'none';
-      project.classList.remove('hidden');
-      project.style.display = 'flex';
-      project.style.opacity = '1';
-    }
-    
-    setTimeout(() => {
-      project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
-      project.style.left = `${x}px`;
-      project.style.top = `${y}px`;
-      project.style.transform = `scale(${scale})`;
-      project.dataset.originalX = x;
-      project.dataset.originalY = y;
-      project.dataset.originalScale = scale;
-    }, Math.random() * 300);
-  });
-  
-  // Hide all dock icons since all projects are now visible
-  const dockIcons = document.querySelectorAll('.app-icon');
-  dockIcons.forEach(icon => {
-    icon.style.display = 'none';
-  });
-});
-  // Process projects and create icons
-  projects.forEach((project, index) => {
-    // Add unique ID to project
-    project.id = 'project-' + index;
-
-    // Add minimize button to header
-    const header = project.querySelector('.head');
-    const toolbar = project.querySelector('.toolbar')
-    const hideButton = document.createElement('button');
-    hideButton.className = 'hide-button';
-    hideButton.innerHTML = '—';
-    hideButton.title = 'Minimize';
-    toolbar.appendChild(hideButton);
-
-// Create dock icon for minimized project
-const projectIcon = document.createElement('div');
-projectIcon.className = 'app-icon';
-projectIcon.dataset.target = 'project-' + index;
-
-// Use project title to create the image src
-const projectImg = project.querySelector('img[src^="source/screenshots/"]');
-const faviconSrc = projectImg.src.replace('.png', '-fav.png');
-
-// Create img element for favicon
-const faviconImage = document.createElement('img');
-
-faviconImage.src = faviconSrc;  // Путь к фавиконке
-
-projectIcon.appendChild(faviconImage);  // Добавляем картинку в иконку
-
-// Set title and hide icon by default
-projectIcon.style.display = 'none';
-iconDock.appendChild(projectIcon);
-
-// Minimize button handler
-hideButton.addEventListener('click', function(e) {
-  e.stopPropagation();
-  
-  // Save current position for animation
-  const rect = project.getBoundingClientRect();
-  const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
-  
-  // Find the target dock icon
-  const targetIcon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
-  const iconRect = targetIcon.getBoundingClientRect();
-  
-  // Calculate flying animation - FIXED to use proper coordinates
-  const currentX = parseInt(project.style.left) || 0;
-  const currentY = parseInt(project.style.top) || 0;
-  
-  // Calculate target position relative to the wrapper
-  // This targets the center of the dock icon
-  const targetX = (iconRect.left + iconRect.width/2) - wrapperRect.left - (project.offsetWidth/2);
-  const targetY = wrapperRect.height - iconDock.offsetHeight; // Bottom of wrapper minus dock height
-  
-  // Set animation properties
-  project.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
-  project.style.transformOrigin = 'center center';
-  
-  // Animate flying to dock
-  project.classList.add('minimizing');
-  project.style.left = `${targetX}px`;
-  project.style.top = `${targetY}px`;
-  project.style.transform = 'scale(0.1)';
-  project.style.opacity = '0';
-  
-  // Show dock icon after animation
-  setTimeout(() => {
-    project.classList.add('hidden');
-    targetIcon.style.display = 'flex';
-    targetIcon.classList.add('bounce');
-    setTimeout(() => targetIcon.classList.remove('bounce'), 500);
-    
-    // Delay before hiding the project completely
-    setTimeout(() => {
-      project.style.display = 'none';
-    }, 100);
-  }, 400);
-});
-
-    // Dock icon click handler to restore project
-    projectIcon.addEventListener('click', function() {
-      const targetProject = document.getElementById(this.dataset.target);
-      
-      // Get icon position for animation
-      const iconRect = this.getBoundingClientRect();
-      const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
-      
-      // Get original position from data attributes
-      const originalX = parseFloat(targetProject.dataset.originalX) || 100;
-      const originalY = parseFloat(targetProject.dataset.originalY) || 100;
-      const originalScale = parseFloat(targetProject.dataset.originalScale) || 1;
-      
-      // Set starting position (at the icon)
-      targetProject.style.left = `${iconRect.left - wrapperRect.left}px`;
-      targetProject.style.top = `${iconRect.top - wrapperRect.top}px`;
-      targetProject.style.transform = 'scale(0.1)';
-      targetProject.style.opacity = '0';
-      targetProject.style.display = 'flex';
-      
-      // Start animation
-      requestAnimationFrame(() => {
-        targetProject.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
-        targetProject.style.transform = `scale(${originalScale})`;
-        targetProject.style.left = `${originalX}px`;
-        targetProject.style.top = `${originalY}px`;
-        targetProject.style.opacity = '1';
-        
-        // Remove hidden class after small delay
-        setTimeout(() => {
-          targetProject.classList.remove('hidden', 'minimizing');
-        }, 50);
-      });
-      
-      // Bring project to top layer
-      targetProject.style.zIndex = zIndexCounter++;
-      
-      // Hide dock icon
-      this.style.display = 'none';
-    });
-
-    // Drag handlers
-    header.addEventListener('mousedown', function(e) {
-      // Skip if minimize button was clicked
-      if (e.target === hideButton) return;
-      
-      e.preventDefault();
-      activeProject = project;
-      project.style.zIndex = zIndexCounter++;
-      project.classList.add('dragging');
-      
-      const rect = project.getBoundingClientRect();
-      initialX = e.clientX - rect.left;
-      initialY = e.clientY - rect.top;
-      
-      document.addEventListener('mousemove', handleDrag);
-      document.addEventListener('mouseup', stopDrag);
-    });
-
-    // Touch device support
-    header.addEventListener('touchstart', function(e) {
-      // Skip if minimize button was clicked
-      if (e.target === hideButton) return;
-      
-      e.preventDefault();
-      activeProject = project;
-      project.style.zIndex = zIndexCounter++;
-      project.classList.add('dragging');
-      
-      const touch = e.touches[0];
-      const rect = project.getBoundingClientRect();
-      initialX = touch.clientX - rect.left;
-      initialY = touch.clientY - rect.top;
-      
-      document.addEventListener('touchmove', handleTouchDrag);
-      document.addEventListener('touchend', stopTouchDrag);
-    });
-  });
-
-  // Mouse drag handler
-  function handleDrag(e) {
-    if (!activeProject) return;
-    
-    const wrapper = document.querySelector('.project-wrapper');
-    const wrapperRect = wrapper.getBoundingClientRect();
-    
-    const headerHeight = activeProject.querySelector('.head').offsetHeight;
-    
-    let newX = e.clientX - wrapperRect.left - initialX;
-    let newY = e.clientY - wrapperRect.top - initialY;
-    
-    // Constrain boundaries
-    const maxX = wrapperRect.width - activeProject.offsetWidth;
-    const maxY = wrapperRect.height - headerHeight;
-    
-    newX = Math.max(0, Math.min(newX, maxX));
-    newY = Math.max(0, Math.min(newY, maxY));
-    
-    // Disable transitions for smooth dragging
-    activeProject.style.transition = 'none';
-    activeProject.style.left = `${newX}px`;
-    activeProject.style.top = `${newY}px`;
-    
-    // Update original position data
-    activeProject.dataset.originalX = newX;
-    activeProject.dataset.originalY = newY;
-  }
-
-  // Touch drag handler
-  function handleTouchDrag(e) {
-    if (!activeProject) return;
-    
-    const touch = e.touches[0];
-    const wrapper = document.querySelector('.project-wrapper');
-    const wrapperRect = wrapper.getBoundingClientRect();
-    
-    const headerHeight = activeProject.querySelector('.head').offsetHeight;
-    
-    let newX = touch.clientX - wrapperRect.left - initialX;
-    let newY = touch.clientY - wrapperRect.top - initialY;
-    
-    // Constrain boundaries
-    const maxX = wrapperRect.width - activeProject.offsetWidth;
-    const maxY = wrapperRect.height - headerHeight;
-    
-    newX = Math.max(0, Math.min(newX, maxX));
-    newY = Math.max(0, Math.min(newY, maxY));
-    
-    // Disable transitions for smooth dragging
-    activeProject.style.transition = 'none';
-    activeProject.style.left = `${newX}px`;
-    activeProject.style.top = `${newY}px`;
-    
-    // Update original position data
-    activeProject.dataset.originalX = newX;
-    activeProject.dataset.originalY = newY;
-  }
-
-  // End drag
-  function stopDrag() {
-    if (activeProject) {
-      // Restore transitions
-      activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-      activeProject.classList.remove('dragging');
-      activeProject = null;
-    }
-    
-    document.removeEventListener('mousemove', handleDrag);
-    document.removeEventListener('mouseup', stopDrag);
-  }
-
-  // End touch drag
-  function stopTouchDrag() {
-    if (activeProject) {
-      // Restore transitions
-      activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-      activeProject.classList.remove('dragging');
-      activeProject = null;
-    }
-    
-    document.removeEventListener('touchmove', handleTouchDrag);
-    document.removeEventListener('touchend', stopTouchDrag);
-  }
-  
-  // Function to position dock at bottom
-  function positionDockAtBottom() {
-    const wrapper = document.querySelector('.project-wrapper');
-    const wrapperRect = wrapper.getBoundingClientRect();
-    iconDock.style.bottom = '16px'; 
-    iconDock.style.top = 'auto';
-    iconDock.style.left = '50%';
-    iconDock.style.transform = 'translateX(-50%)';
-  }
-  
-  // Update dock position on resize
-  window.addEventListener('resize', positionDockAtBottom);
-  
-
-  
-  // Initialize
-  positionDockAtBottom();
-  randomizeProjectPositions();
-});
-
-
-
-
-
-// Функция для добавления ресайза окон
-function addWindowResizeFeature() {
-  const projects = document.querySelectorAll('.project');
-  
-  projects.forEach(project => {
-    // Создаем элементы для ресайза
-    const resizeHandles = {
-      'e': createResizeHandle('resize-e'),  // правый край
-      'w': createResizeHandle('resize-w'),  // левый край
-      's': createResizeHandle('resize-s'),  // нижний край
-      'se': createResizeHandle('resize-se'), // правый нижний угол
-      'sw': createResizeHandle('resize-sw')  // левый нижний угол
-    };
-    
-    // Добавляем созданные элементы к проекту
-    Object.values(resizeHandles).forEach(handle => {
-      project.appendChild(handle);
-    });
-    
-    // Инициализируем обработчики событий для каждой ручки ресайза
-    setupResizeEvents(project, resizeHandles);
-  });
-  
-  // Функция для создания ручки ресайза
-  function createResizeHandle(className) {
-    const handle = document.createElement('div');
-    handle.className = `resize-handle ${className}`;
-    return handle;
-  }
-  
-  // Настройка событий для ресайза
-  function setupResizeEvents(project, handles) {
-    let isResizing = false;
-    let currentHandle = null;
-    let startX, startY, startWidth, startHeight, startLeft, startTop;
-    
-    // Добавляем обработчики событий для каждой ручки
-    Object.entries(handles).forEach(([direction, handle]) => {
-      // Обработчик для мыши
-      handle.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        startResize(e, direction);
-        
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', stopResize);
-      });
-      
-      // Обработчик для сенсорных устройств
-      handle.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const touch = e.touches[0];
-        startResize(touch, direction);
-        
-        document.addEventListener('touchmove', handleTouchMove);
-        document.addEventListener('touchend', stopTouchResize);
-      });
-    });
-    
-    // Инициализация ресайза
-    function startResize(e, direction) {
-      isResizing = true;
-      currentHandle = direction;
-      
-      // Сохраняем начальные значения
-      startX = e.clientX;
-      startY = e.clientY;
-      startWidth = project.offsetWidth;
-      startHeight = project.offsetHeight;
-      startLeft = parseInt(project.style.left) || 0;
-      startTop = parseInt(project.style.top) || 0;
-      
-      // Отключаем переходы для плавного ресайза
-      project.style.transition = 'none';
-      project.classList.add('resizing');
-    }
-    
-    // Обработка перемещения мыши
-    function handleMouseMove(e) {
-      if (!isResizing) return;
-      handleResize(e);
-    }
-    
-    // Обработка перемещения для сенсорных устройств
-    function handleTouchMove(e) {
-      if (!isResizing) return;
-      const touch = e.touches[0];
-      handleResize(touch);
-    }
-    
-    // Обработка самого ресайза
-    function handleResize(e) {
-      const deltaX = e.clientX - startX;
-      const deltaY = e.clientY - startY;
-      
-      // Минимальные размеры окна, чтобы его можно было ресайзить
-      const minWidth = 200;
-      const minHeight = 100;
-      
-      // Максимальные размеры (ограничение размеров контейнера)
-      const wrapper = project.closest('.project-wrapper');
-      const maxWidth = wrapper ? wrapper.clientWidth - startLeft : window.innerWidth;
-      const maxHeight = wrapper ? wrapper.clientHeight - startTop : window.innerHeight;
-      
-      let newWidth = startWidth;
-      let newHeight = startHeight;
-      let newLeft = startLeft;
-      let newTop = startTop;
-      
-      // Расчет новых размеров и позиции в зависимости от направления
-      switch (currentHandle) {
-        case 'e': // Правый край
-          newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
-          break;
-        case 'w': // Левый край
-          newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
-          newLeft = startLeft + (startWidth - newWidth);
-          break;
-        case 's': // Нижний край
-          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
-          break;
-        case 'se': // Правый нижний угол
-          newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
-          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
-          break;
-        case 'sw': // Левый нижний угол
-          newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
-          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
-          newLeft = startLeft + (startWidth - newWidth);
-          break;
-      }
-      
-      // Применяем новые размеры и позицию
-      project.style.width = `${newWidth}px`;
-      project.style.height = `${newHeight}px`;
-      project.style.left = `${newLeft}px`;
-      project.style.top = `${newTop}px`;
-    }
-    
-    // Завершение ресайза
-    function stopResize() {
-      if (isResizing) {
-        // Восстанавливаем переходы
-        project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        project.classList.remove('resizing');
-        
-        // Сбрасываем флаги
-        isResizing = false;
-        currentHandle = null;
-      }
-      
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', stopResize);
-    }
-    
-    // Завершение ресайза для сенсорных устройств
-    function stopTouchResize() {
-      if (isResizing) {
-        // Восстанавливаем переходы
-        project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        project.classList.remove('resizing');
-        
-        // Сбрасываем флаги
-        isResizing = false;
-        currentHandle = null;
-      }
-      
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', stopTouchResize);
-    }
-  }
-}
-
-// CSS для добавления к существующим стилям
-const resizeCSS = `
+      // CSS для добавления к существующим стилям
+      const resizeCSS = `
 .project {
 }
 
@@ -983,18 +1003,19 @@ const resizeCSS = `
 }
 `;
 
-// Добавление стилей в документ
-function addResizeStyles() {
-  const styleEl = document.createElement('style');
-  styleEl.textContent = resizeCSS;
-  document.head.appendChild(styleEl);
-}
+      // Добавление стилей в документ
+      function addResizeStyles() {
+        const styleEl = document.createElement('style');
+        styleEl.textContent = resizeCSS;
+        document.head.appendChild(styleEl);
+      }
 
-// Инициализация функции ресайза
-document.addEventListener('DOMContentLoaded', function() {
-  addResizeStyles();
-  addWindowResizeFeature();
-});
-  </script>
+      // Инициализация функции ресайза
+      document.addEventListener('DOMContentLoaded', function () {
+        addResizeStyles();
+        addWindowResizeFeature();
+      });
+    </script>
 </body>
+
 </html>
