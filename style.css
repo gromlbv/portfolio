@@ -57,10 +57,6 @@
   justify-content: space-between;
 }
 
-.flex-reverse {
-  flex-direction: row-reverse;
-}
-
 .gap-64 {
   gap: 64px;
 }
@@ -326,22 +322,21 @@ header.active {
 
 .lbpage.projects {
   padding: 0 32px;
+  position: relative;
+
+  h2 {
+    position: absolute;
+    top: 64px;
+    width: 100%;
+  }
 
   .mac-wrapper {
-    position: relative;
     width: 100%;
 
     background-image: url(/source/background.png);
-    background-size: cover;
     border-radius: 32px;
 
-    h2 {
-      position: absolute;
-      top: 64px;
-      width: 100%;
 
-      z-index: 5;
-    }
   }
 }
 
