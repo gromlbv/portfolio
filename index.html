@@ -48,7 +48,7 @@
     <button id="lang-toggle" class="lang-btn flex-center gap-4">
       <p id="btn-context">EN</p>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
-        <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
+        <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5" />
       </svg>
     </button>
 
@@ -136,29 +136,37 @@
 
   <div class="lbpage gap-64" id="target">
     <h2><localized-text key="h1-p3"></localized-text></h2>
-    <div class="flex-cl gap-24">
+    <div class="flex-cl flex-center gap-24">
       <a href="https://seniwave.com/" target="_blank">
-        <p class="smaller clickable">SeniWave ......................................... now</p>
+        <p class="smaller clickable">SeniWave<span class="dots"></span>now</p>
       </a>
       <a href="https://dges.io/" target="_blank">
-        <p class="smaller clickable">DGES ................................................ 2025</p>
+        <p class="smaller clickable">DGES<span class="dots"></span>2025</p>
       </a>
       <a href="https://arspatially.com" target="_blank">
-        <p class="smaller clickable">ARSpatially .................................... 2025</p>
+        <p class="smaller clickable">ARSpatially<span class="dots"></span>2025</p>
       </a>
       <a href="#" target="_blank">
-        <p class="smaller clickable">Tatneft ............................................ 2024</p>
+        <p class="smaller clickable">Tatneft<span class="dots"></span>2024</p>
       </a>
       <a href="https://www.gazprom-spka.ru/ru/" target="_blank">
-        <p class="smaller clickable">Gazprom ........................................ 2024</p>
+        <p class="smaller clickable">Gazprom<span class="dots"></span>2024</p>
       </a>
-    </div>
+    </div>    
   </div>
 
+
   <div class="lbpage projects">
-    <h2><localized-text key="h1-p4"></localized-text></h2>
+    <p class="flex flex-center">view as list will be added soon...</p>
+    <div class="vspacer-24"></div>
+
     <div class="mac-wrapper">
       <div class="project-wrapper flex-cl flex-center gap-12">
+        
+        <h2><localized-text key="h1-p4"></localized-text></h2>
+
+        <button id="toggle_fullscreen">Fullscreen</button>
+
         <div class="project">
           <div class="head">
 
@@ -231,6 +239,32 @@
           <img src="source/screenshots/jadan.png">
         </div>
 
+
+        <!-- <div class="project">
+          <div class="browser-head">
+            <div class="head">
+            <div class="toolbar">
+       авто-заполняшка
+            </div>
+
+            <div class="browser-tabs flex flex-center">
+              <div class="tab active">arspatially.com</div>
+              <div class="tab">jadan.lbvo.ru</div>
+              <div class="tab">lbvo.ru</div>
+            </div>
+            <a class="browser">
+              <img src="source/globe.svg" width="15" height="14">
+              -
+            </a>
+
+          </div>
+
+        </div>
+          <iframe src="http://127.0.0.1:5500/index.html" frameborder="0"></iframe>
+          <img src="source/screenshots/jadan.png" style="display: none;">
+        </div> -->
+
+
         <div class="project">
           <div class="head">
 
@@ -292,18 +326,17 @@
   <script src="localize.js"></script>
   <script src="windows.js"></script>
   <script>
-    $('#toggle_fullscreen').on('click', function(){
-  // if already full screen; exit
-  // else go fullscreen
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    $('.project-wrapper').get(0).requestFullscreen();
-  }
-});
+    $('#toggle_fullscreen').on('click', function () {
+      // if already full screen; exit
+      // else go fullscreen
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        $('.project-wrapper').get(0).requestFullscreen();
+      }
+    });
   </script>
 
 
 </body>
-
 </html>
