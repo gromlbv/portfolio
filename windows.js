@@ -1,3 +1,4 @@
+
 const header = document.getElementById('header');
 const target = document.getElementById('target');
 
@@ -121,6 +122,15 @@ document.addEventListener('DOMContentLoaded', function () {
       const wrapperWidth = wrapper.clientWidth;
       const wrapperHeight = wrapper.clientHeight;
 
+      // Set random width between 200px and 400px
+      const randomWidth = 350 + Math.floor(Math.random() * 1);
+
+
+      project.style.width = `${randomWidth}px`;
+
+      // const randomHeight = 350 + Math.floor(Math.random() * 1);
+      // project.style.height = `${randomHeight}px`;
+
       // Use header height for proper constraints
       const headerHeight = project.querySelector('.head').offsetHeight;
 
@@ -129,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
-      const scale = 0.8 + Math.random() * 0.3;
+      const scale = 1; // Keep scale at 1 (no scaling)
 
       // Animate movement with slight delay
       project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
@@ -220,11 +230,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add minimize button to header
     const header = project.querySelector('.head');
+    const toolbar = project.querySelector('.toolbar')
     const hideButton = document.createElement('button');
     hideButton.className = 'hide-button';
     hideButton.innerHTML = '—';
     hideButton.title = 'Minimize';
-    header.appendChild(hideButton);
+    toolbar.appendChild(hideButton);
 
     // Create dock icon for minimized project
     const projectIcon = document.createElement('div');
@@ -469,7 +480,261 @@ document.addEventListener('DOMContentLoaded', function () {
   // Update dock position on resize
   window.addEventListener('resize', positionDockAtBottom);
 
+
+
   // Initialize
   positionDockAtBottom();
   randomizeProjectPositions();
+});
+
+
+
+
+
+// Функция для добавления ресайза окон
+function addWindowResizeFeature() {
+  const projects = document.querySelectorAll('.project');
+
+  projects.forEach(project => {
+    // Создаем элементы для ресайза
+    const resizeHandles = {
+      'e': createResizeHandle('resize-e'),  // правый край
+      'w': createResizeHandle('resize-w'),  // левый край
+      's': createResizeHandle('resize-s'),  // нижний край
+      'se': createResizeHandle('resize-se'), // правый нижний угол
+      'sw': createResizeHandle('resize-sw')  // левый нижний угол
+    };
+
+    // Добавляем созданные элементы к проекту
+    Object.values(resizeHandles).forEach(handle => {
+      project.appendChild(handle);
+    });
+
+    // Инициализируем обработчики событий для каждой ручки ресайза
+    setupResizeEvents(project, resizeHandles);
+  });
+
+  // Функция для создания ручки ресайза
+  function createResizeHandle(className) {
+    const handle = document.createElement('div');
+    handle.className = `resize-handle ${className}`;
+    return handle;
+  }
+
+  // Настройка событий для ресайза
+  function setupResizeEvents(project, handles) {
+    let isResizing = false;
+    let currentHandle = null;
+    let startX, startY, startWidth, startHeight, startLeft, startTop;
+
+    // Добавляем обработчики событий для каждой ручки
+    Object.entries(handles).forEach(([direction, handle]) => {
+      // Обработчик для мыши
+      handle.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        startResize(e, direction);
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', stopResize);
+      });
+
+      // Обработчик для сенсорных устройств
+      handle.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const touch = e.touches[0];
+        startResize(touch, direction);
+
+        document.addEventListener('touchmove', handleTouchMove);
+        document.addEventListener('touchend', stopTouchResize);
+      });
+    });
+
+    // Инициализация ресайза
+    function startResize(e, direction) {
+      isResizing = true;
+      currentHandle = direction;
+
+      // Сохраняем начальные значения
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = project.offsetWidth;
+      startHeight = project.offsetHeight;
+      startLeft = parseInt(project.style.left) || 0;
+      startTop = parseInt(project.style.top) || 0;
+
+      // Отключаем переходы для плавного ресайза
+      project.style.transition = 'none';
+      project.classList.add('resizing');
+    }
+
+    // Обработка перемещения мыши
+    function handleMouseMove(e) {
+      if (!isResizing) return;
+      handleResize(e);
+    }
+
+    // Обработка перемещения для сенсорных устройств
+    function handleTouchMove(e) {
+      if (!isResizing) return;
+      const touch = e.touches[0];
+      handleResize(touch);
+    }
+
+    // Обработка самого ресайза
+    function handleResize(e) {
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+
+      // Минимальные размеры окна, чтобы его можно было ресайзить
+      const minWidth = 200;
+      const minHeight = 100;
+
+      // Максимальные размеры (ограничение размеров контейнера)
+      const wrapper = project.closest('.project-wrapper');
+      const maxWidth = wrapper ? wrapper.clientWidth - startLeft : window.innerWidth;
+      const maxHeight = wrapper ? wrapper.clientHeight - startTop : window.innerHeight;
+
+      let newWidth = startWidth;
+      let newHeight = startHeight;
+      let newLeft = startLeft;
+      let newTop = startTop;
+
+      // Расчет новых размеров и позиции в зависимости от направления
+      switch (currentHandle) {
+        case 'e': // Правый край
+          newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
+          break;
+        case 'w': // Левый край
+          newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
+          newLeft = startLeft + (startWidth - newWidth);
+          break;
+        case 's': // Нижний край
+          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+          break;
+        case 'se': // Правый нижний угол
+          newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
+          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+          break;
+        case 'sw': // Левый нижний угол
+          newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
+          newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
+          newLeft = startLeft + (startWidth - newWidth);
+          break;
+      }
+
+      // Применяем новые размеры и позицию
+      project.style.width = `${newWidth}px`;
+      project.style.height = `${newHeight}px`;
+      project.style.left = `${newLeft}px`;
+      project.style.top = `${newTop}px`;
+    }
+
+    // Завершение ресайза
+    function stopResize() {
+      if (isResizing) {
+        // Восстанавливаем переходы
+        project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        project.classList.remove('resizing');
+
+        // Сбрасываем флаги
+        isResizing = false;
+        currentHandle = null;
+      }
+
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', stopResize);
+    }
+
+    // Завершение ресайза для сенсорных устройств
+    function stopTouchResize() {
+      if (isResizing) {
+        // Восстанавливаем переходы
+        project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        project.classList.remove('resizing');
+
+        // Сбрасываем флаги
+        isResizing = false;
+        currentHandle = null;
+      }
+
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', stopTouchResize);
+    }
+  }
+}
+
+// CSS для добавления к существующим стилям
+const resizeCSS = `
+.project {
+}
+
+.resize-handle {
+position: absolute;
+background: transparent;
+z-index: 10;
+}
+
+.resize-e {
+cursor: e-resize;
+width: 8px;
+top: 0;
+right: 0;
+bottom: 0;
+}
+
+.resize-w {
+cursor: w-resize;
+width: 8px;
+top: 0;
+left: 0;
+bottom: 0;
+}
+
+.resize-s {
+cursor: s-resize;
+height: 8px;
+left: 0;
+right: 0;
+bottom: 0;
+}
+
+.resize-se {
+cursor: se-resize;
+width: 12px;
+height: 12px;
+right: 0;
+bottom: 0;
+}
+
+.resize-sw {
+cursor: sw-resize;
+width: 12px;
+height: 12px;
+left: 0;
+bottom: 0;
+}
+
+.project.resizing {
+user-select: none;
+pointer-events: none;
+}
+
+.project.resizing .resize-handle {
+pointer-events: auto;
+}
+`;
+
+// Добавление стилей в документ
+function addResizeStyles() {
+  const styleEl = document.createElement('style');
+  styleEl.textContent = resizeCSS;
+  document.head.appendChild(styleEl);
+}
+
+// Инициализация функции ресайза
+document.addEventListener('DOMContentLoaded', function () {
+  addResizeStyles();
+  addWindowResizeFeature();
 });

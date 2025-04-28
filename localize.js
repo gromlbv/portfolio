@@ -23,6 +23,7 @@ var dictionary = {
 
         // page3
         "h1-p3": "places where i <br> gathered experience",
+        "now": "now",
 
         // page4
         "h1-p4": "recent projects",
@@ -57,15 +58,16 @@ var dictionary = {
 
         // page3
         "h1-p3": "места, где я <br> набирался опыта",
+        "now": "сейчас",
 
         // page4
         "h1-p4": "недавние проекты",
 
         // page5
-        "h1-p5": "давай свяжемся",
+        "h1-p5": "мои контакты",
         "p-p5": "я открыт для новых проектов",
-        "telegram": "Telegram",
-        "email": "Email"
+        "telegram": "Телеграм",
+        "email": "Почта"
     }
 }
 
@@ -100,13 +102,44 @@ class LocalizedTextElement extends HTMLElement {
 new HTMLLocalizer();
 
 
-document.getElementById('lang-toggle').addEventListener('click', function () {
+
+
+function switchLanguage() {
     var currentLang = document.documentElement.lang || 'en';
     var newLang = currentLang === 'en' ? 'ru' : 'en';
     document.documentElement.lang = newLang;
     updateTextLanguage(newLang);
-    this.textContent = newLang === 'en' ? 'Switch to Russian' : 'Switch to English';
+
+    document.getElementById('lang-toggle').innerHTML = newLang === 'en' 
+        ? `<p id="btn-context">EN</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
+            </svg>`
+        : `<p id="btn-context">RU</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
+            </svg>`;
+}
+
+document.getElementById('lang-toggle').addEventListener('click', function() {
+    switchLanguage();
 });
+
+window.onload = function() {
+    var currentLang = document.documentElement.lang || 'en';
+    document.documentElement.lang = currentLang;
+
+    document.getElementById('lang-toggle').innerHTML = currentLang === 'en' 
+        ? `<p id="btn-context">EN</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
+            </svg>`
+        : `<p id="btn-context">RU</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
+            </svg>`;
+};
+
 
 function updateTextLanguage(lang) {
     var elements = document.querySelectorAll('localized-text');

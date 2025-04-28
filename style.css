@@ -8,6 +8,11 @@
   /* --margin-vertical: 50px; */
 }
 
+img{
+  user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
 
 @font-face {
   font-family: 'NeutralSans';
@@ -52,6 +57,9 @@
   justify-content: center;
   align-items: center;
 }
+.flex-reverse{
+  flex-direction: row-reverse;
+}
 
 .flex-between {
   justify-content: space-between;
@@ -60,21 +68,20 @@
 .gap-64 {
   gap: 64px;
 }
-
 .gap-24 {
   gap: 24px;
 }
-
 .gap-18 {
   gap: 18px;
 }
-
 .gap-12 {
   gap: 12px;
 }
-
 .gap-8 {
   gap: 8px;
+}
+.gap-4 {
+  gap: 4px;
 }
 
 
@@ -210,6 +217,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Стиль для русскоязычного контента */
+html[lang="ru"] {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Стиль для англоязычного контента */
+html[lang="en"] {
+  font-family: NeutralSans;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -219,10 +236,10 @@ body {
   background-color: var(--background-color);
   color: var(--main-color);
 
-  font-family: NeutralSans;
-
   box-sizing: border-box;
   overflow-x: hidden;
+
+  
 }
 
 header {
@@ -427,7 +444,13 @@ p.smaller {
 
 
 
+#lang-toggle{
+  color: #CCBFB0;
+  background-color: transparent;
+  border: none;
 
+  cursor: pointer;
+}
 
 .scroll-page {
   width: 100%;
