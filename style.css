@@ -350,8 +350,8 @@ header.active {
   .mac-wrapper {
     width: 100%;
 
-    background-image: url(/source/background.png);
     border-radius: 32px;
+    overflow: hidden;
 
 
   }
@@ -362,8 +362,11 @@ header.active {
   position: relative;
   overflow: hidden;
 
-  height: 1920px;
   height: 95vh;
+
+  background-image: url(/source/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .project {

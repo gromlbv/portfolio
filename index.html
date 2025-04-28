@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -156,7 +157,6 @@
 
   <div class="lbpage projects">
     <h2><localized-text key="h1-p4"></localized-text></h2>
-    
     <div class="mac-wrapper">
       <div class="project-wrapper flex-cl flex-center gap-12">
         <div class="project">
@@ -291,6 +291,17 @@
 
   <script src="localize.js"></script>
   <script src="windows.js"></script>
+  <script>
+    $('#toggle_fullscreen').on('click', function(){
+  // if already full screen; exit
+  // else go fullscreen
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    $('.project-wrapper').get(0).requestFullscreen();
+  }
+});
+  </script>
 
 
 </body>

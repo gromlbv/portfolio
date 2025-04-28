@@ -1,19 +1,26 @@
-
 const header = document.getElementById('header');
 const target = document.getElementById('target');
 
+let isIntersecting = false;
+
 const observer = new IntersectionObserver(([entry]) => {
-  if (entry.isIntersecting) {
-    header.classList.add('active');
-  } else {
-    header.classList.remove('active');
-  }
+  isIntersecting = entry.isIntersecting;
+  updateHeader();
 }, {
-  threshold: 0.1 // можно менять чувствительность
+  threshold: 0.1
 });
 
 observer.observe(target);
 
+function updateHeader() {
+  if (isIntersecting && window.scrollY > 0) {
+    header.classList.add('active');
+  } else {
+    header.classList.remove('active');
+  }
+}
+
+window.addEventListener('scroll', updateHeader);
 
 
 
@@ -505,31 +512,25 @@ function addWindowResizeFeature() {
       'sw': createResizeHandle('resize-sw')  // левый нижний угол
     };
 
-    // Добавляем созданные элементы к проекту
     Object.values(resizeHandles).forEach(handle => {
       project.appendChild(handle);
     });
 
-    // Инициализируем обработчики событий для каждой ручки ресайза
     setupResizeEvents(project, resizeHandles);
   });
 
-  // Функция для создания ручки ресайза
   function createResizeHandle(className) {
     const handle = document.createElement('div');
     handle.className = `resize-handle ${className}`;
     return handle;
   }
 
-  // Настройка событий для ресайза
   function setupResizeEvents(project, handles) {
     let isResizing = false;
     let currentHandle = null;
     let startX, startY, startWidth, startHeight, startLeft, startTop;
 
-    // Добавляем обработчики событий для каждой ручки
     Object.entries(handles).forEach(([direction, handle]) => {
-      // Обработчик для мыши
       handle.addEventListener('mousedown', function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -539,7 +540,6 @@ function addWindowResizeFeature() {
         document.addEventListener('mouseup', stopResize);
       });
 
-      // Обработчик для сенсорных устройств
       handle.addEventListener('touchstart', function (e) {
         e.preventDefault();
         e.stopPropagation();
