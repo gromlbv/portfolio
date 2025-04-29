@@ -6,7 +6,9 @@ var dictionary = {
         // page1
         "name": "i’m Dima <br> Gromov",
         "info": "middle <span>ux/ui designer</span> & <br> intern ios developer",
-
+        "block-1": "located in <b>Crimea,<br>Simferopol</b>",
+        "block-3": "my pet photos<br>(in development)",
+        
         // page2
         "h1-p2": "what i love",
 
@@ -42,7 +44,9 @@ var dictionary = {
         // page1
         "name": "я Дима <br> Громов",
         "info": "middle <span>ux/ui дизайнер</span> и <br> intern iOS разработчик",
-
+        "block-1": "нахожусь в <b>Крыму,<br>Симферополь</b>",
+        "block-3": "(в разработке)",
+        
         // page2
         "h1-p2": "что я люблю",
 
