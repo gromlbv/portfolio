@@ -206,8 +206,12 @@ a.button-like:hover {
 a.button-like:active{
   scale: 0.95;
 }
+a.no-drag{
+  user-select: none;
+  -webkit-user-drag: none;
+}
 .animate{
-  transition: 0.3s filter;
+  transition: 0.3s;
 }
 .animate:hover{
   transition: 0.3s;
