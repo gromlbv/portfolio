@@ -210,12 +210,19 @@ a.no-drag{
   user-select: none;
   -webkit-user-drag: none;
 }
-.animate{
+.animate, .block{
   transition: 0.3s;
 }
 .animate:hover{
   transition: 0.3s;
   filter: contrast(0.3) brightness(0.5);
+  scale: 1.08;
+}
+.block:hover{
+  filter: contrast(1) brightness(1.1);
+  background-color: var(--main-color) !important;
+  transform: rotate(0) !important;
+  
   scale: 1.08;
 }
 a.browser {
@@ -282,8 +289,6 @@ body {
 
   box-sizing: border-box;
   overflow-x: hidden;
-
-  
 }
 
 header {
@@ -595,9 +600,8 @@ p.smaller {
   mask-position: center;
   mask-repeat: no-repeat; */
 
-  mask-image: linear-gradient(to right, transparent 3%, black 10%, black 90%, transparent 97%);  
+  mask-image: linear-gradient(to right, transparent 3%, black 10%, black 92%, transparent 97%);  
   mask-size: 100% 100%;
-  mask-position: center;
   mask-repeat: no-repeat;
 
   /* -webkit-mask-image:
@@ -616,10 +620,12 @@ p.smaller {
 }
 
 .blur-wrapper{
+  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 5;
   overflow: hidden;
+  pointer-events: none;
 }
 
 
