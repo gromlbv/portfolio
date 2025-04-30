@@ -45,7 +45,7 @@
     </div>
 
   </header>
-  <div class="lbpage gap-18" id="start">
+  <div class="lbpage gap-18 z-index6" id="start">
 
     <button id="lang-toggle" class="lang-btn flex-center gap-4 animate">
       <p id="btn-context">EN</p>
@@ -110,7 +110,7 @@
   </div>
 
   <div class="lbpage gap-64 scroll-page">
-    <h2><localized-text key="h1-p2"></localized-text></h2>
+    <h2 class="z-index6"><localized-text key="h1-p2"></localized-text></h2>
     <div class="scroll-container" style="scroll-padding-left: 50%;">
       <div class="card">
         <localized-text key="card-1"></localized-text>
@@ -127,7 +127,27 @@
       <div class="card">
         <localized-text key="card-5"></localized-text>
       </div>
+
+      </div>
+      <div class="blur-wrapper">
+        <div class="gradient-blur">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="gradient-blur left">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
     </div>
+    
   </div>
 
   <div class="lbpage gap-64" id="target">
@@ -158,7 +178,7 @@
 
     <div class="mac-wrapper">
       <div class="project-wrapper flex-cl flex-center gap-12">
-        
+
         <h2><localized-text key="h1-p4"></localized-text></h2>
 
         <button id="toggle_fullscreen">Fullscreen</button>
@@ -302,7 +322,7 @@
     </div>
   </div>
 
-  <div class="lbpage gap-18" id="contacts">
+  <div class="lbpage gap-12 " id="contacts">
     <h2><localized-text key="h1-p5"></localized-text></h2>
     <p><localized-text key="p-p5"></localized-text></p>
     <div class="spacer-24"></div>
@@ -321,10 +341,9 @@
 
   <script src="localize.js"></script>
   <script src="windows.js"></script>
+
   <script>
     $('#toggle_fullscreen').on('click', function () {
-      // if already full screen; exit
-      // else go fullscreen
       if (document.fullscreenElement) {
         document.exitFullscreen();
       } else {
