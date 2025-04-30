@@ -257,7 +257,6 @@ a.no-drag {
 }
 
 .block:hover {
-  filter: contrast(1) brightness(1.1);
   background-color: var(--main-color) !important;
   transform: rotate(0) !important;
 
@@ -461,6 +460,8 @@ header.active {
       
       cursor: pointer;
       user-select: none;
+
+      filter: initial !important;
     }
     .close-map-btn:hover{
       transition: 0.4s;
@@ -493,8 +494,6 @@ header.active {
 .block.hidden{
   transition: 0.2s;
   scale: 0.5;
-
-
 }
 
 
