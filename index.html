@@ -50,15 +50,17 @@
 
   <div class="absolute-preview hidden">
     <div class="preview-head flex-center flex-between">
-      <a class="browser close-btn">X</a>
+      <a class="browser close-btn">✕</a>
       <h3 class="preview-link">link-here</h3>
-      <a class="browser dark open-link" href="#" target="_blank">Open in browser</a>
+      <a class="browser open-link" href="#" target="_blank">
+        <img src="source/globe.svg" width="15" height="14">
+        Open in browser</a>
     </div>
-    <iframe src="https://lbvo.ru/404.html" frameborder="0"></iframe>
+    <iframe src="https://lbvo.ru/loading.html" frameborder="0"></iframe>
   </div>
 
 
-  <div class="lbpage gap-18 z-index6" id="start">
+  <div class="lbpage gap-18" id="start">
 
     <button id="lang-toggle" class="lang-btn flex-center gap-4 animate">
       <p id="btn-context">Читать на русском</p>
@@ -70,11 +72,15 @@
     <div class="horiz-block flex-center gap-64">
 
       <div class="addit-blocks flex flex-reverse">
-        <a class="block rotate1 animate-block" href="/">
-          <img src="source/icons/map.svg" alt="">
+        <a class="block rotate1 animate-block open-map-btn">
+          <img src="source/icons/map.svg">
           <p>
             <localized-text key="block-1"></localized-text>
           </p>
+          <div class="map-block overflow hidden">
+            <div class="close-map-btn">✕</div>
+            <img src="source/map.png">
+          </div>
         </a>
         <!-- <div class="img-block">
               <img src="source/me.png">
@@ -229,7 +235,12 @@
         <h3>AR Spatially Landing</h3>
         <div class="flex-cl gap-24 text-left">
           <div class="flex-cl gap-4">
+            <h4>What's done</h4>
+            <p>Web-Design</p>
+
+            <h4></h4>
             <p>I've remade the whole project landing!</p>
+
           </div>
 
           <div class="flex-cl gap-8">
@@ -433,14 +444,26 @@
 
   <script>
     $('.button-like[href="#contacts"]').on('click', function () {
-  const $btn = $(this);
-  $('.gradient-flash').addClass('button-gradient-flash');
+      const $btn = $(this);
+      $('.gradient-flash').addClass('button-gradient-flash');
 
-  setTimeout(() => {
-    $('.gradient-flash').removeClass('button-gradient-flash');
-  }, 2000);
+      setTimeout(() => {
+        $('.gradient-flash').removeClass('button-gradient-flash');
+      }, 2000);
+    });
+
+    $('.open-map-btn').on('click', function () {
+  $(this).find('.overflow').addClass('visible'); // или .children('.overflow')
+  $(this).addClass('hidden');
 });
+    $(document).on('click', '.close-map-btn', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).closest('.overflow').removeClass('visible');
+      $(this).closest('.block').removeClass('hidden');
+    });
 
+    
     $('.js-toggle-view').on('click', function () {
       $('.list-view').toggle();
       $('.desktop-view').toggle();
@@ -468,7 +491,7 @@
     $('.absolute-preview .close-btn').on('click', function () {
       $('.absolute-preview').addClass('hidden').hide();
       $('html').removeClass('previewed');
-      $('.absolute-preview iframe').attr('src', 'https://lbvo.ru/404.html'); // сброс
+      $('.absolute-preview iframe').attr('src', 'https://lbvo.ru/loading.html');
     });
 
   </script>
