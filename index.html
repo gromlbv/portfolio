@@ -43,7 +43,7 @@
     </div>
 
   </header>
-  <div class="lbpage gap-18" id="start">
+  <div class="lbpage gap-18 z-index6" id="start">
 
     <button id="lang-toggle" class="lang-btn flex-center gap-4 animate">
       <p id="btn-context">EN</p>
@@ -108,7 +108,7 @@
   </div>
 
   <div class="lbpage gap-64 scroll-page">
-    <h2><localized-text key="h1-p2"></localized-text></h2>
+    <h2 class="z-index6"><localized-text key="h1-p2"></localized-text></h2>
     <div class="scroll-container" style="scroll-padding-left: 50%;">
       <div class="card">
         <localized-text key="card-1"></localized-text>
@@ -125,7 +125,27 @@
       <div class="card">
         <localized-text key="card-5"></localized-text>
       </div>
+
+      </div>
+      <div class="blur-wrapper">
+        <div class="gradient-blur">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="gradient-blur left">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
     </div>
+    
   </div>
 
   <div class="lbpage gap-64" id="target">
@@ -317,56 +337,11 @@
   </div>
 
 
-  <div id="mega">
-    <div id="wrapper">
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
-        <li>Item 7</li>
-        <li>Item 8</li>
-        <li>Item 9</li>
-        <li>Item 10</li>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
-        <li>Item 7</li>
-        <li>Item 8</li>
-        <li>Item 9</li>
-        <li>Item 10</li>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
-        <li>Item 10</li>
-      </ul>
-      <div class="gradient-blur">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    </div>
-
-
-
   <script src="localize.js"></script>
   <script src="windows.js"></script>
+
   <script>
     $('#toggle_fullscreen').on('click', function () {
-      // if already full screen; exit
-      // else go fullscreen
       if (document.fullscreenElement) {
         document.exitFullscreen();
       } else {
