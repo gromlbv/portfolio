@@ -413,6 +413,9 @@ header.active {
 
     cursor: pointer;
 
+    user-select: none;
+    -webkit-user-drag: none;
+
   }
 
   .block.rotate1 {
@@ -459,8 +462,6 @@ header.active {
       background-color: var(--background-color);
       
       cursor: pointer;
-      user-select: none;
-
       filter: initial !important;
     }
     .close-map-btn:hover{
@@ -480,8 +481,8 @@ header.active {
 
 .overflow {
   opacity: 0;
-  transform: scale(1.5);
-  transition: opacity 0.4s ease, transform 0.7s ease;
+  transform: scale(1.0);
+  transition: opacity 0.2s ease, transform 0.4s ease;
   pointer-events: none;
 }
 
