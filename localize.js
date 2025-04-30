@@ -29,13 +29,37 @@ var dictionary = {
 
         // page4
         "h1-p4": "recent projects",
+        "list-btn": "View as list",
+        "desktop-btn": "See on ’’desktop’’",
+        "web-preview": "Preview Website",
+        "case-study": "Case study",
+
+        "remind-me": "Remind me",
+
         //...
 
         // page5
         "h1-p5": "let’s get in touch",
         "p-p5": "i'm wide open for new projects",
         "telegram": "Telegram",
-        "email": "Email"
+        "email": "Email",
+
+
+        "january": "january",
+        "february": "february",
+        "march": "march",
+        "april": "april",
+        "may": "may",
+        "june": "june",
+        "july": "july",
+        "august": "august",
+        "september": "september",
+        "october": "october",
+        "november": "november",
+        "december": "december",
+
+        "more-project-add": "i have <b>9</b> more projects to add",
+
     },
     "ru": {
         // header
@@ -43,7 +67,7 @@ var dictionary = {
 
         // page1
         "name": "я Дима <br> Громов",
-        "info": "middle <span>ux/ui дизайнер</span> и <br> intern iOS разработчик",
+        "info": "middle <span>ux/ui дизайнер</span> и <br> intern ios разработчик",
         "block-1": "нахожусь в <b>Крыму,<br>Симферополь</b>",
         "block-3": "(в разработке)",
         
@@ -65,13 +89,36 @@ var dictionary = {
         "now": "сейчас",
 
         // page4
-        "h1-p4": "недавние проекты",
+        "h1-p4": "недавние проекты (русский в процессе)",
+        "list-btn": "Отобразить как список",
+        "desktop-btn": "Вернуть ’’рабочий стол’’",
+        "web-preview": "Превью сайта",
+        "case-study": "Кейс",
+
+        "remind-me": "Напомнить мне",
 
         // page5
         "h1-p5": "мои контакты",
         "p-p5": "я открыт для новых проектов!",
         "telegram": "Телеграм",
-        "email": "Почта"
+        "email": "Почта",
+
+
+        "january": "января",
+        "february": "февраля",
+        "march": "марта",
+        "april": "апреля",
+        "may": "мая",
+        "june": "июня",
+        "july": "июля",
+        "august": "августа",
+        "september": "сентября",
+        "october": "октября",
+        "november": "ноября",
+        "december": "декабря",
+
+        "more-project-add": "есть еще где-то <b>9</b> недобавленных проектов!",
+
     }
 }
 
@@ -115,11 +162,11 @@ function switchLanguage() {
     updateTextLanguage(newLang);
 
     document.getElementById('lang-toggle').innerHTML = newLang === 'en' 
-        ? `<p id="btn-context">EN</p>
+        ? `<p id="btn-context">Читать на русском</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
             </svg>`
-        : `<p id="btn-context">RU</p>
+        : `<p id="btn-context">Switch to English</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
             </svg>`;
@@ -134,11 +181,11 @@ window.onload = function() {
     document.documentElement.lang = currentLang;
 
     document.getElementById('lang-toggle').innerHTML = currentLang === 'en' 
-        ? `<p id="btn-context">EN</p>
+        ? `<p id="btn-context">Читать на русском</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
             </svg>`
-        : `<p id="btn-context">RU</p>
+        : `<p id="btn-context">Switch to English</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5"/>
             </svg>`;

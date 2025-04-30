@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dima Gromov</title>
 
-  <meta name="theme-color" content="#FFEFDD"/>
+  <meta name="theme-color" content="#FFEFDD" />
 
   <link rel="stylesheet" href="style.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -45,10 +46,22 @@
     </div>
 
   </header>
+
+
+  <div class="absolute-preview hidden">
+    <div class="preview-head flex-center flex-between">
+      <a class="browser close-btn">X</a>
+      <h3 class="preview-link">link-here</h3>
+      <a class="browser dark open-link" href="#" target="_blank">Open in browser</a>
+    </div>
+    <iframe src="https://lbvo.ru/404.html" frameborder="0"></iframe>
+  </div>
+
+
   <div class="lbpage gap-18 z-index6" id="start">
 
     <button id="lang-toggle" class="lang-btn flex-center gap-4 animate">
-      <p id="btn-context">EN</p>
+      <p id="btn-context">Читать на русском</p>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none">
         <path d="M1 1L6 6L11 1" stroke="#CCBFB0" stroke-width="1.5" />
       </svg>
@@ -128,26 +141,26 @@
         <localized-text key="card-5"></localized-text>
       </div>
 
-      </div>
-      <div class="blur-wrapper">
-        <div class="gradient-blur">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="gradient-blur left">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
     </div>
-    
+    <div class="blur-wrapper">
+      <div class="gradient-blur">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="gradient-blur left">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
   </div>
 
   <div class="lbpage gap-64 z-index6" id="target">
@@ -168,95 +181,170 @@
       <a href="https://www.gazprom-spka.ru/ru/" target="_blank">
         <p class="smaller clickable">Gazprom<span class="dots"></span>2024</p>
       </a>
-    </div>    
+    </div>
   </div>
 
 
   <div class="lbpage projects">
-    <p class="flex flex-center">view as list will be added soon...</p>
-    <div class="vspacer-24"></div>
 
-    <div class="mac-wrapper">
-      <div class="project-wrapper flex-cl flex-center gap-12">
 
-        <h2><localized-text key="h1-p4"></localized-text></h2>
+    <div class="list-view flex-cl">
+      <div class="flex gap-24 flex-between">
+        <h2 class="flex flex-center"><localized-text key="h1-p4"></localized-text></h2>
 
-        <button id="toggle_fullscreen">Fullscreen</button>
+        <a class="button-like js-toggle-view">
+          <img src="source/icons/desktop.svg">
+          <localized-text key="desktop-btn"></localized-text>
+        </a>
+      </div>
 
-        <div class="project">
-          <div class="head">
+      <div class="vspacer-24"></div>
 
-            <div class="toolbar">
+      <div class="list-project date">
+        <h3>2025</h3>
+      </div>
+
+      <div class="list-project">
+        <h3>Jadan Dental</h3>
+        <div class="flex-cl gap-24 text-left">
+          <div class="flex-cl gap-4">
+            <h4>What's done</h4>
+            <p>Web design, Frotnend</p>
+
+            <h4>Website type</h4>
+            <p>Landing, 5 pages total</p>
+          </div>
+          <div class="flex-cl gap-8">
+            <a class="toggle_preview" data-url="https://jadan.lbvo.ru">
+              <localized-text key="web-preview"></localized-text>
+            </a>
+            <a href="#"><localized-text key="case-study"></localized-text></a>
+          </div>
+        </div>
+        <p>20 <localized-text key="april"></localized-text></p>
+      </div>
+
+      <div class="list-project">
+
+        <h3>AR Spatially Landing</h3>
+        <div class="flex-cl gap-24 text-left">
+          <div class="flex-cl gap-4">
+            <p>I've remade the whole project landing!</p>
+          </div>
+
+          <div class="flex-cl gap-8">
+            <a class="toggle_preview" data-url="https://arspatially.com">
+              <localized-text key="web-preview"></localized-text>
+            </a>
+            <a href="#"><localized-text key="case-study"></localized-text></a>
+          </div>
+        </div>
+        <p>9 <localized-text key="april"></localized-text></p>
+      </div>
+
+      <div class="list-project date">
+        <h3 style="color: #2a262493; font-weight: 400;">
+          <localized-text key="more-project-add"></localized-text>
+        </h3>
+        <a class="button-like no-drag" style="min-width: fit-content;" href="#contacts">
+          <localized-text key="remind-me"></localized-text>
+        </a>
+      </div>
+    </div>
+
+    <div class="desktop-view">
+      <div class="flex gap-24 flex-between">
+        <h2 class="flex flex-center"><localized-text key="h1-p4"></localized-text></h2>
+
+        <a class="button-like js-toggle-view">
+          <img src="source/icons/list.svg">
+          <localized-text key="list-btn"></localized-text>
+        </a>
+      </div>
+
+      <div class="vspacer-24"></div>
+
+      <div class="desktop">
+        <div class="project-wrapper flex-cl flex-center gap-12">
+
+          <!-- <h2 class="absolute"><localized-text key="h1-p4"></localized-text></h2> -->
+
+          <button id="toggle_fullscreen">Fullscreen</button>
+
+          <div class="project">
+            <div class="head">
+
+              <div class="toolbar">
+
+              </div>
+
+              <h3>AR Spatially Landing</h3>
+
+              <a class="browser" href="https://arspatially.com" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                arspatially.com
+              </a>
 
             </div>
-
-            <h3>AR Spatially Landing</h3>
-
-            <a class="browser" href="https://arspatially.com" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              arspatially.com
-            </a>
-
+            <img src="source/screenshots/arspatially.png">
           </div>
-          <img src="source/screenshots/arspatially.png">
-        </div>
 
-        <div class="project">
-          <div class="head">
+          <div class="project">
+            <div class="head">
 
-            <div class="toolbar">
-              <!-- авто-заполняшка -->
+              <div class="toolbar">
+                <!-- авто-заполняшка -->
+              </div>
+
+              <h3>Simferopol College of Radioelectronics</h3>
+
+              <a class="browser" href="https://simf-scr.vercel.app/" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                simf-scr.vercel.app/
+              </a>
+
             </div>
-
-            <h3>Simferopol College of Radioelectronics</h3>
-
-            <a class="browser" href="https://simf-scr.vercel.app/" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              simf-scr.vercel.app/
-            </a>
-
+            <img src="source/screenshots/simfscr.png">
           </div>
-          <img src="source/screenshots/simfscr.png">
-        </div>
 
-        <div class="project">
-          <div class="head">
+          <div class="project">
+            <div class="head">
 
-            <div class="toolbar">
-              <!-- авто-заполняшка -->
+              <div class="toolbar">
+                <!-- авто-заполняшка -->
+              </div>
+
+              <h3>LbvShopBot</h3>
+
+              <a class="browser" href="#" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                —
+              </a>
+
             </div>
-
-            <h3>LbvShopBot</h3>
-
-            <a class="browser" href="#" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              —
-            </a>
-
+            <img src="source/screenshots/lbvshopbot.png">
           </div>
-          <img src="source/screenshots/lbvshopbot.png">
-        </div>
 
-        <div class="project">
-          <div class="head">
+          <div class="project">
+            <div class="head">
 
-            <div class="toolbar">
-              <!-- авто-заполняшка -->
+              <div class="toolbar">
+                <!-- авто-заполняшка -->
+              </div>
+
+              <h3>Jadan Dental</h3>
+
+              <a class="browser" href="https://jadan.lbvo.ru" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                jadan.lbvo.ru
+              </a>
+
             </div>
-
-            <h3>Jadan Dental</h3>
-
-            <a class="browser" href="https://jadan.lbvo.ru" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              jadan.lbvo.ru
-            </a>
-
+            <img src="source/screenshots/jadan.png">
           </div>
-          <img src="source/screenshots/jadan.png">
-        </div>
 
 
-        <!-- <div class="project">
+          <!-- <div class="project">
           <div class="browser-head">
             <div class="head">
             <div class="toolbar">
@@ -281,44 +369,45 @@
         </div> -->
 
 
-        <div class="project">
-          <div class="head">
+          <div class="project">
+            <div class="head">
 
-            <div class="toolbar">
-              <!-- авто-заполняшка -->
+              <div class="toolbar">
+                <!-- авто-заполняшка -->
+              </div>
+
+              <h3>1000 Dice</h3>
+
+              <a class="browser" href="#" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                —
+              </a>
+
             </div>
-
-            <h3>1000 Dice</h3>
-
-            <a class="browser" href="#" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              —
-            </a>
-
+            <img src="source/screenshots/1000dice.png">
           </div>
-          <img src="source/screenshots/1000dice.png">
-        </div>
 
-        <div class="project">
-          <div class="head">
+          <div class="project">
+            <div class="head">
 
-            <div class="toolbar">
-              <!-- авто-заполняшка -->
+              <div class="toolbar">
+                <!-- авто-заполняшка -->
+              </div>
+
+              <h3>Antarctis</h3>
+
+              <a class="browser" href="https://app.antarctis.ru" target="_blank">
+                <img src="source/globe.svg" width="15" height="14">
+                app.antarctis.ru
+              </a>
+
             </div>
-
-            <h3>Antarctis</h3>
-
-            <a class="browser" href="https://app.antarctis.ru" target="_blank">
-              <img src="source/globe.svg" width="15" height="14">
-              app.antarctis.ru
-            </a>
-
+            <img src="source/screenshots/antarctis.png">
           </div>
-          <img src="source/screenshots/antarctis.png">
+
         </div>
 
       </div>
-
     </div>
   </div>
 
@@ -327,7 +416,7 @@
     <p><localized-text key="p-p5"></localized-text></p>
     <div class="spacer-24"></div>
     <div class="flex-cl gap-12">
-      <a class="button-like fill wide" href="https://t.me/lbv_dev">
+      <a class="button-like fill wide gradient-flash" href="https://t.me/lbv_dev">
         <img src="source/telegram-btn.svg" alt="Telegram">
         <localized-text key="telegram"></localized-text>
       </a>
@@ -343,6 +432,20 @@
   <script src="windows.js"></script>
 
   <script>
+    $('.button-like[href="#contacts"]').on('click', function () {
+  const $btn = $(this);
+  $('.gradient-flash').addClass('button-gradient-flash');
+
+  setTimeout(() => {
+    $('.gradient-flash').removeClass('button-gradient-flash');
+  }, 2000);
+});
+
+    $('.js-toggle-view').on('click', function () {
+      $('.list-view').toggle();
+      $('.desktop-view').toggle();
+    });
+
     $('#toggle_fullscreen').on('click', function () {
       if (document.fullscreenElement) {
         document.exitFullscreen();
@@ -350,8 +453,27 @@
         $('.project-wrapper').get(0).requestFullscreen();
       }
     });
+
+    $('.toggle_preview').on('click', function () {
+      const url = $(this).data('url');
+
+      $('.absolute-preview iframe').attr('src', url);
+      $('.preview-link').text(url);
+      $('.open-link').attr('href', url);
+      $('html').addClass('previewed');
+
+      $('.absolute-preview').removeClass('hidden').show();
+    });
+
+    $('.absolute-preview .close-btn').on('click', function () {
+      $('.absolute-preview').addClass('hidden').hide();
+      $('html').removeClass('previewed');
+      $('.absolute-preview iframe').attr('src', 'https://lbvo.ru/404.html'); // сброс
+    });
+
   </script>
 
 
 </body>
+
 </html>
