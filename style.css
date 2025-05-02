@@ -87,8 +87,6 @@ img {
 }
 
 
-
-
 .flex {
   display: flex;
 }
@@ -282,6 +280,8 @@ a.browser {
   font-size: 16px;
   font-weight: 500;
   opacity: 0.6;
+
+  cursor: pointer;
 
   img {
     max-height: 14px;
@@ -642,6 +642,18 @@ header.active {
   background-size: cover;
 }
 
+.project::before {
+  z-index: 3;
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 2px rgba(140,140,140, 0.5);
+  pointer-events: none;
+  border-radius: 18px;
+}
+
 .project {
   position: absolute;
   display: flex;
@@ -650,20 +662,142 @@ header.active {
 
   max-width: 1540px;
   max-height: 1650px;
-  border-radius: 24px;
+
   background: rgba(46, 46, 46, 0.40);
+  /* border: 1px solid rgba(140,140,140,255);
+  outline: 1px solid rgba(0, 0, 0, 0.407); */
+  
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 0.5));
+  border-radius: 18px;
+
   backdrop-filter: blur(32px);
   color: white;
 
-  img {
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top;
+    box-sizing: border-box;
 
-    user-select: none;
-    user-drag: none;
-    -webkit-user-drag: none;
+
+    overflow: hidden;
+
+    background-color: transparent;
+
+    /* color: var(--main-color) !important; */
+
+
+  
+    .preview-img{
+      position: relative;
+      display: inline-block;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+    }
+    .preview-img img {
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      object-fit: cover;
+      object-position: center;
+  
+      user-select: none;
+      -webkit-user-drag: none;
+  
+      border-radius: 0;
+    }
+  
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+  
+      width: 100%;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(50px);
+      pointer-events: none;
+      overflow: hidden;
+  
+      transition: transform 0.6s ease;
+
+      img{
+        width: 100%;
+        border-radius: 12px;
+      }
+    }
+  
+    h4 {
+      font-size: 18px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  }
+  
+  .content-wrapper.pressed {
+    cursor: initial;
+
+    gap: 6px;
+    padding-top: 6px;
+
+    /* background-color: var(--background-color); */
+  
+    .project-info {
+      overflow-y: auto !important;
+
+      width: 100%;
+      opacity: 1;
+      max-height: initial;
+      transform: translateY(0);
+      pointer-events: auto;
+
+      padding: 0 32px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+
+      box-sizing: border-box;
+      border-top: 1px solid rgba(180, 180, 180, 0.6);
+    }
+  
+
+    .preview-img {
+      height: fit-content;
+      max-width: 50%;
+    }
+    .preview-img img {
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+
+      transition: opacity 0.2s;
+    }
+    .preview-img:hover {
+      transition: 0.3s;
+
+      opacity: 0.6;
+    }
+    .preview-img:hover::after {
+      content: "✕";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 200;
+      color: rgba(255, 255, 255, 0.5);
+    }
   }
 
   iframe {
@@ -1308,7 +1442,6 @@ p.smaller {
 /* Улучшенные стили для проектов чтобы они выглядели как окна ОС */
 .project {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Добавляем небольшой эффект наведения */
@@ -1434,7 +1567,6 @@ p.smaller {
 /* Improved project styling to match macOS windows */
 .project {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   
   will-change: transform, opacity, left, top;
 }
@@ -1585,14 +1717,14 @@ html.previewed{
 
   .preview-head{
     width: 100%;
-    padding: 32px 24px;
+    padding: 28px 18px;
 
     max-height: 32px;
 
     border-bottom: 1px solid black;
     border-radius: 24px 24px 0 0;
 
-    background: rgba(46, 46, 46, 0.40);
+    background: rgba(46, 46, 46, 0.4);
     
     
     box-sizing: border-box;
@@ -1618,7 +1750,7 @@ html.previewed{
 
     box-sizing: border-box;
 
-    background: rgba(46, 46, 46, 0.40);
+    background: rgba(46, 46, 46, 0.8);
 
 
   }

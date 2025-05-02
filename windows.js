@@ -235,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add unique ID to project
     project.id = 'project-' + index;
 
+    
     // Add minimize button to header
     const header = project.querySelector('.head');
     const toolbar = project.querySelector('.toolbar')
@@ -738,3 +739,217 @@ document.addEventListener('DOMContentLoaded', function () {
   addResizeStyles();
   addWindowResizeFeature();
 });
+
+
+// // Функция для добавления возможности максимизации окон
+// function addMaximizeFunctionality() {
+//   console.log('Adding maximize functionality...'); // Для отладки
+
+//   // CSS для кнопки максимизации
+//   const maximizeCSS = `
+//     .maximize-button {
+//       background: #28c941;
+//       border: none;
+//       border-radius: 50%;
+//       width: 12px;
+//       height: 12px;
+//       margin-left: 4px;
+//       color: rgba(0, 0, 0, 0);
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       font-size: 8px;
+//       transition: color 0.2s;
+//       cursor: pointer;
+//     }
+
+//     .maximize-button:hover {
+//       color: rgba(0, 0, 0, 0.5);
+//     }
+
+//     .project.maximized {
+//       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+//       z-index: 999 !important;
+//     }
+
+//     .project.maximized .resize-handle {
+//       display: none !important;
+//     }
+//   `;
+
+//   // Добавление стилей
+//   const styleEl = document.createElement('style');
+//   styleEl.textContent = maximizeCSS;
+//   document.head.appendChild(styleEl);
+
+//   // Получаем все проекты
+//   const projects = document.querySelectorAll('.project');
+  
+//   projects.forEach((project) => {
+//     // Находим заголовок и панель инструментов
+//     const header = project.querySelector('.head');
+//     const toolbar = project.querySelector('.toolbar');
+    
+//     if (!toolbar) {
+//       console.error('Toolbar not found in project', project);
+//       return;
+//     }
+
+//     // Создаем кнопку максимизации
+//     const maximizeButton = document.createElement('button');
+//     maximizeButton.className = 'maximize-button';
+//     maximizeButton.innerHTML = '❒';
+//     maximizeButton.title = 'Maximize';
+//     toolbar.appendChild(maximizeButton);
+
+//     // Функция максимизации/восстановления
+//     function toggleMaximize(event) {
+//       if (event) {
+//         event.stopPropagation();
+//       }
+      
+//       console.log('Toggle maximize called'); // Для отладки
+      
+//       const wrapper = document.querySelector('.project-wrapper');
+//       const wrapperRect = wrapper.getBoundingClientRect();
+      
+//       if (project.classList.contains('maximized')) {
+//         // Восстанавливаем исходное состояние
+//         project.style.transition = 'all 0.3s ease';
+//         project.style.left = project.dataset.preMaximizeLeft + 'px';
+//         project.style.top = project.dataset.preMaximizeTop + 'px';
+//         project.style.width = project.dataset.preMaximizeWidth + 'px';
+//         project.style.height = project.dataset.preMaximizeHeight + 'px';
+//         project.classList.remove('maximized');
+//         maximizeButton.innerHTML = '❒';
+        
+//         console.log('Project restored to:', {
+//           left: project.style.left,
+//           top: project.style.top,
+//           width: project.style.width,
+//           height: project.style.height
+//         });
+//       } else {
+//         // Сохраняем текущие размеры перед максимизацией
+//         project.dataset.preMaximizeLeft = parseInt(project.style.left) || 0;
+//         project.dataset.preMaximizeTop = parseInt(project.style.top) || 0;
+//         project.dataset.preMaximizeWidth = project.offsetWidth;
+//         project.dataset.preMaximizeHeight = project.offsetHeight;
+        
+//         console.log('Saved dimensions:', {
+//           left: project.dataset.preMaximizeLeft,
+//           top: project.dataset.preMaximizeTop,
+//           width: project.dataset.preMaximizeWidth,
+//           height: project.dataset.preMaximizeHeight
+//         });
+        
+//         // Максимизируем окно
+//         project.style.transition = 'all 0.3s ease';
+//         project.style.left = '0px';
+//         project.style.top = '0px';
+//         project.style.width = wrapperRect.width + 'px';
+//         project.style.height = wrapperRect.height + 'px';
+//         project.classList.add('maximized');
+//         maximizeButton.innerHTML = '◱';
+        
+//         // Поднимаем окно на верхний слой
+//         project.style.zIndex = 9999;
+//       }
+//     }
+    
+//     // Обработчик клика по кнопке максимизации
+//     maximizeButton.addEventListener('click', toggleMaximize);
+    
+//     // Обработчик двойного клика по заголовку
+//     header.addEventListener('dblclick', function(event) {
+//       // Игнорируем двойной клик по кнопкам
+//       if (!event.target.classList.contains('hide-button') && 
+//           !event.target.classList.contains('maximize-button')) {
+//         toggleMaximize(event);
+//       }
+//     });
+    
+//     // Сохраняем оригинальные обработчики перетаскивания
+//     const originalMousedownHandler = header._mousedownHandler;
+//     const originalTouchstartHandler = header._touchstartHandler;
+    
+//     // Новый обработчик нажатия мыши
+//     function enhancedMouseDownHandler(event) {
+//       // Игнорируем нажатия на кнопки
+//       if (event.target.classList.contains('hide-button') || 
+//           event.target.classList.contains('maximize-button')) {
+//         return;
+//       }
+      
+//       // Если окно максимизировано, восстанавливаем его перед началом перетаскивания
+//       if (project.classList.contains('maximized')) {
+//         toggleMaximize();
+        
+//         // Даем время для анимации восстановления
+//         setTimeout(() => {
+//           // Центрируем окно под курсором
+//           const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
+//           const newX = event.clientX - wrapperRect.left - (project.offsetWidth / 2);
+//           const newY = event.clientY - wrapperRect.top - 20;
+          
+//           project.style.transition = 'none';
+//           project.style.left = newX + 'px';
+//           project.style.top = newY + 'px';
+          
+//           // Устанавливаем начальные координаты для перетаскивания
+//           if (window.activeProject && window.activeProject === project) {
+//             window.initialX = event.clientX - newX;
+//             window.initialY = event.clientY - newY;
+//           }
+//         }, 10);
+//       }
+//     }
+    
+//     // Новый обработчик для сенсорных устройств
+//     function enhancedTouchStartHandler(event) {
+//       // Игнорируем нажатия на кнопки
+//       if (event.target.classList.contains('hide-button') || 
+//           event.target.classList.contains('maximize-button')) {
+//         return;
+//       }
+      
+//       // Аналогичная логика восстановления окна при начале перетаскивания
+//       if (project.classList.contains('maximized')) {
+//         toggleMaximize();
+        
+//         setTimeout(() => {
+//           const touch = event.touches[0];
+//           const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
+//           const newX = touch.clientX - wrapperRect.left - (project.offsetWidth / 2);
+//           const newY = touch.clientY - wrapperRect.top - 20;
+          
+//           project.style.transition = 'none';
+//           project.style.left = newX + 'px';
+//           project.style.top = newY + 'px';
+          
+//           if (window.activeProject && window.activeProject === project) {
+//             window.initialX = touch.clientX - newX;
+//             window.initialY = touch.clientY - newY;
+//           }
+//         }, 10);
+//       }
+//     }
+    
+//     // Добавляем улучшенные обработчики
+//     header.addEventListener('mousedown', enhancedMouseDownHandler, true);
+//     header.addEventListener('touchstart', enhancedTouchStartHandler, true);
+//   });
+  
+//   console.log('Maximize functionality added successfully');
+// }
+
+// // Вызываем функцию после полной загрузки DOM
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Задержка для уверенности, что все другие инициализации завершены
+//   setTimeout(addMaximizeFunctionality, 100);
+// });
+
+// // Также можно вызвать функцию сразу
+// if (document.readyState === 'complete' || document.readyState === 'interactive') {
+//   setTimeout(addMaximizeFunctionality, 100);
+// }

@@ -1,5 +1,8 @@
 var dictionary = {
     "en": {
+        // absolute-preview
+        "open-in-browser": "Open in browser",
+
         // header
         "get-in-touch": "Get in touch",
 
@@ -62,6 +65,9 @@ var dictionary = {
 
     },
     "ru": {
+        // absolute-preview
+        "open-in-browser": "Открыть в браузере",
+
         // header
         "get-in-touch": "Связаться",
 
