@@ -5,7 +5,8 @@
   --orange-accent-color: #FF805E;
 
   --margin-horizontal: 86px;
-  /* --margin-vertical: 50px; */
+  --margin-vertical: 32px;
+  --gap-64: 64px;
 }
 *::selection {
   background: var(--orange-accent-color);
@@ -54,7 +55,6 @@
 
 img {
   user-select: none;
-  user-drag: none;
   -webkit-user-drag: none;
 }
 
@@ -110,12 +110,12 @@ img {
   flex-direction: row-reverse;
 }
 
-.flex-between {
+.flex-between { 
   justify-content: space-between;
 }
 
 .gap-64 {
-  gap: 64px;
+  gap: var(--gap-64);
 }
 .gap-48 {
   gap: 48px;
@@ -188,6 +188,10 @@ p {
   font-weight: 400;
 }
 
+.text-align-left{
+  text-align: left;
+}
+
 a {
   text-decoration: none;
   color: initial;
@@ -241,8 +245,6 @@ a.no-drag {
   user-select: none;
   -webkit-user-drag: none;
 }
-
-#lang-toggle:hover::after {}
 
 .animate,
 .block {
@@ -376,7 +378,7 @@ header.active {
   align-items: center;
   flex: 1;
 
-  padding: var(--margin-horizontal) 0;
+  padding: var(--margin-horizontal) var(--margin-vertical);
 
   background-color: var(--background-color);
 
@@ -543,7 +545,7 @@ header.active {
     }
 
     h3 {
-      width: 90%;
+      width: 100%;
       height: 100%;
 
       text-align: left;
@@ -603,12 +605,11 @@ header.active {
 }
 
 .lbpage.projects {
-  padding: 0 32px;
   position: relative;
 
   h2.absolute {
     position: absolute;
-    top: 64px;
+    top: var(--gap-64);
     width: 100%;
   }
 
@@ -824,7 +825,6 @@ header.active {
     object-position: top;
 
     user-select: none;
-    user-drag: none;
     -webkit-user-drag: none;
   }
 
@@ -845,6 +845,7 @@ header.active {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
       line-height: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -857,12 +858,6 @@ header.active {
       font-weight: 500;
       opacity: 0.6;
     }
-
-    .toolbar {}
-
-
-
-
   }
 }
 
@@ -1717,7 +1712,7 @@ html.previewed{
   transform: translate(-50%, -50%);
   width: 100vw;
   height: 100vh;
-  padding: 64px;
+  padding: var(--gap-64);
   padding-bottom: 128px;
 
   color: white !important;
@@ -1746,11 +1741,15 @@ html.previewed{
 
     .close-btn{
 
-      width: 32px;
+      min-width: 32px;
       height: 32px;
 
       padding: 0;
       cursor: pointer;
+    }
+    .preview-link{
+      max-width: 100%;
+      width: 100%;
     }
   }
   iframe {
@@ -1843,4 +1842,41 @@ html.previewed{
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
+}
+
+
+
+
+@media (max-width: 768px) {
+  :root{
+    --margin-horizontal: 48px;
+    --gap-64: 32px
+  }
+
+  h1{
+    font-size: 64px;
+  }
+  h2{
+    font-size: 28px;
+  }
+
+  .list-view{
+    display: initial;
+    box-sizing: border-box;
+    .list-project{
+      flex-direction: column;
+      gap: 24px;
+
+      div{
+        width: 100%;
+      }
+      p{
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
+  .desktop-view{
+    display: none;
+  }
 }
