@@ -1,0 +1,1356 @@
+//
+//  PersonModel.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 23.04.2025.
+//
+
+import SwiftUI
+
+class Person: Identifiable, ObservableObject {
+    var id = UUID()
+    
+    @Published var name: String
+    @Published var status: Status
+    @Published var arrivalTime: Date
+    @Published var departureTime: Date
+    
+    init(name: String, status: Status, arrivalTime: Date, departureTime: Date) {
+        self.name = name
+        self.arrivalTime = arrivalTime
+        self.departureTime = departureTime
+        self.status = status
+    }
+}
+
+enum Status: String, CaseIterable, Identifiable {
+    case notReady = "Не готовы"
+    case inWork = "В работе"
+    case ready = "Готовы"
+
+    var id: String { rawValue }
+}
+
+class PersonModel: ObservableObject {
+    @Published var persons: [Person] = []
+
+    private func generateRandomPerson() -> Person {
+        let firstNames = ["Алексей", "Ирина", "Сергей", "Ольга", "Дмитрий", "Мария", "Никита", "Екатерина"]
+        let lastNames = ["Иванов", "Петрова", "Смирнов", "Кузнецова", "Соколов", "Попова", "Васильев", "Новикова"]
+        let patronymics = ["Алексеевич", "Сергеевна", "Иванович", "Дмитриевна", "Николаевич", "Андреевна", "Павлович", "Владимировна"]
+
+        let randomName = "\(lastNames.randomElement()!) \(firstNames.randomElement()!) \(patronymics.randomElement()!)"
+        let randomStatus = Status.allCases.randomElement()!
+        let randomArrivalTime = Date().addingTimeInterval(TimeInterval(Int.random(in: -86400...86400)))
+        let randomDepartureTime = randomArrivalTime.addingTimeInterval(TimeInterval(Int.random(in: 86400...172800)))
+
+        return Person(name: randomName, status: randomStatus, arrivalTime: randomArrivalTime, departureTime: randomDepartureTime)
+    }
+
+    // Генерация случайных пользователей при старте
+    private func generateTestData() {
+        for _ in 0..<30 {
+            let randomPerson = generateRandomPerson()
+            persons.append(randomPerson)
+        }
+    }
+
+    init() {
+        // Генерация тестовых данных при инициализации модели
+        generateTestData()
+    }
+    
+    
+    private func updatePerson(_ person: Person) {
+        objectWillChange.send()
+    }
+
+    func addPerson(name: String, status: Status, arrivalTime: Date, departureTime: Date) {
+        let newPerson = Person(
+            name: name,
+            status: status,
+            arrivalTime: arrivalTime,
+            departureTime: departureTime
+        )
+        persons.append(newPerson)
+        updatePerson(newPerson)
+    }
+    
+    func downgradeStatus(for person: Person) {
+        if persons.firstIndex(where: { $0.id == person.id }) != nil {
+            switch person.status {
+            case .notReady:
+                break
+            case .inWork:
+                setStatusnotReady(for: person)
+            case .ready:
+                setStatusInWork(for: person)
+            }
+            updatePerson(person)
+        }
+    }
+
+    func upgradeStatus(for person: Person) {
+        if persons.firstIndex(where: { $0.id == person.id }) != nil {
+            switch person.status {
+            case .notReady:
+                setStatusInWork(for: person)
+            case .inWork:
+                setStatusReady(for: person)
+            case .ready:
+                break
+            }
+            updatePerson(person)
+        }
+    }
+    
+    
+    func updatePersonDate(for person: Person, newDate: Date) {
+        if let index = persons.firstIndex(where: { $0.id == person.id }) {
+            persons[index].departureTime = Calendar.current.startOfDay(for: newDate)
+            updatePerson(person)
+        }
+    }
+
+    func setStatusnotReady(for person: Person) {
+        if let index = persons.firstIndex(where: { $0.id == person.id }) {
+            persons[index].status = Status.notReady
+            updatePerson(persons[index])
+        }
+    }
+
+    func setStatusInWork(for person: Person) {
+        if let index = persons.firstIndex(where: { $0.id == person.id }) {
+            persons[index].status = Status.inWork
+            updatePerson(persons[index])
+        }
+    }
+
+    func setStatusReady(for person: Person) {
+        if let index = persons.firstIndex(where: { $0.id == person.id }) {
+            persons[index].status = Status.ready
+            updatePerson(persons[index])
+        }
+    }
+
+    func DeletePerson(for person: Person) {
+        if let index = persons.firstIndex(where: { $0.id == person.id }) {
+            persons.remove(at: index)
+            updatePerson(person)
+        }
+    }
+}
+
+
+
+
+
+
+
+//
+//  lbvListApp.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 23.04.2025.
+//
+
+import SwiftUI
+import SwiftData
+
+@main
+struct lbvListApp: App {
+    @StateObject private var personModel = PersonModel()
+
+    var body: some Scene {
+        WindowGroup {
+            MainAppView()
+                .environmentObject(personModel)
+        }
+    }
+}
+
+struct MainAppView: View {
+    @EnvironmentObject var personModel: PersonModel
+    
+    @State var selectedTab = 1
+    
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            
+            AllListTab()
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("Все записи")
+                }
+                .tag(0)
+            
+            StatusListTab()
+                .tabItem {
+                    Image(systemName: "doc")
+                    Text("По статусам")
+                }
+                .tag(1)
+                .toolbarBackground(.hidden, for: .tabBar)
+
+            
+            AddPersonTab()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Новая запись")
+                }
+                .tag(2)
+                .toolbarBackground(.hidden, for: .tabBar)
+
+        }
+    }
+}
+
+#Preview {
+    MainAppView()
+        .environmentObject(PersonModel())
+}
+
+
+
+
+
+
+
+//
+//  SwiftUIView.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 23.04.2025.
+//
+
+import SwiftUI
+
+class PersonFormModel: ObservableObject {
+    @Published var name: String = ""
+    @Published var status: Status = .notReady
+    @Published var arrivalDate: Date = Date()
+    @Published var departureDate: Date = Date().addingTimeInterval(1296000)
+}
+
+struct AddPersonTab: View {
+    @EnvironmentObject var personModel: PersonModel
+    @StateObject var form = PersonFormModel()
+    
+    @FocusState private var nameFieldFocused: Bool
+    
+    @State private var isFieldFocusEveryTime = AppStorageModel().isFieldFocusEveryTime
+    @State private var isCalendarVisible = AppStorageModel().isCalendarVisible
+    @State private var isFormResetEverytime = AppStorageModel().isFormResetEverytime
+    
+    @State private var submitPressToggle: Bool = false
+    
+    var body: some View {
+        VStack {
+            ScrollView {
+                VStack (alignment: .center, spacing: 12){
+                    HStack{
+                        Button {
+                            isFieldFocusEveryTime.toggle()
+                        } label: {
+                            if isFieldFocusEveryTime {
+                                Image(systemName: "keyboard.fill")
+                                    .transition(.symbolEffect)
+                            } else {
+                                Image(systemName: "keyboard")
+                                    .transition(.symbolEffect)
+                            }
+                        }
+                        .frame(width: 48, height: 48)
+                        .background(isFieldFocusEveryTime ? Color.accentColor : Color(UIColor.systemGray6))
+                        .foregroundStyle(isFieldFocusEveryTime ? Color.white : Color.secondary)
+                        .cornerRadius(14)
+                        .buttonStyle(.plain)
+                        .transition(.blurReplace.combined(with: .symbolEffect))
+                        .sensoryFeedback(.impact, trigger: isFieldFocusEveryTime)
+                        .contextMenu{
+                            Section("Если включено - клавиатура не будет пропадать после добавления пациента") {
+                                Button("Переключить") {
+                                    isFieldFocusEveryTime.toggle()
+                                }
+                            }
+                        }
+                        .overlay(
+                            Group {
+                                if !isFieldFocusEveryTime {
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color(UIColor.systemGray6))
+                                        .frame(width: 5, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            )
+                                            .combined(with: .scale(scale: 0, anchor: .topLeading)).combined(with: .opacity).combined(with: .slide)
+                                            )
+                                    
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color.secondary)
+                                        .frame(width: 2, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            ).combined(with: .scale(scale: 0, anchor: .topLeading))
+                                        )
+                                }
+                            }
+                        )
+                        .animation(.easeInOut(duration: 0.5), value: isFieldFocusEveryTime)
+                        
+                        Button {
+                            withAnimation {
+                                isCalendarVisible.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "calendar")
+                                .symbolEffect(.bounce.down, value: isCalendarVisible)
+                        }
+                        .frame(width: 48, height: 48)
+                        .background(isCalendarVisible ? Color.accentColor : Color(UIColor.systemGray6))
+                        .foregroundStyle(isCalendarVisible ? Color.white : Color.secondary)
+                        .cornerRadius(14)
+                        .sensoryFeedback(.impact, trigger: isCalendarVisible)
+                        .contextMenu{
+                            Section("Отображать выбор даты в виде календаря") {
+                                Button("Переключить") {
+                                    isCalendarVisible.toggle()
+                                }
+                            }
+                        }
+                        .overlay(
+                            Group {
+                                if !isCalendarVisible {
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color(UIColor.systemGray6))
+                                        .frame(width: 5, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            )
+                                            .combined(with: .scale(scale: 0, anchor: .topLeading)).combined(with: .opacity).combined(with: .slide)
+                                            )
+                                    
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color.secondary)
+                                        .frame(width: 2, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            ).combined(with: .scale(scale: 0, anchor: .topLeading))
+                                        )
+                                }
+                            }
+                        )
+                        .animation(.easeInOut(duration: 0.5), value: isCalendarVisible)
+
+
+                        
+                        Button {
+                            withAnimation {
+                                isFormResetEverytime.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "arrow.trianglehead.2.counterclockwise")
+                                .symbolEffect(.bounce.down, value: isFormResetEverytime)
+                        }
+                        .frame(width: 48, height: 48)
+                        .background(isFormResetEverytime ? Color.accentColor : Color(UIColor.systemGray6))
+                        .foregroundStyle(isFormResetEverytime ? Color.white : Color.secondary)
+                        .sensoryFeedback(.impact, trigger: isFormResetEverytime)
+                        .cornerRadius(14)
+                        .contextMenu{
+                            Section("Отображать выбор даты в виде календаря") {
+                                Button("Переключить") {
+                                    isFormResetEverytime.toggle()
+                                }
+                            }
+                        }
+                        .overlay(
+                            Group {
+                                if !isFormResetEverytime {
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color(UIColor.systemGray6))
+                                        .frame(width: 5, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            )
+                                            .combined(with: .scale(scale: 0, anchor: .topLeading)).combined(with: .opacity).combined(with: .slide)
+                                            )
+                                    
+                                    RoundedRectangle(cornerSize: CGSize(width: 12, height: 12))
+                                        .fill(Color.secondary)
+                                        .frame(width: 2, height: 24)
+                                        .rotationEffect(.degrees(50))
+                                        .transition(
+                                            .asymmetric(
+                                                insertion: .offset(x: -30, y: 30),
+                                                removal: .offset(x: 30, y: -30)
+                                            ).combined(with: .scale(scale: 0, anchor: .topLeading))
+                                        )
+                                }
+                            }
+                        )
+                        .animation(.easeInOut(duration: 0.5), value: isCalendarVisible)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .leading, spacing: 6){
+                        Label("ФИО", systemImage: "person.fill")
+                            .labelStyle(.titleOnly)
+                            .multilineTextAlignment(.leading)
+                            .padding(.leading, 6)
+                            .font(.callout)
+                            .opacity(0.5)
+                        
+                        TextField("Имя пациента", text: $form.name)
+                            .padding()
+                        
+                            .focused($nameFieldFocused)
+                            .multilineTextAlignment(.leading)
+                            .submitLabel(.done)
+                            .textFieldStyle(.plain)
+                            .background(.mySecondaryColor02)
+                            .cornerRadius(14)
+                        
+                            .onSubmit {
+                                submit()
+                            }
+                    }
+
+                    VStack(alignment: .leading, spacing: 6){
+                        Label("Запись", systemImage: "person.fill")
+                            .labelStyle(.titleOnly)
+                            .multilineTextAlignment(.leading)
+                            .padding(.leading, 6)
+                            .font(.callout)
+                            .opacity(0.5)
+                        
+                        if isCalendarVisible {
+                            HStack{
+                                DateRangePickerView()
+                                    .background(.mySecondaryColor02)
+                                    .cornerRadius(14)
+                                Spacer()
+                            }
+
+                        } else {
+                            HStack(alignment: .center, spacing: 2) {
+                                DatePicker("ПРИБЫТИЕ", selection: $form.arrivalDate, displayedComponents: [.date])
+                                    .labelsHidden()
+                                
+                                Text(" – ")
+                                    .opacity(0.2)
+                                
+                                DatePicker("", selection: $form.departureDate, displayedComponents: [.date])
+                                    .labelsHidden()
+                                
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                    
+                    
+                    VStack(alignment: .leading, spacing: 6){
+                        Label("Статус", systemImage: "person.fill")
+                            .labelStyle(.titleOnly)
+                            .multilineTextAlignment(.leading)
+                            .padding(.leading, 6)
+                            .font(.callout)
+                            .opacity(0.5)
+                        
+                        Picker(selection: $form.status, label: Text("Статус: \(form.status.rawValue)")) {
+                            ForEach(Status.allCases, id: \.self) { status in
+                                Text(status.rawValue)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                }
+            }
+            
+            Spacer()
+            
+            Button {
+                submit()
+            } label: {
+                Text("Добавить")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+            }
+            .sensoryFeedback(.success, trigger: submitPressToggle)
+            .foregroundStyle(form.name .isEmpty ? Color.secondary : Color.myBackground)
+            .buttonStyle(.borderedProminent)
+            .disabled(form.name.trimmingCharacters(in: .whitespaces).isEmpty)
+            .cornerRadius(14)
+        }
+        .padding(.horizontal)
+        .padding(.bottom )
+        
+        
+    }
+    
+    func submit() {
+        if form.name.isEmpty {
+            nameFieldFocused = false
+        } else {
+            submitPressToggle.toggle()
+            personModel.addPerson(name: form.name, status: Status(rawValue: form.status.rawValue) ?? Status.notReady, arrivalTime: form.arrivalDate, departureTime: form.departureDate)
+            
+            form.name = ""
+
+            if !isFormResetEverytime {
+                form.status = .notReady
+                form.arrivalDate = Date()
+                form.departureDate = Date().addingTimeInterval(1296000)
+            }
+            
+            if !isFieldFocusEveryTime {
+                withAnimation {
+                    nameFieldFocused = false
+                }
+            }
+
+        }
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+#Preview {
+    AddPersonTab()
+        .environmentObject(PersonModel())
+}
+
+
+
+
+
+
+
+
+//
+//  StatusListTab.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 23.04.2025.
+//
+
+import SwiftUI
+
+struct StatusListTab: View {
+    @EnvironmentObject var personModel: PersonModel
+    
+    @AppStorage("selectedRange") private var selectedRange: TimeRange = .notReady
+    @AppStorage("isDatesVisible") private var isDatesVisible: Bool = true
+    
+    @State private var isSearchFocused = false
+    @State private var searchText: String = ""
+    
+    @State private var isSelectionMode = false
+    @State private var selectedPersons: Set<UUID> = []
+
+    enum TimeRange: String, CaseIterable {
+        case notReady = "Не готовы"
+        case inWork = "В работе"
+        case ready = "Готовы"
+    }
+    
+    var filteredPersons: [Person] {
+        personModel.persons.filter { person in
+            (searchText.isEmpty || person.name.localizedCaseInsensitiveContains(searchText)) &&
+            person.status.rawValue == selectedRange.rawValue
+        }
+    }
+    
+    var body: some View {
+        NavigationStack {
+            if filteredPersons.isEmpty && !searchText.isEmpty {
+                NotFoundView(searchText: searchText)
+            }
+
+            PersonListView(
+                persons: filteredPersons,
+                personModel: personModel,
+                isDatesVisible: isDatesVisible,
+                isSelectionMode: isSelectionMode,
+                selectedPersons: $selectedPersons
+            )
+            
+            
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(
+                isSelectionMode && !selectedPersons.isEmpty ?
+                "Выбрано \(selectedPersons.count)"
+                :
+                "\(selectedRange.rawValue) \(personModel.persons.filter({ $0.status.rawValue == selectedRange.rawValue }).count) пациентов"
+            )
+            .searchable(text: $searchText, isPresented: $isSearchFocused, placement: .navigationBarDrawer(displayMode: .automatic), prompt: isSearchFocused ? "Поиск по статусу '\(selectedRange.rawValue)'" : "Поиск по пациентам")
+            
+            .toolbar {
+                ToolbarItem {
+                    HStack(spacing: 4) {
+
+                            Button {
+                                withAnimation {
+                                    isSelectionMode.toggle()
+                                    if isSelectionMode { selectedPersons.removeAll()}
+                                }
+                            } label: {
+                                if isSelectionMode {
+                                    Text("Отмена")
+                                        .font(.caption)
+                                        .bold()
+                                        .frame(height: 16)
+                                        .transition(.scale(scale: 0, anchor: .leading).combined(with: .opacity))
+                                } else {
+                                    Image(systemName: "checkmark.circle")
+                                        .imageScale(.small)
+                                        .frame(width: 6, height: 16)
+                                        .transition(.scale(scale: 0, anchor: .leading).combined(with: .opacity))
+                                }
+                            }
+                            .buttonStyle(.bordered)
+                            .cornerRadius(.greatestFiniteMagnitude)
+                            
+                            Button {
+                                DispatchQueue.main.async {
+                                    isSearchFocused = true
+                                }
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                                    .imageScale(.small)
+                                    .frame(width: 7, height: 16)
+                            }
+                            .buttonStyle(.bordered)
+                            .clipShape(Circle())
+                        
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        isDatesVisible.toggle()
+                    } label: {
+                        if isDatesVisible {
+                            Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                                .imageScale(.large)
+                                .frame(width: 36, height: 36)
+                                .foregroundStyle(Color.accentColor)
+                                .transition(.symbolEffect)
+                        } else {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .imageScale(.large)
+                                .frame(width: 36, height: 36)
+                                .foregroundStyle(Color.accentColor)
+                                .transition(.symbolEffect)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .clipShape(Circle())
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    if isSelectionMode {
+                        VStack {
+                            HStack {
+                                Menu{
+                                    Button {
+                                        selectedPersons.forEach { id in
+                                            if let index = personModel.persons.firstIndex(where: { $0.id == id }) {
+                                                personModel.persons[index].status = .ready
+                                            }
+                                        }
+                                        selectedPersons.removeAll()
+                                        isSelectionMode = false
+                                    } label: {
+                                        Label("Готовы", systemImage: "checkmark")
+                                    }
+                                    
+                                    Button {
+                                        selectedPersons.forEach { id in
+                                            if let index = personModel.persons.firstIndex(where: { $0.id == id }) {
+                                                personModel.persons[index].status = .inWork
+                                            }
+                                        }
+                                        selectedPersons.removeAll()
+                                        isSelectionMode = false
+                                    } label: {
+                                        Label("В работе", systemImage: "stethoscope")
+                                    }
+                                    
+                                    Button {
+                                        selectedPersons.forEach { id in
+                                            if let index = personModel.persons.firstIndex(where: { $0.id == id }) {
+                                                personModel.persons[index].status = .notReady
+                                            }
+                                        }
+                                        selectedPersons.removeAll()
+                                        isSelectionMode = false
+                                    } label: {
+                                        Label("Не готовы", systemImage: "hammer")
+                                    }
+                                    
+                                    
+                                } label: {
+                                    HStack {
+                                        Text("Переместить в")
+                                        Image(systemName: "chevron.down")
+                                            .imageScale(.small)
+                                    }
+                                    
+                                }
+                                
+                                Spacer()
+                                
+                                Button("Удалить", role: .destructive) {
+                                    for id in selectedPersons {
+                                        if let person = personModel.persons.first(where: { $0.id == id }) {
+                                            personModel.DeletePerson(for: person)
+                                        }
+                                    }
+                                    selectedPersons.removeAll()
+                                    isSelectionMode = false
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            
+                            Divider()
+
+                                .padding(.horizontal, -16)
+                        }
+                    }
+                    
+                    HStack(alignment: .bottom, spacing: 4) {
+                        ForEach(TimeRange.allCases, id: \.self) { range in
+                            Button(action: {
+                                selectedRange = range
+                            }) {
+                                Text(range.rawValue)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(maxHeight: .infinity)
+                                    .foregroundColor(selectedRange == range ? .myBackground : .secondary)
+
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 38)
+                            .buttonStyle(.plain)
+                            .foregroundColor(selectedRange == range ? .myBackground : .accentColor)
+                            .background(selectedRange == range ? Color.accentColor : Color.clear)
+                            
+                            .cornerRadius(14)
+
+
+                            if range != TimeRange.allCases.last {
+                                Divider()
+                            }
+                        }
+                    }
+                    .padding(.bottom, 6)
+
+                }
+            }
+        }
+    }
+}
+
+
+struct PersonListView: View {
+    let persons: [Person]
+    let personModel: PersonModel
+    let isDatesVisible: Bool
+    let isSelectionMode: Bool
+    @Binding var selectedPersons: Set<UUID>
+    
+    var groupedPersons: [(date: Date, persons: [Person])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: persons) { person in
+            calendar.startOfDay(for: person.departureTime)
+        }
+        return grouped
+            .map { ($0.key, $0.value) }
+            .sorted { $0.0 < $1.0 }
+    }
+    
+    func formattedHeader(for date: Date) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Сегодня"
+        } else if calendar.isDateInTomorrow(date) {
+            return "Завтра"
+        } else {
+            return date.formatted(date: .abbreviated, time: .omitted)
+        }
+    }
+    
+    var body: some View{
+
+        List {
+            if isDatesVisible {
+                GroupedListView
+            } else {
+                NotGroupedListView
+            }
+        }
+    }
+    
+    var NotGroupedListView: some View {
+        ForEach(persons) { person in
+                NavigationLink {
+                    PersonDetailView(person: person, personModel: personModel)
+                } label: {
+                    HStack {
+                        if isSelectionMode {
+                            Image(systemName: selectedPersons.contains(person.id) ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(selectedPersons.contains(person.id) ? .accentColor : .secondary)
+                            
+                                .frame(width: 20, height: 20)
+                                .cornerRadius(14)
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text(person.name)
+                            Text("\(person.arrivalTime.formatted(date: .numeric, time: .omitted)) по \(person.departureTime.formatted(date: .numeric, time: .omitted))")
+                                .opacity(0.5)
+                        }
+
+                    }
+                    
+                }
+                .swipeActions(edge: .trailing) {
+                    if person.status != .notReady {
+                        Button {
+                            personModel.downgradeStatus(for: person)
+                        } label: {
+                            Label("Понизить", systemImage: "arrow.down")
+                        }
+                        .tint(.yellow)
+                    }
+                    if person.status == .notReady {
+                        Button(role: .destructive) {
+                            personModel.DeletePerson(for: person)
+                        } label: {
+                            Label("Удалить", systemImage: "trash")
+                        }
+                    }
+                }
+                .swipeActions(edge: .leading) {
+                    Button {
+                        personModel.upgradeStatus(for: person)
+                    } label: {
+                        Label("Отправить далее", systemImage: "arrow.up")
+                    }
+                    .tint(.blue)
+                }
+                .onTapGesture {
+                    if isSelectionMode {
+                        if selectedPersons.contains(person.id) {
+                            selectedPersons.remove(person.id)
+                        } else {
+                            selectedPersons.insert(person.id)
+                        }
+                    }
+                }
+            
+            
+        }
+    }
+    
+    var GroupedListView: some View {
+        ForEach(groupedPersons, id: \.date) { (date, persons) in
+            Section(header: isDatesVisible ? Text(formattedHeader(for: date)).padding(.leading, 16) : nil) {
+                ForEach(persons) { person in
+                    
+                    NavigationLink {
+                        PersonDetailView(person: person, personModel: personModel)
+                    } label: {
+                        HStack {
+                            if isSelectionMode {
+                                Image(systemName: selectedPersons.contains(person.id) ? "checkmark.circle.fill" : "circle")
+                                    .foregroundColor(selectedPersons.contains(person.id) ? .accentColor : .secondary)
+
+                                    .frame(width: 20, height: 20)
+                                    .cornerRadius(14)
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text(person.name)
+                                Text("\(person.arrivalTime.formatted(date: .numeric, time: .omitted)) по \(person.departureTime.formatted(date: .numeric, time: .omitted))")
+                                    .opacity(0.5)
+                            }
+                            .swipeActions(edge: .trailing) {
+                                if person.status != .notReady {
+                                    Button {
+                                        personModel.downgradeStatus(for: person)
+                                    } label: {
+                                        Label("Понизить", systemImage: "arrow.down")
+                                    }
+                                    .tint(.yellow)
+                                }
+                                if person.status == .notReady {
+                                    Button(role: .destructive) {
+                                        personModel.DeletePerson(for: person)
+                                    } label: {
+                                        Label("Удалить", systemImage: "trash")
+                                    }
+                                }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    personModel.upgradeStatus(for: person)
+                                } label: {
+                                    Label("Отправить далее", systemImage: "arrow.up")
+                                }
+                                .tint(.blue)
+                            }
+                        }
+
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+
+            }
+            .listRowInsets(EdgeInsets())
+            .contentMargins(.zero)
+        }
+        
+        
+    }
+}
+
+
+#Preview {
+    MainAppView()
+        .environmentObject(PersonModel())
+}
+
+
+
+
+
+
+
+//
+//  AllListTab.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 03.05.2025.
+//
+
+import SwiftUI
+
+struct AllListTab: View {
+    enum TimeRange: String, CaseIterable {
+        case every = "Любой"
+        case notReady = "Не готовы"
+        case inWork = "В работе"
+        case ready = "Готовы"
+    }
+    
+    @EnvironmentObject var personModel: PersonModel
+    
+    @State var searchText: String = ""
+    @State private var isSearchFocused = false
+    @State private var selectedScope: TimeRange? = .every
+
+    
+    var body: some View {
+        var filteredPersons: [Person] {
+            if searchText.isEmpty {
+                return personModel.persons
+            } else {
+                return personModel.persons.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            }
+        }
+        
+        NavigationStack {
+            if filteredPersons.isEmpty && !searchText.isEmpty {
+                NotFoundView(searchText: searchText)
+            }
+            
+            List {
+                ForEach(filteredPersons) { person in
+                    NavigationLink{
+                        PersonDetailView(person: person, personModel: personModel)
+                    } label: {
+                        VStack (alignment: .leading){
+                            Text(person.name)
+                            Text(person.status.rawValue)
+                            Text("\(person.arrivalTime.formatted(date: .numeric, time: .omitted)) по \(person.departureTime.formatted(date: .numeric, time: .omitted))")
+                                .opacity(0.5)
+                        }
+                        .swipeActions(edge: .trailing) {
+                            if person.status != .notReady {
+                                Button {
+                                    personModel.downgradeStatus(for: person)
+                                } label : {
+                                    Label("Понизить", systemImage: "arrow.down")
+                                }
+                                .tint(.yellow)
+                            }
+                            if person.status == .notReady {
+                                Button(role: .destructive) {
+                                    personModel.DeletePerson(for: person)
+                                } label : {
+                                    Label("Удалить", systemImage: "trash")
+                                }
+                            }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                personModel.upgradeStatus(for: person)
+                            } label : {
+                                Label("Отправить далее", systemImage: "arrow.up")
+                            }
+                            .tint(.blue)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Всего \(personModel.persons.count) человек")
+            .navigationBarTitleDisplayMode(.large)
+            .searchable(text: $searchText, isPresented: $isSearchFocused, placement: .navigationBarDrawer(displayMode: .always), prompt: "Поиск по пациентам")
+            .searchScopes($selectedScope) {
+                ForEach(TimeRange.allCases, id: \.self) { scope in
+                    Text(scope.rawValue).tag(scope as TimeRange?)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    AllListTab()
+        .environmentObject(PersonModel())
+}
+
+
+
+
+
+
+//
+//  DateRangePicker.swift
+//  lbvList
+//
+//  Created by dmitry lbv on 02.05.2025.
+//
+
+import SwiftUI
+
+struct DateRangePickerView: View {
+    @State private var startDate: Date?
+    @State private var endDate: Date?
+    @State private var currentMonth: Date = Date()
+    
+    private let calendar = Calendar.current
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+        ///formatter.locale = Locale(identifier: "ru_RU")
+        return formatter
+    }()
+    
+    private let weekdayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EE"
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter
+    }()
+    
+    var body: some View {
+        VStack(alignment: .center, spacing: 18) {
+            HStack(alignment: .center, spacing: 32) {
+                Button {
+                    //withAnimation {
+                        currentMonth = calendar.date(byAdding: .month, value: -1, to: currentMonth) ?? currentMonth
+                    //}
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.accentColor)
+                }
+                
+                
+                Button(action: {
+                    // Открывать выбор месяца/года
+                    withAnimation {
+                        currentMonth = Date()
+                    }
+                }) {
+                    Text(dateFormatter.string(from: currentMonth))
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                }
+                
+                
+                Button(action: {
+                    //withAnimation {
+                        currentMonth = calendar.date(byAdding: .month, value: 1, to: currentMonth) ?? currentMonth
+                    //}
+                }) {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(.accentColor)
+                }
+            }
+            .padding(.bottom, 12)
+            
+            // Дни недели
+            HStack {
+                ForEach(getWeekDays(), id: \.self) { day in
+                    Text(day)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .frame(width: 28)
+                        .foregroundColor(.gray)
+                }
+            }
+            
+            // Сетка календаря
+            let days = getDaysInMonth()
+            let columns = Array(repeating: GridItem(.fixed(28)), count: 7)
+            
+            HStack {
+                LazyVGrid(columns: columns, spacing: 3) {
+                    ForEach(days, id: \.self) { date in
+                        if let date = date {
+                            DayView(date: date, isSelected: isDateInRange(date), isStart: isStartDate(date), isEnd: isEndDate(date))
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectDate(date)
+                                    }
+                                }
+                        } else {
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(height: 36)
+                        }
+                    }
+                }
+            }
+            .fixedSize()
+            
+            // Информация о выбранном диапазоне
+            //VStack(alignment: .leading, spacing: 5) {
+            //    if let start = startDate {
+            //        Text("Начало: \(formatDate(start))")
+            //            .font(.subheadline)
+            //    }
+            //
+            //    if let end = endDate {
+            //        Text("Окончание: \(formatDate(end))")
+            //            .font(.subheadline)
+            //    }
+            //
+            //    if let start = startDate, let end = endDate {
+            //        let days = calendar.dateComponents([.day], from: start, to: end).day ?? 0
+            //        Text("Выбрано дней: \(days + 1)")
+            //            .font(.subheadline)
+            //            .fontWeight(.medium)
+            //    }
+            //}
+            //.frame(maxWidth: .infinity, alignment: .leading)
+            //.padding(.horizontal)
+                        
+        }
+        .padding()
+        .padding(.top, 10)
+
+    }
+    
+    // Выбор даты по тапу
+    private func selectDate(_ date: Date) {
+        if startDate == nil || (startDate != nil && endDate != nil) {
+            // Первый выбор или начало нового выбора после завершенного диапазона
+            startDate = date
+            endDate = nil
+        } else {
+            // Второй выбор
+            if date < startDate! {
+                endDate = startDate
+                startDate = date
+            } else {
+                endDate = date
+            }
+        }
+    }
+    
+    // Получаем дни текущего месяца вместе с отступами для начала и конца
+    private func getDaysInMonth() -> [Date?] {
+        var days = [Date?]()
+        
+        let monthRange = calendar.range(of: .day, in: .month, for: currentMonth)!
+        let firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
+        
+        // Определяем день недели для первого дня месяца (0 - воскресенье, 1 - понедельник и т.д.)
+        var firstWeekday = calendar.component(.weekday, from: firstDayOfMonth) - 2
+        // Преобразуем к нашей системе, где понедельник - первый день (0)
+        if firstWeekday < 0 { firstWeekday += 7 }
+        
+        // Добавляем пустые места для выравнивания с днями недели
+        for _ in 0..<firstWeekday {
+            days.append(nil)
+        }
+        
+        // Добавляем все дни месяца
+        for day in 1...monthRange.count {
+            if let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth) {
+                days.append(date)
+            }
+        }
+        
+        return days
+    }
+    
+    // Получаем дни недели, начиная с понедельника
+    private func getWeekDays() -> [String] {
+        let weekdaySymbols = weekdayFormatter.shortWeekdaySymbols ?? []
+        // Перемещаем воскресенье (индекс 0) в конец массива
+        var rearrangedWeekdays = Array(weekdaySymbols.dropFirst()) // Убираем воскресенье
+        rearrangedWeekdays.append(weekdaySymbols[0]) // Добавляем воскресенье в конец
+        return rearrangedWeekdays.map { $0.capitalized }
+    }
+    
+    // Проверка, находится ли дата в выбранном диапазоне
+    private func isDateInRange(_ date: Date) -> Bool {
+        if let start = startDate, let end = endDate {
+            return (date >= start && date <= end)
+        } else if let start = startDate, endDate == nil {
+            return date == start
+        }
+        return false
+    }
+    
+    // Проверка, является ли дата начальной в диапазоне
+    private func isStartDate(_ date: Date) -> Bool {
+        if let start = startDate {
+            return calendar.isDate(date, inSameDayAs: start)
+        }
+        return false
+    }
+    
+    // Проверка, является ли дата конечной в диапазоне
+    private func isEndDate(_ date: Date) -> Bool {
+        if let end = endDate {
+            return calendar.isDate(date, inSameDayAs: end)
+        }
+        return false
+    }
+    
+    // Форматирование даты для отображения
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter.string(from: date)
+    }
+}
+
+// Представление для отдельного дня в календаре
+struct DayView: View {
+    let date: Date
+    let isSelected: Bool
+    let isStart: Bool
+    let isEnd: Bool
+    
+    private let calendar = Calendar.current
+    
+    var body: some View {
+        Text("\(calendar.component(.day, from: date))")
+            .fontWeight(isSelected ? .bold : .regular)
+            .frame(height: 36)
+            .frame(width: 36)
+            .background(
+                ZStack {
+                    if isSelected {
+                        if isStart && isEnd {
+                            // Если это и начало и конец (одиночная дата)
+                            Circle()
+                                .fill(Color.accentColor)
+                        } else if isStart {
+                            // Если это начало диапазона
+                            ZStack() {
+                                Rectangle()
+                                    .fill(Color.accentColor.opacity(0.3))
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                
+                                Rectangle()
+                                    .fill(Color.accentColor)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .cornerRadius(48)
+                            }
+                            .frame(height: 36)
+                            .roundedCorner(48, corners: [.bottomLeft, .topLeft])
+                            
+
+                        } else if isEnd {
+                            // Если это конец диапазона
+                            ZStack() {
+                                Rectangle()
+                                    .fill(Color.accentColor.opacity(0.3))
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                
+                                Rectangle()
+                                    .fill(Color.accentColor)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .cornerRadius(48)
+                            }
+                            .frame(height: 36)
+                            .roundedCorner(48, corners: [.bottomRight, .topRight])
+                            
+                        } else {
+                            // Если это середина диапазона
+                            Rectangle()
+                                .fill(Color.accentColor.opacity(0.3))
+                        }
+                    }
+                }
+            )
+            .foregroundColor(
+                isStart || isEnd ?
+                    .white : isSelected ? .accentColor : .primary
+            )
+            .clipShape(isSelected && (isStart || isEnd) ? Rectangle() : Rectangle())
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+extension View {
+    func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+// Предварительный просмотр
+struct DateRangePickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        DateRangePickerView()
+    }
+}

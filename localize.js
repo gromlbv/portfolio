@@ -45,7 +45,7 @@ var dictionary = {
         "h1-p5": "let’s get in touch",
         "p-p5": "i'm wide open for new projects",
         "telegram": "Telegram",
-        "email": "Email",
+        "email": "Email me",
 
 
         "january": "january",
