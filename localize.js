@@ -8,7 +8,8 @@ var dictionary = {
 
         // page1
         "name": "i’m Dima <br> Gromov",
-        "info": "middle <span>ux/ui designer</span> & <br> intern ios developer",
+        "info": "middle <a href=\"#projects\">ux/ui designer</a> & <br> intern ios developer",
+        
         "block-1": "located in <b>Crimea,<br>Simferopol</b>",
         "block-3": "my pet photos<br>(in development)",
         

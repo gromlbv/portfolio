@@ -185,6 +185,7 @@ h3 {
 
 p {
   font-size: 18px;
+  font-weight: 400;
 }
 
 a {
@@ -385,6 +386,23 @@ header.active {
 .middle-text {
   flex-shrink: 1;
   width: 100%;
+
+  a {
+    background-color: var(--orange-accent-color);
+    color: var(--background-color);
+    border-radius: 99px;
+    padding: 0 6px;
+    padding-bottom: 2px;
+
+    cursor: pointer;
+
+    transition: opacity 0.3s;
+  }
+  a:hover{
+    transition: 0.3s;
+    transform: scale(1.2) !important;
+    opacity: 0.78;
+  }
 }
 
 .addit-blocks {
@@ -597,7 +615,6 @@ header.active {
   #toggle_fullscreen {
     position: absolute;
     bottom: 98px;
-    width: fit-content;
 
     width: fit-content;
     gap: 12px;
@@ -868,13 +885,7 @@ header.active {
   }
 }
 
-p span {
-  background-color: var(--orange-accent-color);
-  color: var(--background-color);
-  border-radius: 99px;
-  padding: 0 6px;
-  padding-bottom: 2px;
-}
+
 
 p.clickable:hover {
   transition: 0.4s;
