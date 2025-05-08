@@ -1672,7 +1672,7 @@ html.previewed{
   }
 
 }
-@media (max-width: 1900px) {
+@media (max-width: 920px) {
   .list-view{
     display: initial;
   }
