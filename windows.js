@@ -1,19 +1,19 @@
 const header = document.getElementById('header');
-const target = document.getElementById('target');
+const targets = document.querySelectorAll('.observe-target');
 
-let isIntersecting = false;
+let anyIntersecting = false;
 
-const observer = new IntersectionObserver(([entry]) => {
-  isIntersecting = entry.isIntersecting;
+const observer = new IntersectionObserver((entries) => {
+  anyIntersecting = entries.some(entry => entry.isIntersecting);
   updateHeader();
 }, {
   threshold: 0.1
 });
 
-observer.observe(target);
+targets.forEach(target => observer.observe(target));
 
 function updateHeader() {
-  if (isIntersecting && window.scrollY > 0) {
+  if (anyIntersecting && window.scrollY > 0) {
     header.classList.add('active');
   } else {
     header.classList.remove('active');

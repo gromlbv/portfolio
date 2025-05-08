@@ -379,7 +379,7 @@ header {
 header {
   position: fixed;
 
-  width: 100%;
+  width: 100vw;
   padding-top: 12px;
   padding-bottom: 16px;
 
@@ -1608,7 +1608,7 @@ html.previewed{
       div{
         width: 100%;
       }
-      p{
+      .date-p{
         width: 100%;
         text-align: left;
       }
