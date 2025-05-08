@@ -241,6 +241,38 @@ a.button-like:active {
   scale: 0.95;
 }
 
+.button-like {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+
+.button-like::before {
+  transition: 0.6s;
+
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--orange-accent-color), red, var(--orange-accent-color));
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+.button-gradient-flash{
+  transition: 1s;
+  scale: 1.1;
+}
+.button-gradient-flash::before { 
+  opacity: 1;
+}
+
+.button-like > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 a.no-drag {
   user-select: none;
   -webkit-user-drag: none;
@@ -413,90 +445,97 @@ header.active {
   flex: 1;
   flex-grow: 1;
   gap: -24px;
+}
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
 
-  .block {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
+  padding: 16px 16px 14px 16px;
+  height: fit-content;
 
-    padding: 16px 16px 14px 16px;
-    height: fit-content;
+  border-radius: 12px;
+  background: #F6E6D5;
+  color: #CCBFB0;
 
-    border-radius: 12px;
-    background: #F6E6D5;
-    color: #CCBFB0;
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
 
-    text-align: left;
-    font-weight: 500;
-    white-space: nowrap;
+  cursor: pointer;
 
-    cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.block.mobile{
+  display: none;
+}
 
-    user-select: none;
-    -webkit-user-drag: none;
+.block.rotate1 {
+  transform: rotate(-15deg);
+}
 
-  }
+.block.rotate2 {
+  transform: rotate(5.103deg);
+  margin-top: 90px;
+}
 
-  .block.rotate1 {
-    transform: rotate(-15deg);
-  }
+.block.rotate3 {
+  transform: rotate(-6.603deg);
+}
+.block.hidden{
+  transition: 0.2s;
+  scale: 0.5;
+}
+.map-block{
+  position: absolute;
+  display: flex;
+  top: -50%;
+  min-width: 250px;
+  width: 250px;
+  height: 150px;
 
-  .block.rotate2 {
-    transform: rotate(5.103deg);
-    margin-top: 90px;
-  }
+  border-radius: 24px;
 
-  .block.rotate3 {
-    transform: rotate(-6.603deg);
-  }
+  overflow: hidden;
+  z-index: 100 !important;
 
-  .map-block{
+  scale: 2;
+
+  .close-map-btn{
+    transition: 0.3s;
     position: absolute;
-    display: flex;
-    top: -50%;
-    min-width: 250px;
-    width: 250px;
-    height: 150px;
+    top: 16px;
+    right: 16px;
 
-    border-radius: 24px;
+    align-content: center;
+    text-align: center;
+    
+    width: 32px;
+    height: 32px;
 
-    overflow: hidden;
-    z-index: 100 !important;
-
-    scale: 2;
-
-    .close-map-btn{
-      transition: 0.3s;
-      position: absolute;
-      top: 16px;
-      right: 16px;
-
-      align-content: center;
-      text-align: center;
-      
-      width: 32px;
-      height: 32px;
-
-      border-radius: 32px;
-      background-color: var(--background-color);
-      
-      cursor: pointer;
-      filter: initial !important;
-    }
-    .close-map-btn:hover{
-      transition: 0.4s;
-      color: var(--secondary-color);
-      background-color: var(--main-color) !important;
-
-      scale: 1.2;
-    }
-    img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    border-radius: 32px;
+    background-color: var(--background-color);
+    
+    cursor: pointer;
+    filter: initial !important;
   }
+  .close-map-btn:hover{
+    transition: 0.4s;
+    color: var(--secondary-color);
+    background-color: var(--main-color) !important;
+
+    scale: 1.2;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.map-block.top{
+  top: 20px;
 }
 
 .overflow {
@@ -512,10 +551,7 @@ header.active {
   pointer-events: auto;
 }
 
-.block.hidden{
-  transition: 0.2s;
-  scale: 0.5;
-}
+
 
 
 .list-view {
@@ -525,7 +561,7 @@ header.active {
   .list-project {
     display: flex;
     align-items: flex-start;
-    transition: 0.1s;
+    gap: 8px;
 
     width: 100%;
     align-items: left;
@@ -536,12 +572,20 @@ header.active {
     margin: 0 -32px;
     padding: 32px;
 
+    transition: 0.1s;
 
-    p {
+    .date-p {
       width: 10%;
       min-width: 10%;
-      text-overflow: none !important;
-      text-overflow: none;
+
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-clamp: 1;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+
     }
 
     h3 {
@@ -970,215 +1014,6 @@ p.smaller {
   box-sizing: border-box;
 }
 
-.blur-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  overflow: hidden;
-  pointer-events: none;
-  display: none;
-}
-
-
-.gradient-blur {
-  position: absolute;
-  z-index: 5;
-  inset: auto 0 0 0;
-  height: 100%;
-  width: 40%;
-  pointer-events: none;
-  user-select: none;
-  left: 60%;
-
-}
-
-.gradient-blur>div,
-.gradient-blur::before,
-.gradient-blur::after {
-  position: absolute;
-  inset: 0;
-  margin-left: 150px;
-
-}
-
-.gradient-blur::before {
-  content: "";
-  z-index: 1;
-  backdrop-filter: blur(0.5px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 12.5%,
-      rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 0) 37.5%);
-}
-
-.gradient-blur>div:nth-of-type(1) {
-  z-index: 2;
-  backdrop-filter: blur(1px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 12.5%,
-      rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 1) 37.5%,
-      rgba(0, 0, 0, 0) 50%);
-}
-
-.gradient-blur>div:nth-of-type(2) {
-  z-index: 3;
-  backdrop-filter: blur(2px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 25%,
-      rgba(0, 0, 0, 1) 37.5%,
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 0) 62.5%);
-}
-
-.gradient-blur>div:nth-of-type(3) {
-  z-index: 4;
-  backdrop-filter: blur(4px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 37.5%,
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 1) 62.5%,
-      rgba(0, 0, 0, 0) 75%);
-}
-
-.gradient-blur>div:nth-of-type(4) {
-  z-index: 5;
-  backdrop-filter: blur(8px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 1) 62.5%,
-      rgba(0, 0, 0, 1) 75%,
-      rgba(0, 0, 0, 0) 87.5%);
-}
-
-.gradient-blur>div:nth-of-type(5) {
-  z-index: 6;
-  backdrop-filter: blur(16px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 62.5%,
-      rgba(0, 0, 0, 1) 75%,
-      rgba(0, 0, 0, 1) 87.5%,
-      rgba(0, 0, 0, 0) 100%);
-}
-
-.gradient-blur>div:nth-of-type(6) {
-  z-index: 7;
-  backdrop-filter: blur(32px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 75%,
-      rgba(0, 0, 0, 1) 87.5%,
-      rgba(0, 0, 0, 1) 100%);
-}
-
-.gradient-blur::after {
-  content: "";
-  z-index: 8;
-  backdrop-filter: blur(64px);
-  mask: linear-gradient(to right,
-      rgba(0, 0, 0, 0) 87.5%,
-      rgba(0, 0, 0, 1) 100%);
-}
-
-.gradient-blur.left {
-  position: absolute;
-  z-index: 5;
-  inset: auto 0 0 0;
-  height: 100%;
-  pointer-events: none;
-  user-select: none;
-  margin: 0;
-  padding: 0;
-  width: 40%;
-}
-
-.gradient-blur.left>div,
-.gradient-blur.left::before,
-.gradient-blur.left::after {
-  position: absolute;
-  inset: 0;
-  margin-left: 0px;
-}
-
-.gradient-blur.left::before {
-  content: "";
-  z-index: 1;
-  backdrop-filter: blur(0.5px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 12.5%,
-      rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 0) 37.5%);
-}
-
-.gradient-blur.left>div:nth-of-type(1) {
-  z-index: 2;
-  backdrop-filter: blur(1px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 12.5%,
-      rgba(0, 0, 0, 1) 25%,
-      rgba(0, 0, 0, 1) 37.5%,
-      rgba(0, 0, 0, 0) 50%);
-}
-
-.gradient-blur.left>div:nth-of-type(2) {
-  z-index: 3;
-  backdrop-filter: blur(2px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 25%,
-      rgba(0, 0, 0, 1) 37.5%,
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 0) 62.5%);
-}
-
-.gradient-blur.left>div:nth-of-type(3) {
-  z-index: 4;
-  backdrop-filter: blur(4px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 37.5%,
-      rgba(0, 0, 0, 1) 50%,
-      rgba(0, 0, 0, 1) 62.5%,
-      rgba(0, 0, 0, 0) 75%);
-}
-
-.gradient-blur.left>div:nth-of-type(4) {
-  z-index: 5;
-  backdrop-filter: blur(8px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 1) 62.5%,
-      rgba(0, 0, 0, 1) 75%,
-      rgba(0, 0, 0, 0) 87.5%);
-}
-
-.gradient-blur.left>div:nth-of-type(5) {
-  z-index: 6;
-  backdrop-filter: blur(16px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 62.5%,
-      rgba(0, 0, 0, 1) 75%,
-      rgba(0, 0, 0, 1) 87.5%,
-      rgba(0, 0, 0, 0) 100%);
-}
-
-.gradient-blur.left>div:nth-of-type(6) {
-  z-index: 7;
-  backdrop-filter: blur(32px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 75%,
-      rgba(0, 0, 0, 1) 87.5%,
-      rgba(0, 0, 0, 1) 100%);
-}
-
-.gradient-blur.left::after {
-  content: "AAAAA";
-  z-index: 8;
-  backdrop-filter: blur(64px);
-  mask: linear-gradient(to left,
-      rgba(0, 0, 0, 0) 87.5%,
-      rgba(0, 0, 0, 1) 100%);
-}
 
 
 .z-index6 {
@@ -1254,90 +1089,6 @@ p.smaller {
 
 
 
-
-
-
-
-
-
-
-
-
-
-.project {
-  cursor: grab;
-  transition: all 0.2s ease;
-  z-index: 6;
-}
-
-.project.dragging {
-  transition: 0.6s;
-  cursor: grabbing;
-  z-index: 100;
-  filter: contrast(0.9);
-  /* scale: 1.05; */
-}
-
-
-/* Стили для кнопки скрытия */
-.hide-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 12px;
-  padding: 0;
-  transition: background-color 0.2s;
-}
-
-.hide-button:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.app-icon:hover {
-  transform: scale(1.1);
-  background: rgba(46, 46, 46, 0.8);
-}
-
-/* Анимация для проектов */
-.project {
-  cursor: default;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project .head {
-  cursor: grab;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.project.dragging {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  opacity: 0.95;
-}
-
-.project.dragging .head {
-  cursor: grabbing;
-}
-
-/* Скрытие/показ проектов с анимацией */
-.project {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.project.hidden {
-  opacity: 0;
-  transform: scale(0.5);
-  pointer-events: none;
-}
 
 
 
@@ -1750,6 +1501,7 @@ html.previewed{
     .preview-link{
       max-width: 100%;
       width: 100%;
+      text-align: center;
     }
   }
   iframe {
@@ -1773,38 +1525,6 @@ html.previewed{
 
 
 
-
-
-.button-like {
-  position: relative;
-  overflow: hidden;
-  transition: color 0.4s ease;
-}
-
-.button-like::before {
-  transition: 0.6s;
-
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, var(--orange-accent-color), red, var(--orange-accent-color));
-  background-size: 200% 200%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 0;
-}
-.button-gradient-flash{
-  transition: 1s;
-  scale: 1.1;
-}
-.button-gradient-flash::before {
-  opacity: 1;
-}
-
-.button-like > * {
-  position: relative;
-  z-index: 1;
-}
 
 
 /* .button-like::before {
@@ -1854,14 +1574,32 @@ html.previewed{
   }
 
   h1{
-    font-size: 64px;
+    font-size: 58px;
   }
   h2{
     font-size: 28px;
   }
 
+  .scroll-container {
+    mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  }
+
+  .addit-blocks {
+    display: none;
+  }
+  .block.mobile{
+    display: flex;
+    rotate: 0;
+  }
+
+  .projects-head{
+    flex-direction: column;
+    align-items: center;
+    a {
+      align-self: initial;
+    }
+  }
   .list-view{
-    display: initial;
     box-sizing: border-box;
     .list-project{
       flex-direction: column;
@@ -1876,7 +1614,239 @@ html.previewed{
       }
     }
   }
+
+}
+@media (max-width: 1900px) {
+  .list-view{
+    display: initial;
+  }
   .desktop-view{
     display: none;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.blur-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+
+.gradient-blur {
+  position: absolute;
+  z-index: 5;
+  inset: auto 0 0 0;
+  height: 100%;
+  width: 40%;
+  pointer-events: none;
+  user-select: none;
+  left: 60%;
+
+}
+
+.gradient-blur>div,
+.gradient-blur::before,
+.gradient-blur::after {
+  position: absolute;
+  inset: 0;
+  margin-left: 150px;
+
+}
+
+.gradient-blur::before {
+  content: "";
+  z-index: 1;
+  backdrop-filter: blur(0.5px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 12.5%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 0) 37.5%);
+}
+
+.gradient-blur>div:nth-of-type(1) {
+  z-index: 2;
+  backdrop-filter: blur(1px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 12.5%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 1) 37.5%,
+      rgba(0, 0, 0, 0) 50%);
+}
+
+.gradient-blur>div:nth-of-type(2) {
+  z-index: 3;
+  backdrop-filter: blur(2px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(0, 0, 0, 1) 37.5%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) 62.5%);
+}
+
+.gradient-blur>div:nth-of-type(3) {
+  z-index: 4;
+  backdrop-filter: blur(4px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 37.5%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 1) 62.5%,
+      rgba(0, 0, 0, 0) 75%);
+}
+
+.gradient-blur>div:nth-of-type(4) {
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 1) 62.5%,
+      rgba(0, 0, 0, 1) 75%,
+      rgba(0, 0, 0, 0) 87.5%);
+}
+
+.gradient-blur>div:nth-of-type(5) {
+  z-index: 6;
+  backdrop-filter: blur(16px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 62.5%,
+      rgba(0, 0, 0, 1) 75%,
+      rgba(0, 0, 0, 1) 87.5%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-blur>div:nth-of-type(6) {
+  z-index: 7;
+  backdrop-filter: blur(32px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(0, 0, 0, 1) 87.5%,
+      rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur::after {
+  content: "";
+  z-index: 8;
+  backdrop-filter: blur(64px);
+  mask: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 87.5%,
+      rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur.left {
+  position: absolute;
+  z-index: 5;
+  inset: auto 0 0 0;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  width: 40%;
+}
+
+.gradient-blur.left>div,
+.gradient-blur.left::before,
+.gradient-blur.left::after {
+  position: absolute;
+  inset: 0;
+  margin-left: 0px;
+}
+
+.gradient-blur.left::before {
+  content: "";
+  z-index: 1;
+  backdrop-filter: blur(0.5px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 12.5%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 0) 37.5%);
+}
+
+.gradient-blur.left>div:nth-of-type(1) {
+  z-index: 2;
+  backdrop-filter: blur(1px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 12.5%,
+      rgba(0, 0, 0, 1) 25%,
+      rgba(0, 0, 0, 1) 37.5%,
+      rgba(0, 0, 0, 0) 50%);
+}
+
+.gradient-blur.left>div:nth-of-type(2) {
+  z-index: 3;
+  backdrop-filter: blur(2px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(0, 0, 0, 1) 37.5%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) 62.5%);
+}
+
+.gradient-blur.left>div:nth-of-type(3) {
+  z-index: 4;
+  backdrop-filter: blur(4px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 37.5%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 1) 62.5%,
+      rgba(0, 0, 0, 0) 75%);
+}
+
+.gradient-blur.left>div:nth-of-type(4) {
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 1) 62.5%,
+      rgba(0, 0, 0, 1) 75%,
+      rgba(0, 0, 0, 0) 87.5%);
+}
+
+.gradient-blur.left>div:nth-of-type(5) {
+  z-index: 6;
+  backdrop-filter: blur(16px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 62.5%,
+      rgba(0, 0, 0, 1) 75%,
+      rgba(0, 0, 0, 1) 87.5%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-blur.left>div:nth-of-type(6) {
+  z-index: 7;
+  backdrop-filter: blur(32px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(0, 0, 0, 1) 87.5%,
+      rgba(0, 0, 0, 1) 100%);
+}
+
+.gradient-blur.left::after {
+  content: "AAAAA";
+  z-index: 8;
+  backdrop-filter: blur(64px);
+  mask: linear-gradient(to left,
+      rgba(0, 0, 0, 0) 87.5%,
+      rgba(0, 0, 0, 1) 100%);
 }

@@ -57,12 +57,12 @@ var dictionary = {
         "june": "june",
         "july": "july",
         "august": "august",
-        "september": "september",
+        "september": "sep",
         "october": "october",
         "november": "november",
         "december": "december",
 
-        "more-project-add": "i have <b>9</b> more projects to add",
+        "more-project-add": "i have <b>3</b> more projects to add",
 
     },
     "ru": {
@@ -124,7 +124,7 @@ var dictionary = {
         "november": "ноября",
         "december": "декабря",
 
-        "more-project-add": "есть еще где-то <b>9</b> недобавленных проектов!",
+        "more-project-add": "есть еще где-то <b>3</b> недобавленных проектов!",
 
     }
 }

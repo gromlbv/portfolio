@@ -111,7 +111,6 @@
           </p>
         </a>
       </div>
-
     </div>
 
 
@@ -128,6 +127,17 @@
         <img src="source/github.svg" alt="GitHub">
       </a>
     </div>
+
+    <a class="block mobile animate-block open-map-btn">
+      <img src="source/icons/map.svg">
+      <p>
+        <localized-text key="block-1"></localized-text>
+      </p>
+      <div class="map-block top overflow hidden">
+        <div class="close-map-btn">✕</div>
+        <img src="source/map.png">
+      </div>
+    </a>
   </div>
 
   <div class="lbpage gap-64 scroll-page">
@@ -197,7 +207,7 @@
 
 
     <div class="list-view flex-cl">
-      <div class="flex gap-24 flex-between">
+      <div class="projects-head flex gap-24 flex-between">
         <h2 class="flex flex-center text-align-left"><localized-text key="h1-p4"></localized-text></h2>
 
         <a class="button-like js-toggle-view">
@@ -212,48 +222,103 @@
         <h3>2025</h3>
       </div>
 
-      <div class="list-project">
-        <h3>Jadan Dental</h3>
-        <div class="flex-cl gap-24 text-left">
-          <div class="flex-cl gap-4">
-            <h4>What's done</h4>
-            <p>Web design, Frotnend</p>
+      <list-project
+        name="Hydroys & Pure Cycle Power landings"
+        url=""
+        description="
+        <h4>Currently Work in Progress</h4>"
+        date="8"
+        month="may">
+      </list-project>
 
-            <h4>Website type</h4>
-            <p>Landing, 5 pages total</p>
-          </div>
-          <div class="flex-cl gap-8">
-            <a class="toggle_preview" data-url="https://jadan.lbvo.ru">
-              <localized-text key="web-preview"></localized-text>
-            </a>
-            <a href="#"><localized-text key="case-study"></localized-text></a>
-          </div>
-        </div>
-        <p>20 <localized-text key="april"></localized-text></p>
+      <list-project
+        name="Jadan Dental"
+        url="https://jadan.lbvo.ru"
+        description="
+        <h4>What's done</h4>
+        <p>Web design, Frotnend</p>
+        <h4>Website type</h4>
+        <p>Landing, 5 pages total</p>"
+        date="20"
+        month="april">
+      </list-project>
+
+      <list-project
+        name="AR Spatially Landing"
+        url="https://arspatially.com"
+        description="
+          <h4>What's done</h4>
+          <p>Web-Design</p>
+          <h4></h4>
+          <p>I've remade the whole project landing!</p>
+          <h4>Website type</h4>
+          <p>Landing page</p>"
+        date="9"
+        month="april">
+      </list-project>
+
+      <div class="list-project date">
+        <h3>2024</h3>
       </div>
 
-      <div class="list-project">
 
-        <h3>AR Spatially Landing</h3>
-        <div class="flex-cl gap-24 text-left">
-          <div class="flex-cl gap-4">
-            <h4>What's done</h4>
-            <p>Web-Design</p>
+      <list-project
+        name="Topraitings News parser & Landing"
+        url=""
+        description="
+          <h4>What i done</h4>
+          <p>UI/UX Design, Frontend, Python parser</p></p>"
+        date="19"
+        month="october">
+      </list-project>
 
-            <h4></h4>
-            <p>I've remade the whole project landing!</p>
+      <list-project
+        name="platega.io"
+        url=""
+        description="
+          <h4>What's done</h4>
+          <p>UI/UX Design, Vue.js frontend</p>
+          <h4></h4>
+          <p>Payment form for online acquiring</p>"
+        date="19"
+        month="september">
+      </list-project>
 
-          </div>
+      <list-project
+        name="AR Spatially iOS & Android apps"
+        url="https://arspatially.com"
+        description="
+          <h4>What's done</h4>
+          <p>UI/UX Design</p>"
+        date="21"
+        month="april">
+      </list-project>
 
-          <div class="flex-cl gap-8">
-            <a class="toggle_preview" data-url="https://arspatially.com">
-              <localized-text key="web-preview"></localized-text>
-            </a>
-            <a href="#"><localized-text key="case-study"></localized-text></a>
-          </div>
-        </div>
-        <p>9 <localized-text key="april"></localized-text></p>
-      </div>
+      <list-project
+        name="Antarctis"
+        url="https://app.antarctis.ru"
+        description="
+        <h4>What's done</h4>
+        <p>Web design, Frotnend</p>
+
+        <h4>Website type</h4>
+        <p>Landing, 5 pages total</p>"
+        date="4"
+        month="june">
+      </list-project>
+
+      <list-project
+        name="Bulevard Coffee PWA"
+        url=""
+        description="
+        <h4>What's done</h4>
+        <p>Web design, Frontend fixes</p>
+
+        <h4>What it's about</h4>
+        <p>Bulevard Coffee PWA</p>"
+        date="14"
+        month="may">
+      </list-project>
 
       <div class="list-project date">
         <h3 style="color: #2a262493; font-weight: 400;">
@@ -266,7 +331,7 @@
     </div>
 
     <div class="desktop-view">
-      <div class="flex gap-24 flex-between">
+      <div class="projects-head flex gap-24 flex-between">
         <h2 class="flex flex-center text-align-left"><localized-text key="h1-p4"></localized-text></h2>
 
         <a class="button-like js-toggle-view">
@@ -289,10 +354,9 @@
             description="
               <h4>Web-design</h4>
               <p>Landing page for AR Spatially, also i made new event landing!</p>
-              <img src='source/screenshots/arspatially.png'>
+              <img src='source/screenshots/arspatially-event.png'>
               <p>Made in Figma</p>
             ">
-
           </project-card>
 
           <project-card 
@@ -353,22 +417,15 @@
 
   <script src="localize.js"></script>
   <script src="windows.js"></script>
+<script>
 
-  <script>
-    document.querySelectorAll('a.browser').forEach(el => {
-  const text = el.textContent.trim();
-  if (text.startsWith('https://')) {
-    const rest = text.slice(8);
-    el.innerHTML = `<span style="opacity: 0.5;">https://</span>${rest}`;
-  }
-});
-    class ProjectCard extends HTMLElement {
-      connectedCallback() {
-        const name = this.getAttribute("name");
-        const url = this.getAttribute("url");
-        const img = this.getAttribute("img");
-        const description = this.getAttribute("description");
-        this.innerHTML = `
+  class ProjectCard extends HTMLElement {
+    connectedCallback() {
+      const name = this.getAttribute("name");
+      const url = this.getAttribute("url");
+      const img = this.getAttribute("img");
+      const description = this.getAttribute("description");
+      this.innerHTML = `
       <div class="project">
         <div class="head">
           <div class="toolbar"></div>
@@ -390,70 +447,112 @@
         </div>
       </div>
     `;
-      }
     }
-    customElements.define("project-card", ProjectCard);
+  }
+  customElements.define("project-card", ProjectCard);
 
 
+  class ListProject extends HTMLElement {
+    connectedCallback() {
+      const name = this.getAttribute("name");
+      const url = this.getAttribute("url");
+      const description = this.getAttribute("description");
+      const date = this.getAttribute("date");
+      const month = this.getAttribute("month");
+
+      const previewLink = url
+        ? `<a class="toggle_preview" data-url="${url}">
+            <localized-text key="web-preview"></localized-text>
+          </a>`
+        : "";
+
+      this.innerHTML = `
+        <div class="list-project">
+          <h3>${name}</h3>
+          <div class="flex-cl gap-24 text-left">
+            <div class="flex-cl gap-4">
+              ${description}
+            </div>
+            <div class="flex-cl gap-8">
+              ${previewLink}
+              <!-- <a href="#"><localized-text key="case-study"></localized-text></a> -->
+            </div>
+          </div>
+          <p class="date-p">${date} <localized-text key="${month}"></localized-text></p>
+        </div>
+      `;
+    }
+  }
+
+  customElements.define("list-project", ListProject);
 
 
-    $('.button-like[href="#contacts"]').on('click', function () {
-      const $btn = $(this);
-      $('.gradient-flash').addClass('button-gradient-flash');
-
-      setTimeout(() => {
-        $('.gradient-flash').removeClass('button-gradient-flash');
-      }, 2000);
-    });
-
-    $('.open-map-btn').on('click', function () {
-      $(this).find('.overflow').addClass('visible'); // или .children('.overflow')
-      $(this).addClass('hidden');
-    });
-    $(document).on('click', '.close-map-btn', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      $(this).closest('.overflow').removeClass('visible');
-      $(this).closest('.block').removeClass('hidden');
-    });
-
-    $('.preview-img').on('click', function () {
-      $(this).closest('.content-wrapper').toggleClass('pressed');
-    });
+  document.querySelectorAll('a.browser').forEach(el => {
+    const text = el.textContent.trim();
+    if (text.startsWith('https://')) {
+      const rest = text.slice(8);
+      el.innerHTML = `<span style="opacity: 0.5;">https://</span>${rest}`;
+    }
+  });
 
 
-    $('.js-toggle-view').on('click', function () {
-      $('.list-view').toggle();
-      $('.desktop-view').toggle();
-    });
+  $('.button-like[href="#contacts"]').on('click', function () {
+    const $btn = $(this);
+    $('.gradient-flash').addClass('button-gradient-flash');
 
-    $('#toggle_fullscreen').on('click', function () {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else {
-        $('.project-wrapper').get(0).requestFullscreen();
-      }
-    });
+    setTimeout(() => {
+      $('.gradient-flash').removeClass('button-gradient-flash');
+    }, 2000);
+  });
 
-    $('.toggle_preview').on('click', function () {
-      const url = $(this).data('url');
+  $('.open-map-btn').on('click', function () {
+    $(this).find('.overflow').addClass('visible'); // или .children('.overflow')
+    $(this).addClass('hidden');
+  });
+  $(document).on('click', '.close-map-btn', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).closest('.overflow').removeClass('visible');
+    $(this).closest('.block').removeClass('hidden');
+  });
 
-      $('.absolute-preview iframe').attr('src', url);
-      const formatted = url.replace(/^https:\/\//, '<span style="opacity:0.4">https://</span>');
-      $('.preview-link').html(formatted);
-      $('.open-link').attr('href', url);
-      $('html').addClass('previewed');
+  $('.preview-img').on('click', function () {
+    $(this).closest('.content-wrapper').toggleClass('pressed');
+  });
 
-      $('.absolute-preview').removeClass('hidden').show();
-    });
 
-    $('.absolute-preview .close-btn').on('click', function () {
-      $('.absolute-preview').addClass('hidden').hide();
-      $('html').removeClass('previewed');
-      $('.absolute-preview iframe').attr('src', 'https://lbvo.ru/loading.html');
-    });
+  $('.js-toggle-view').on('click', function () {
+    $('.list-view').toggle();
+    $('.desktop-view').toggle();
+  });
 
-  </script>
+  $('#toggle_fullscreen').on('click', function () {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      $('.project-wrapper').get(0).requestFullscreen();
+    }
+  });
+
+  $('.toggle_preview').on('click', function () {
+    const url = $(this).data('url');
+
+    $('.absolute-preview iframe').attr('src', url);
+    const formatted = url.replace(/^https:\/\//, '<span style="opacity:0.4">https://</span>');
+    $('.preview-link').html(formatted);
+    $('.open-link').attr('href', url);
+    $('html').addClass('previewed');
+
+    $('.absolute-preview').removeClass('hidden').show();
+  });
+
+  $('.absolute-preview .close-btn').on('click', function () {
+    $('.absolute-preview').addClass('hidden').hide();
+    $('html').removeClass('previewed');
+    $('.absolute-preview iframe').attr('src', 'https://lbvo.ru/loading.html');
+  });
+
+</script>
 
 
 </body>
