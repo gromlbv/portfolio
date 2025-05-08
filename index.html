@@ -223,35 +223,41 @@
 
       <list-project
         name="Hydroys & Pure Cycle Power landings"
-        url=""
         description="
         <h4>Currently Work in Progress</h4>"
+        url=""
         date="8"
         month="may">
       </list-project>
 
       <list-project
         name="Jadan Dental"
-        url="https://jadan.lbvo.ru"
         description="
         <h4>What's done</h4>
         <p>Web design, Frotnend</p>
         <h4>Website type</h4>
-        <p>Landing, 5 pages total</p>"
+        <p>Landing, 5 pages total</p>
+        "
+        screenshots="
+        <img src='source/screenshots/jadan.png'>
+        "
+        url="https://jadan.lbvo.ru"
         date="20"
         month="april">
       </list-project>
 
       <list-project
         name="AR Spatially Landing"
-        url="https://arspatially.com"
         description="
           <h4>What's done</h4>
           <p>Web-Design</p>
           <h4></h4>
           <p>I've remade the whole project landing!</p>
-          <h4>Website type</h4>
-          <p>Landing page</p>"
+        "
+        screenshots="
+          <img src='source/screenshots/arspatially.png'>
+        "
+        url="https://arspatially.com"
         date="9"
         month="april">
       </list-project>
@@ -272,12 +278,14 @@
 
       <list-project
         name="platega.io"
-        url=""
         description="
           <h4>What's done</h4>
           <p>UI/UX Design, Vue.js frontend</p>
           <h4></h4>
           <p>Payment form for online acquiring</p>"
+        screenshots="
+        <img src='source/screenshots/plategaio.png'>"
+        url=""
         date="19"
         month="september">
       </list-project>
@@ -294,26 +302,32 @@
 
       <list-project
         name="Antarctis"
-        url="https://app.antarctis.ru"
         description="
         <h4>What's done</h4>
         <p>Web design, Frotnend</p>
-
         <h4>Website type</h4>
         <p>Landing, 5 pages total</p>"
+        screenshots="
+        <img src='source/screenshots/antarctis.png'>
+        "
+        url="https://app.antarctis.ru"
         date="4"
         month="june">
       </list-project>
 
       <list-project
         name="Bulevard Coffee PWA"
-        url=""
         description="
         <h4>What's done</h4>
         <p>Web design, Frontend fixes</p>
-
-        <h4>What it's about</h4>
+        <h4>What's it about</h4>
         <p>Bulevard Coffee PWA</p>"
+        screenshots="
+        <img src='source/screenshots/bulevard/1.png'>
+        <img src='source/screenshots/bulevard/2.png'>
+        <img src='source/screenshots/bulevard/3.png'>
+        "
+        url=""
         date="14"
         month="may">
       </list-project>
@@ -453,8 +467,9 @@
   class ListProject extends HTMLElement {
     connectedCallback() {
       const name = this.getAttribute("name");
-      const url = this.getAttribute("url");
       const description = this.getAttribute("description");
+      const url = this.getAttribute("url");
+      const screenshots = this.getAttribute("screenshots");
       const date = this.getAttribute("date");
       const month = this.getAttribute("month");
 
@@ -464,10 +479,17 @@
           </a>`
         : "";
 
+      const screenshotsWrapper = screenshots
+        ? `<div class="overlay-screenshots">
+              ${screenshots}
+          </div>`
+        : "";
+
       this.innerHTML = `
         <div class="list-project">
           <h3>${name}</h3>
           <div class="flex-cl gap-24 text-left">
+            ${screenshotsWrapper}
             <div class="flex-cl gap-4">
               ${description}
             </div>
