@@ -38,6 +38,10 @@ var dictionary = {
         "web-preview": "Preview Website",
         "case-study": "Case study",
 
+        "antarctis-desc": "<h4>Web design, Frontend</h4><p>A service catalog that gives the user not only browsing and buying options, but also precise customization of products. Then a PDF configuration file is sent to the employee’s email, and a copy goes to the buyer’s personal account.</p><h4>AR objects!</h4><p>I added integration with a service that renders AR objects. It has a convenient admin panel, and now each product can have its own model that can be rotated and previewed in real life on the phone.</p>",
+        "bulevard-desc": "<h4>Web design, frontend tweaks</h4><p>Here we created two web apps for the coffee shop.</p><h4>PWA for the barista.</h4><p>It keeps track of coffee orders, and the barista can issue a free coffee — resetting the counter. We added QR codes for users so they can access their account without entering credentials.</p><h4>Cup tracking for the customer</h4><p>A web app that shows a festive background when the user can get a free coffee, along with their account, unique card, and registration date.</p>",
+        "plategaio-desc": "<h4>UI/UX Design, Vue.js Frontend</h4><h4>Payment form for online acquiring</h4><p>Created the design. For this project, I discovered Vue.js for the first time, connected the form to the backend, worked on the timer, and the subsequent steps for waiting for the payment to be received.</p>",
+
         "remind-me": "Remind me",
 
         //...
@@ -74,7 +78,7 @@ var dictionary = {
 
         // page1
         "name": "я Дима <br> Громов",
-        "info": "middle <span>ux/ui дизайнер</span> и <br> intern ios разработчик",
+        "info": "middle <a href=\"#projects\">ux/ui дизайнер</a> и <br> intern ios разработчик",
         "block-1": "нахожусь в <b>Крыму,<br>Симферополь</b>",
         "block-3": "(в разработке)",
         
@@ -102,6 +106,10 @@ var dictionary = {
         "web-preview": "Превью сайта",
         "case-study": "Кейс",
 
+        "antarctis-desc": "<h4>Веб дизайн, Фронтенд</h4><p>Сервис-каталог который дает юзеру не только просмотр и покупку товаров, но и предоставляыет точную подгонку их под себя, далее PDF файл конфигурации приходит на почту сотруднику, а также его копия - в личный кабинет покупателя.</p><h4>AR объекты!</h4><p>Я добавил интеграцию с сервисом который рисует AR обьекты, у него удобная админка и теперь на каждый товар можно добавить свою модельку, которую можно покрутить и посмотреть в жизни на телефоне.</p>",
+        "bulevard-desc": "<h4>Веб дизайн, правки на Фронтенде</h4><p>Здесь мы создали сразу два веб-приложения для кофейни.</p><h4>PWA для баристы.</h4><p>Здесь ведется учет заказов кофе, бариста может выдавать бесплатный кофе - тем самым сбрасывая счетчик для него. Добавили QR коды для пользователей для доступа в личный кабинет, чтобы он не вводил свои данные.</p><h4>Отслеживание чашек для покупателя</h4><p>Веб приложение, где есть праздничный фон - когда юзер может забрать бесплатный кофе, а также аккаунт с его уникальной карточкой и датой регистрации</p>",
+        "plategaio-desc": "<h4>UI/UX Дизайн, Vue.js Фронтенд</h4><h4>Платежная форма для интернет эквайринга</h4><p>Создал дизайн. Ради этого заказа впервые открыл для себя Vue.js, подключил форму к бекенду, проработал таймер, и последующие шаги ожидания поступления платежа.</p>",
+        
         "remind-me": "Напомнить мне",
 
         // page5
