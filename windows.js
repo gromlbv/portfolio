@@ -1,26 +1,4 @@
-const header = document.getElementById('header');
-const targets = document.querySelectorAll('.observe-target');
 
-let anyIntersecting = false;
-
-const observer = new IntersectionObserver((entries) => {
-  anyIntersecting = entries.some(entry => entry.isIntersecting);
-  updateHeader();
-}, {
-  threshold: 0.1
-});
-
-targets.forEach(target => observer.observe(target));
-
-function updateHeader() {
-  if (anyIntersecting && window.scrollY > 0) {
-    header.classList.add('active');
-  } else {
-    header.classList.remove('active');
-  }
-}
-
-window.addEventListener('scroll', updateHeader);
 
 
 

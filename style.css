@@ -4,7 +4,7 @@
   --secondary-color: #F6E6D5;
   --orange-accent-color: #FF805E;
 
-  --margin-horizontal: 86px;
+  --margin-horizontal: 52px;
   --margin-vertical: 32px;
   --gap-64: 64px;
 }
@@ -208,6 +208,7 @@ a.button-like {
 
   padding: 18px 20px;
   width: fit-content;
+  height: fit-content;
 
   border-radius: 18px;
   border: none;
@@ -219,6 +220,9 @@ a.button-like {
   font-weight: 600;
 
   cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 a.button-like.fill {
@@ -285,7 +289,7 @@ a.no-drag {
 
 .animate:hover {
   transition: 0.3s;
-  filter: contrast(0.3) brightness(0.5);
+  filter: saturate(2) contrast(0.3) brightness(0.2);
   scale: 1.08;
 }
 
@@ -345,36 +349,27 @@ html {
   overflow-x: hidden;
 }
 
-/* Стиль для русскоязычного контента */
 html[lang="ru"] {
   font-family: 'Inter', sans-serif;
 }
 
-/* Стиль для англоязычного контента */
 html[lang="en"] {
   font-family: NeutralSans;
 }
 
 body {
+  width: 100vw;
   margin: 0;
   padding: 0;
-
-  width: 100%;
 
   background-color: var(--background-color);
   color: var(--main-color);
 
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-header {
-  opacity: 0;
-  z-index: -10;
-  transform: translatey(-160px);
 
-  transition: transform 0.4s, opacity 0.4s, z-index 0.6s;
-}
 
 header {
   position: fixed;
@@ -395,8 +390,15 @@ header {
   }
 }
 
+header {
+  opacity: 0;
+  z-index: -10;
+  transform: translatey(-160px);
+
+  transition: transform 0.4s, opacity 0.4s, z-index 0.6s;
+}
+
 header.active {
-  transition: 0.5s;
   opacity: initial;
   z-index: 199;
   transform: initial;
@@ -415,6 +417,13 @@ header.active {
   background-color: var(--background-color);
 
   text-align: center;
+}
+
+.lbpage:nth-of-type(2) {
+  padding-top: 86px;
+}
+.lbpage:last-of-type {
+  padding-bottom: 86px;
 }
 
 .middle-text {
@@ -536,6 +545,45 @@ header.active {
 }
 .map-block.top{
   top: 20px;
+}
+
+.pet-block{
+  width: 350px;
+  height: 250px;
+  padding: 0 12px;
+
+  background: var(--secondary-color);
+  backdrop-filter: blur(18px) !important;
+
+
+  overflow: hidden;
+
+  .grid-wrapper {
+    overflow-y: scroll;
+
+    .grid {
+      column-count: 3;
+      column-gap: 4px;
+
+      height: fit-content;
+      max-width: 100%;
+
+      padding-top: 12px;
+
+      img {
+        display: block;
+        object-fit: cover;
+
+        height: fit-content;
+        margin-bottom: 4px;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .grid-wrapper::-webkit-scrollbar {
+    scrollbar-width: none !important;
+  }
 }
 
 .overflow {
@@ -1092,7 +1140,7 @@ p.smaller {
 
 .card em {
   font-weight: 600;
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .card h3 {

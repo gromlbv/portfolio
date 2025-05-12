@@ -104,11 +104,19 @@
           </p>
         </a> -->
 
-        <a class="block rotate3" href="/">
+        <a class="block rotate2 animate-block open-map-btn" id="load-pets">
           <img src="source/icons/bone.svg" alt="">
           <p>
             <localized-text key="block-3"></localized-text>
           </p>
+          <div class="map-block pet-block overflow hidden">
+            <div class="close-map-btn">✕</div>
+            <div class="grid-wrapper">
+              <div class="grid" id="gallery">
+              </div>
+            </div>
+
+          </div>
         </a>
       </div>
     </div>
@@ -203,10 +211,8 @@
   </div>
 
 
-  <div class="lbpage projects observe-target" id="projects">
-
-
-    <div class="list-view flex-cl">
+  <div class="lbpage projects" id="projects">
+    <div class="list-view flex-cl observe-target">
       <div class="projects-head flex gap-24 flex-between">
         <h2 class="flex flex-center text-align-left"><localized-text key="h1-p4"></localized-text></h2>
         <a class="button-like js-toggle-view">
@@ -419,6 +425,66 @@
 
   <script src="localize.js"></script>
   <script src="windows.js"></script>
+  
+  <script>
+    const header = document.getElementById('header');
+    const targets = document.querySelectorAll('.observe-target');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        entry.target.dataset.intersecting = entry.isIntersecting;
+      });
+
+      const anyVisible = [...targets].some(el => el.dataset.intersecting === "true");
+      updateHeader(anyVisible);
+    }, {
+      threshold: 0.1
+    });
+
+    targets.forEach(target => {
+      target.dataset.intersecting = "true";
+      observer.observe(target);
+    });
+
+    function updateHeader(anyVisible) {
+      if (anyVisible && window.scrollY > 0) {
+        header.classList.add('active');
+      } else {
+        header.classList.remove('active');
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      const anyVisible = [...targets].some(el => el.dataset.intersecting === "true");
+      updateHeader(anyVisible);
+    });
+
+
+    const imageNames = ['cat.jpg', 'dog.jpg', 'parrot.jpg'];
+
+    async function loadPets() {
+      const gallery = document.getElementById('gallery');
+      for (let i = 1; i < 100; i++) {
+        const url = `source/pets/pet${i}.webp`;
+        const img = new Image();
+        img.src = url;
+
+        try {
+          await img.decode();
+          gallery.appendChild(img);
+        } catch {
+          break;
+        }
+      }
+
+
+      document.getElementById('load-pets').disabled = true;
+    }
+
+    document.getElementById('load-pets').addEventListener('click', loadPets, { once: true });
+  </script>
+
+
 <script>
 
   class ProjectCard extends HTMLElement {

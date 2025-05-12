@@ -11,7 +11,7 @@ var dictionary = {
         "info": "middle <a href=\"#projects\">ux/ui designer</a> & <br> intern ios developer",
         
         "block-1": "located in <b>Crimea,<br>Simferopol</b>",
-        "block-3": "my pet photos<br>(in development)",
+        "block-3": "my pet photos",
         
         // page2
         "h1-p2": "what i love",
@@ -80,7 +80,7 @@ var dictionary = {
         "name": "я Дима <br> Громов",
         "info": "middle <a href=\"#projects\">ux/ui дизайнер</a> и <br> intern ios разработчик",
         "block-1": "нахожусь в <b>Крыму,<br>Симферополь</b>",
-        "block-3": "(в разработке)",
+        "block-3": "фото питомцев",
         
         // page2
         "h1-p2": "что я люблю",
