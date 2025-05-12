@@ -588,9 +588,9 @@ header.active {
       justify-content: flex-end;
       gap: 4px;
 
-      top: -32px;
-      left: calc(-80% - 24px);
-      width: 80%;
+      top: -2vw;
+      left: calc(-150% - 12px);
+      width: 150%;
       height: 250%;
 
       border-radius: 12px;
