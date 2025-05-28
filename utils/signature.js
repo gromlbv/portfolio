@@ -1,29 +1,36 @@
-const LBV_SIGNATURE = `%c
-developer with <3 by
+const SIGNATURE = `%c
+developed with <3 by
 .-.   .--..-..-..--. .---..-..-.
 | |__ |-<  \\ '/ | \\ \\| |-  \\  /
 '----''--'  ''  '-'-''---'  ''  
 (lbv_dev)
 `;
 
-const LBV_LINE = '%cmy links ───────────────────────────────────'
-const LBV_INFO1 = '%c\nwebsite https://lbvo.ru';
-const LBV_INFO2 = '\ntelegram https://t.me/lbv_dev';
-const LBV_INFO3 = '\ngithub https://github.com/gromlbv';
-const GAP = '\n'
+const INFO = `%c
+website https://lbvo.ru
+telegram https://t.me/lbv_dev
+github https://github.com/gromlbv
+`;
 
-export function write_signature() {
+const GAP = '\n';
+const LINE = '%cmy links ──────────────────────────\n';
+
+function set_console_property (){
     Object.defineProperty(window, 'lbv_dev', {
         get() {
             console.log('кок');
-            return 'my @lbv_dev';
+            return 'my tg @lbv_dev';
         }
     });
-
-
-    console.log(LBV_SIGNATURE, 'color: #FF9898; font-family: monospace; font-weight: bold; font-size: 12px');
-    console.log(GAP + LBV_LINE + LBV_INFO1 + LBV_INFO2 + LBV_INFO3 + GAP, 'color: gray', 'color: gray');
 }
+
+export function write_signature() {
+    set_console_property();
+
+    console.log(SIGNATURE, 'color: #FF9898; font-family: monospace; font-weight: bold; font-size: 12px');
+    console.log(GAP + LINE + INFO + GAP, 'color: gray', 'color: gray');
+}
+
 
 
 //  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
