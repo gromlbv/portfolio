@@ -300,7 +300,7 @@ a.no-drag {
   scale: 1.08;
 }
 
-a.browser {
+.browser {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,6 +314,7 @@ a.browser {
 
   border-radius: 99px;
   background: rgba(255, 255, 255, 0.12);
+  border: none;
   color: white;
 
   font-size: 16px;
@@ -328,7 +329,7 @@ a.browser {
   }
   transition: opacity 0.2s, filter 0.2s;
 }
-a.browser:hover{
+.browser:hover{
   filter: contrast(1.5) brightness(1.5);
   opacity: initial;
 }
