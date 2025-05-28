@@ -13,7 +13,7 @@ github https://github.com/gromlbv
 `;
 
 const GAP = '\n';
-const LINE = '%cmy links ──────────────────────────\n';
+const LINE = '%cmy links  ──────────────────────────\n';
 
 function set_console_property (){
     Object.defineProperty(window, 'lbv_dev', {

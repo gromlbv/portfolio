@@ -8,7 +8,7 @@ var dictionary = {
 
         // page1
         "name": "i’m Dima <br> Gromov",
-        "info": "middle <a href=\"#projects\">ux/ui designer</a> & <br> intern ios developer",
+        "info": "middle <a href=\"#projects\">ux/ui designer</a> & <br> fullstack web/ios developer",
         
         "block-1": "located in <b>Crimea,<br>Simferopol</b>",
         "block-3": "my pet photos",
@@ -78,7 +78,7 @@ var dictionary = {
 
         // page1
         "name": "я Дима <br> Громов",
-        "info": "middle <a href=\"#projects\">ux/ui дизайнер</a> и <br> intern ios разработчик",
+        "info": "middle <a href=\"#projects\">ux/ui дизайнер</a> и <br> fullstack web/ios разработчик",
         "block-1": "нахожусь в <b>Крыму,<br>Симферополь</b>",
         "block-3": "фото питомцев",
         
