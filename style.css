@@ -1049,6 +1049,7 @@ p.clickable:hover {
   transition: 0.4s;
   background-color: var(--secondary-color);
   border-radius: 99px;
+  transform: scale(1.05);
 }
 
 .experience-flex{
