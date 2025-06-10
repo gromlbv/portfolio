@@ -1041,13 +1041,44 @@ header.active {
 
 
 
+p.clickable{
+    padding: 12px 18px;
+    backdrop-filter: blur(12px);
+}
 p.clickable:hover {
   transition: 0.4s;
   background-color: var(--secondary-color);
   border-radius: 99px;
-  padding: 6px 8px;
 }
 
+.experience-flex{
+  img{
+    position: absolute;
+    
+    left: 0%;
+    margin-bottom: 190px;
+    width: 100vw;
+    height: fit-content;
+    position: fixed;
+    z-index: 2;
+
+    pointer-events: none;
+
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(1.05);
+    transition: opacity 0.3s, filter 0.2s, transform 0.4s;
+  }
+}
+
+.experience-flex:hover{
+  img{
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+    transition: opacity 0.5s, filter 0.6s, transform 0.6s;
+  }
+}
 p.smaller {
   font-size: 16px;
 }

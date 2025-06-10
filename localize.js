@@ -23,8 +23,8 @@ var dictionary = {
         "card-2": "Figma",
         "card-3": ".html+.css",
         "card-4": "Swift UI",
-
         "card-5": "creating <em>new</em> and <br><em>fresh</em> ui",
+        "card-6": "python + flask<br> + sqlalchemy",
 
 
         // page3

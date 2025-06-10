@@ -171,7 +171,9 @@
       <div class="card">
         <localized-text key="card-5"></localized-text>
       </div>
-
+      <div class="card">
+        <localized-text key="card-6"></localized-text>
+      </div>
     </div>
     <div class="blur-wrapper">
       <div class="gradient-blur">
@@ -196,15 +198,43 @@
 
   <div class="lbpage gap-64 z-index6 observe-target">
     <h2><localized-text key="h1-p3"></localized-text></h2>
-    <div class="flex-cl flex-center gap-24">
+    <div class="flex-cl flex-center gap-8">
       <a href="https://seniwave.com/" target="_blank">
         <p class="smaller clickable">SeniWave<span class="dots"></span>now</p>
       </a>
-      <a href="https://dges.io/" target="_blank">
+      <a class="experience-flex" href="https://dges.io/" target="_blank">
         <p class="smaller clickable">DGES<span class="dots"></span>2025</p>
+        <img class="experience-img" src="source/backgrounds/dges.png">
       </a>
-      <a href="https://arspatially.com" target="_blank">
+      <a class="experience-flex" href="https://arspatially.com" target="_blank">
         <p class="smaller clickable">ARSpatially<span class="dots"></span>2025</p>
+        <img class="experience-img" src="source/backgrounds/arspatially.png">
+        <script>
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            const speed = 0.05;
+
+            $(document).on('mousemove', function(e) {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            });
+
+            function animate() {
+                currentX += (targetX - currentX) * speed;
+                currentY += (targetY - currentY) * speed;
+
+                $('.experience-img').css({
+                    left: (currentX - $('.experience-img').width() / 2) + 'px',
+                    top: (currentY - $('.experience-img').height() / 2) + 'px'
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+      </script>
       </a>
       <a href="#" target="_blank">
         <p class="smaller clickable">Tatneft<span class="dots"></span>2024</p>
