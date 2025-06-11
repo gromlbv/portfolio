@@ -1054,14 +1054,14 @@ p.clickable:hover {
 
 .experience-flex{
   img{
-    position: absolute;
-    
+    position: fixed;
+    z-index: 2;
+
     left: 0%;
     margin-bottom: 190px;
     width: 100vw;
     height: fit-content;
-    position: fixed;
-    z-index: 2;
+    object-fit: contain;
 
     pointer-events: none;
 
