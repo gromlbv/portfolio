@@ -1,17 +1,11 @@
 
-
-
-
-
 const container = document.querySelector('.scroll-container');
 const cards = Array.from(container.children);
 
-// Генерируем случайный угол поворота от -12 до +12
 function getRandomRotation() {
   return Math.floor(Math.random() * 50) - 12;
 }
 
-// Применяем случайные повороты и клонируем карточки
 cards.forEach(card => {
   const rotation = getRandomRotation();
   card.style.transform = `rotate(${rotation}deg)`;
@@ -22,31 +16,27 @@ cards.forEach(card => {
   container.appendChild(clone);
 });
 
-// Функция для обновления скорости анимации на основе ширины экрана
 function updateScrollSpeed() {
   const containerWidth = container.offsetWidth;
-  const baseSpeed = 50; // скорость прокрутки в пикселях в секунду
+  const baseSpeed = 50;
   const duration = containerWidth / baseSpeed;
 
-  const minDuration = 8; // минимальная продолжительность анимации
-  const maxDuration = 35; // максимальная продолжительность анимации
+  const minDuration = 8;
+  const maxDuration = 35;
   const finalDuration = Math.min(Math.max(duration, minDuration), maxDuration);
 
   const adjustmentFactor = window.innerWidth > 1400 ? 0.998 : 0.999;
   container.style.animationDuration = finalDuration * adjustmentFactor + "s";
 }
 
-// Обновляем анимацию при загрузке, изменении размера окна и ориентации экрана
 window.addEventListener("load", updateScrollSpeed);
 window.addEventListener("resize", updateScrollSpeed);
 window.addEventListener("orientationchange", updateScrollSpeed);
 
-// Анимация для бесконечного скроллинга
 function startInfiniteScroll() {
   const maxScroll = container.scrollWidth - container.clientWidth;
   container.style.animation = `scrollLeft infinite ${container.style.animationDuration} linear`;
 
-  // Делаем зацикливание прокрутки
   container.addEventListener('scroll', () => {
     if (container.scrollLeft >= maxScroll) {
       container.scrollLeft = 0;
@@ -54,9 +44,7 @@ function startInfiniteScroll() {
   });
 }
 
-// Инициализируем анимацию
 startInfiniteScroll();
-
 
 const projects = document.querySelectorAll('.project');
 const wrapper = document.querySelector('.project-wrapper');
@@ -78,45 +66,32 @@ projects.forEach(project => {
   project.dataset.scale = scale;
 });
 
-
-
-// Add this code to your existing JavaScript or replace the dock-related code
-
 document.addEventListener('DOMContentLoaded', function () {
   const projects = document.querySelectorAll('.project');
   let activeProject = null;
   let initialX, initialY;
   let zIndexCounter = 10;
 
-  // Create container for dock icons at the bottom
   const iconDock = document.createElement('div');
   iconDock.className = 'app-dock';
   document.querySelector('.project-wrapper').appendChild(iconDock);
 
-  // Add reset button
   const resetButton = document.createElement('button');
   resetButton.className = 'reset-button';
   resetButton.innerHTML = '↻';
   resetButton.title = 'Reset all projects';
   iconDock.appendChild(resetButton);
 
-  // Function to randomize project positions
   function randomizeProjectPositions() {
     projects.forEach((project) => {
       const wrapper = document.querySelector('.project-wrapper');
       const wrapperWidth = wrapper.clientWidth;
       const wrapperHeight = wrapper.clientHeight;
 
-      // Set random width between 200px and 400px
       const randomWidth = 350 + Math.floor(Math.random() * 1);
-
 
       project.style.width = `${randomWidth}px`;
 
-      // const randomHeight = 350 + Math.floor(Math.random() * 1);
-      // project.style.height = `${randomHeight}px`;
-
-      // Use header height for proper constraints
       const headerHeight = project.querySelector('.head').offsetHeight;
 
       const maxX = wrapperWidth - project.offsetWidth;
@@ -124,9 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
-      const scale = 1; // Keep scale at 1 (no scaling)
+      const scale = 1;
 
-      // Animate movement with slight delay
       project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
 
       setTimeout(() => {
@@ -139,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
         project.dataset.originalY = y;
         project.dataset.originalScale = scale;
 
-        // Hide corresponding dock icon
         const icon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
         if (icon) {
           icon.style.display = 'none';
@@ -148,17 +121,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Reset button handler
   resetButton.addEventListener('click', function () {
-    // First bring back all hidden projects
     const hiddenProjects = document.querySelectorAll('.project.hidden');
     hiddenProjects.forEach(project => {
-      // Remove hidden class and make visible
       project.classList.remove('hidden', 'minimizing');
       project.style.display = 'flex';
       project.style.opacity = '1';
 
-      // Find and hide corresponding dock icon
       const projectId = project.id;
       const dockIcon = document.querySelector(`.app-icon[data-target="${projectId}"]`);
       if (dockIcon) {
@@ -170,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const wrapperWidth = wrapper.clientWidth;
       const wrapperHeight = wrapper.clientHeight;
 
-      // Use header height for proper constraints
       const headerHeight = project.querySelector('.head').offsetHeight;
 
       const maxX = wrapperWidth - project.offsetWidth;
@@ -180,10 +148,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const y = Math.random() * maxY;
       const scale = 0.8 + Math.random() * 0.3;
 
-      // Animate movement with slight delay
       project.style.transition = 'left 0.5s, top 0.5s, transform 0.5s';
 
-      // For better animation, first ensure element is visible with current position
       if (project.classList.contains('hidden')) {
         project.style.transition = 'none';
         project.classList.remove('hidden');
@@ -202,19 +168,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }, Math.random() * 300);
     });
 
-    // Hide all dock icons since all projects are now visible
     const dockIcons = document.querySelectorAll('.app-icon');
     dockIcons.forEach(icon => {
       icon.style.display = 'none';
     });
   });
-  // Process projects and create icons
+
   projects.forEach((project, index) => {
-    // Add unique ID to project
     project.id = 'project-' + index;
 
-    
-    // Add minimize button to header
     const header = project.querySelector('.head');
     const toolbar = project.querySelector('.toolbar')
     const hideButton = document.createElement('button');
@@ -223,93 +185,72 @@ document.addEventListener('DOMContentLoaded', function () {
     hideButton.title = 'Minimize';
     toolbar.appendChild(hideButton);
 
-    // Create dock icon for minimized project
     const projectIcon = document.createElement('div');
     projectIcon.className = 'app-icon';
     projectIcon.dataset.target = 'project-' + index;
 
-    // Use project title to create the image src
-    const projectImg = project.querySelector('img[src^="source/screenshots/"]');
+    const projectImg = project.querySelector('img[src^="static/screenshots/"]');
     const faviconSrc = projectImg.src.replace('.png', '-fav.png');
 
-    // Create img element for favicon
     const faviconImage = document.createElement('img');
+    faviconImage.src = faviconSrc;
+    projectIcon.appendChild(faviconImage);
 
-    faviconImage.src = faviconSrc;  // Путь к фавиконке
-
-    projectIcon.appendChild(faviconImage);  // Добавляем картинку в иконку
-
-    // Set title and hide icon by default
     projectIcon.style.display = 'none';
     iconDock.appendChild(projectIcon);
 
-    // Minimize button handler
     hideButton.addEventListener('click', function (e) {
       e.stopPropagation();
 
-      // Save current position for animation
       const rect = project.getBoundingClientRect();
       const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
 
-      // Find the target dock icon
       const targetIcon = document.querySelector(`.app-icon[data-target="${project.id}"]`);
       const iconRect = targetIcon.getBoundingClientRect();
 
-      // Calculate flying animation - FIXED to use proper coordinates
       const currentX = parseInt(project.style.left) || 0;
       const currentY = parseInt(project.style.top) || 0;
 
-      // Calculate target position relative to the wrapper
-      // This targets the center of the dock icon
       const targetX = (iconRect.left + iconRect.width / 2) - wrapperRect.left - (project.offsetWidth / 2);
-      const targetY = wrapperRect.height - iconDock.offsetHeight; // Bottom of wrapper minus dock height
+      const targetY = wrapperRect.height - iconDock.offsetHeight;
 
-      // Set animation properties
       project.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
       project.style.transformOrigin = 'center center';
 
-      // Animate flying to dock
       project.classList.add('minimizing');
       project.style.left = `${targetX}px`;
       project.style.top = `${targetY}px`;
       project.style.transform = 'scale(0.1)';
       project.style.opacity = '0';
 
-      // Show dock icon after animation
       setTimeout(() => {
         project.classList.add('hidden');
         targetIcon.style.display = 'flex';
         targetIcon.classList.add('bounce');
         setTimeout(() => targetIcon.classList.remove('bounce'), 500);
 
-        // Delay before hiding the project completely
         setTimeout(() => {
           project.style.display = 'none';
         }, 100);
       }, 400);
     });
 
-    // Dock icon click handler to restore project
     projectIcon.addEventListener('click', function () {
       const targetProject = document.getElementById(this.dataset.target);
 
-      // Get icon position for animation
       const iconRect = this.getBoundingClientRect();
       const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
 
-      // Get original position from data attributes
       const originalX = parseFloat(targetProject.dataset.originalX) || 100;
       const originalY = parseFloat(targetProject.dataset.originalY) || 100;
       const originalScale = parseFloat(targetProject.dataset.originalScale) || 1;
 
-      // Set starting position (at the icon)
       targetProject.style.left = `${iconRect.left - wrapperRect.left}px`;
       targetProject.style.top = `${iconRect.top - wrapperRect.top}px`;
       targetProject.style.transform = 'scale(0.1)';
       targetProject.style.opacity = '0';
       targetProject.style.display = 'flex';
 
-      // Start animation
       requestAnimationFrame(() => {
         targetProject.style.transition = 'transform 0.4s ease, opacity 0.4s ease, left 0.4s ease, top 0.4s ease';
         targetProject.style.transform = `scale(${originalScale})`;
@@ -317,22 +258,17 @@ document.addEventListener('DOMContentLoaded', function () {
         targetProject.style.top = `${originalY}px`;
         targetProject.style.opacity = '1';
 
-        // Remove hidden class after small delay
         setTimeout(() => {
           targetProject.classList.remove('hidden', 'minimizing');
         }, 50);
       });
 
-      // Bring project to top layer
       targetProject.style.zIndex = zIndexCounter++;
 
-      // Hide dock icon
       this.style.display = 'none';
     });
 
-    // Drag handlers
     header.addEventListener('mousedown', function (e) {
-      // Skip if minimize button was clicked
       if (e.target === hideButton) return;
 
       e.preventDefault();
@@ -348,9 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.addEventListener('mouseup', stopDrag);
     });
 
-    // Touch device support
     header.addEventListener('touchstart', function (e) {
-      // Skip if minimize button was clicked
       if (e.target === hideButton) return;
 
       e.preventDefault();
@@ -368,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Mouse drag handler
   function handleDrag(e) {
     if (!activeProject) return;
 
@@ -380,24 +313,20 @@ document.addEventListener('DOMContentLoaded', function () {
     let newX = e.clientX - wrapperRect.left - initialX;
     let newY = e.clientY - wrapperRect.top - initialY;
 
-    // Constrain boundaries
     const maxX = wrapperRect.width - activeProject.offsetWidth;
     const maxY = wrapperRect.height - headerHeight;
 
     newX = Math.max(0, Math.min(newX, maxX));
     newY = Math.max(0, Math.min(newY, maxY));
 
-    // Disable transitions for smooth dragging
     activeProject.style.transition = 'none';
     activeProject.style.left = `${newX}px`;
     activeProject.style.top = `${newY}px`;
 
-    // Update original position data
     activeProject.dataset.originalX = newX;
     activeProject.dataset.originalY = newY;
   }
 
-  // Touch drag handler
   function handleTouchDrag(e) {
     if (!activeProject) return;
 
@@ -410,27 +339,22 @@ document.addEventListener('DOMContentLoaded', function () {
     let newX = touch.clientX - wrapperRect.left - initialX;
     let newY = touch.clientY - wrapperRect.top - initialY;
 
-    // Constrain boundaries
     const maxX = wrapperRect.width - activeProject.offsetWidth;
     const maxY = wrapperRect.height - headerHeight;
 
     newX = Math.max(0, Math.min(newX, maxX));
     newY = Math.max(0, Math.min(newY, maxY));
 
-    // Disable transitions for smooth dragging
     activeProject.style.transition = 'none';
     activeProject.style.left = `${newX}px`;
     activeProject.style.top = `${newY}px`;
 
-    // Update original position data
     activeProject.dataset.originalX = newX;
     activeProject.dataset.originalY = newY;
   }
 
-  // End drag
   function stopDrag() {
     if (activeProject) {
-      // Restore transitions
       activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
       activeProject.classList.remove('dragging');
       activeProject = null;
@@ -440,10 +364,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.removeEventListener('mouseup', stopDrag);
   }
 
-  // End touch drag
   function stopTouchDrag() {
     if (activeProject) {
-      // Restore transitions
       activeProject.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
       activeProject.classList.remove('dragging');
       activeProject = null;
@@ -453,7 +375,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.removeEventListener('touchend', stopTouchDrag);
   }
 
-  // Function to position dock at bottom
   function positionDockAtBottom() {
     const wrapper = document.querySelector('.project-wrapper');
     const wrapperRect = wrapper.getBoundingClientRect();
@@ -463,32 +384,22 @@ document.addEventListener('DOMContentLoaded', function () {
     iconDock.style.transform = 'translateX(-50%)';
   }
 
-  // Update dock position on resize
   window.addEventListener('resize', positionDockAtBottom);
 
-
-
-  // Initialize
   positionDockAtBottom();
   randomizeProjectPositions();
 });
 
-
-
-
-
-// Функция для добавления ресайза окон
 function addWindowResizeFeature() {
   const projects = document.querySelectorAll('.project');
 
   projects.forEach(project => {
-    // Создаем элементы для ресайза
     const resizeHandles = {
-      'e': createResizeHandle('resize-e'),  // правый край
-      'w': createResizeHandle('resize-w'),  // левый край
-      's': createResizeHandle('resize-s'),  // нижний край
-      'se': createResizeHandle('resize-se'), // правый нижний угол
-      'sw': createResizeHandle('resize-sw')  // левый нижний угол
+      'e': createResizeHandle('resize-e'),
+      'w': createResizeHandle('resize-w'),
+      's': createResizeHandle('resize-s'),
+      'se': createResizeHandle('resize-se'),
+      'sw': createResizeHandle('resize-sw')
     };
 
     Object.values(resizeHandles).forEach(handle => {
@@ -530,12 +441,10 @@ function addWindowResizeFeature() {
       });
     });
 
-    // Инициализация ресайза
     function startResize(e, direction) {
       isResizing = true;
       currentHandle = direction;
 
-      // Сохраняем начальные значения
       startX = e.clientX;
       startY = e.clientY;
       startWidth = project.offsetWidth;
@@ -543,34 +452,28 @@ function addWindowResizeFeature() {
       startLeft = parseInt(project.style.left) || 0;
       startTop = parseInt(project.style.top) || 0;
 
-      // Отключаем переходы для плавного ресайза
       project.style.transition = 'none';
       project.classList.add('resizing');
     }
 
-    // Обработка перемещения мыши
     function handleMouseMove(e) {
       if (!isResizing) return;
       handleResize(e);
     }
 
-    // Обработка перемещения для сенсорных устройств
     function handleTouchMove(e) {
       if (!isResizing) return;
       const touch = e.touches[0];
       handleResize(touch);
     }
 
-    // Обработка самого ресайза
     function handleResize(e) {
       const deltaX = e.clientX - startX;
       const deltaY = e.clientY - startY;
 
-      // Минимальные размеры окна, чтобы его можно было ресайзить
       const minWidth = 200;
       const minHeight = 100;
 
-      // Максимальные размеры (ограничение размеров контейнера)
       const wrapper = project.closest('.project-wrapper');
       const maxWidth = wrapper ? wrapper.clientWidth - startLeft : window.innerWidth;
       const maxHeight = wrapper ? wrapper.clientHeight - startTop : window.innerHeight;
@@ -580,44 +483,38 @@ function addWindowResizeFeature() {
       let newLeft = startLeft;
       let newTop = startTop;
 
-      // Расчет новых размеров и позиции в зависимости от направления
       switch (currentHandle) {
-        case 'e': // Правый край
+        case 'e':
           newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
           break;
-        case 'w': // Левый край
+        case 'w':
           newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
           newLeft = startLeft + (startWidth - newWidth);
           break;
-        case 's': // Нижний край
+        case 's':
           newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
           break;
-        case 'se': // Правый нижний угол
+        case 'se':
           newWidth = Math.min(Math.max(startWidth + deltaX, minWidth), maxWidth);
           newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
           break;
-        case 'sw': // Левый нижний угол
+        case 'sw':
           newWidth = Math.min(Math.max(startWidth - deltaX, minWidth), startWidth + startLeft);
           newHeight = Math.min(Math.max(startHeight + deltaY, minHeight), maxHeight);
           newLeft = startLeft + (startWidth - newWidth);
           break;
       }
 
-      // Применяем новые размеры и позицию
       project.style.width = `${newWidth}px`;
       project.style.height = `${newHeight}px`;
       project.style.left = `${newLeft}px`;
       project.style.top = `${newTop}px`;
     }
 
-    // Завершение ресайза
     function stopResize() {
       if (isResizing) {
-        // Восстанавливаем переходы
         project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
         project.classList.remove('resizing');
-
-        // Сбрасываем флаги
         isResizing = false;
         currentHandle = null;
       }
@@ -626,14 +523,10 @@ function addWindowResizeFeature() {
       document.removeEventListener('mouseup', stopResize);
     }
 
-    // Завершение ресайза для сенсорных устройств
     function stopTouchResize() {
       if (isResizing) {
-        // Восстанавливаем переходы
         project.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
         project.classList.remove('resizing');
-
-        // Сбрасываем флаги
         isResizing = false;
         currentHandle = null;
       }
@@ -644,7 +537,6 @@ function addWindowResizeFeature() {
   }
 }
 
-// CSS для добавления к существующим стилям
 const resizeCSS = `
 .project {
 }
@@ -705,229 +597,13 @@ pointer-events: auto;
 }
 `;
 
-// Добавление стилей в документ
 function addResizeStyles() {
   const styleEl = document.createElement('style');
   styleEl.textContent = resizeCSS;
   document.head.appendChild(styleEl);
 }
 
-// Инициализация функции ресайза
 document.addEventListener('DOMContentLoaded', function () {
   addResizeStyles();
   addWindowResizeFeature();
 });
-
-
-// // Функция для добавления возможности максимизации окон
-// function addMaximizeFunctionality() {
-//   console.log('Adding maximize functionality...'); // Для отладки
-
-//   // CSS для кнопки максимизации
-//   const maximizeCSS = `
-//     .maximize-button {
-//       background: #28c941;
-//       border: none;
-//       border-radius: 50%;
-//       width: 12px;
-//       height: 12px;
-//       margin-left: 4px;
-//       color: rgba(0, 0, 0, 0);
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       font-size: 8px;
-//       transition: color 0.2s;
-//       cursor: pointer;
-//     }
-
-//     .maximize-button:hover {
-//       color: rgba(0, 0, 0, 0.5);
-//     }
-
-//     .project.maximized {
-//       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
-//       z-index: 999 !important;
-//     }
-
-//     .project.maximized .resize-handle {
-//       display: none !important;
-//     }
-//   `;
-
-//   // Добавление стилей
-//   const styleEl = document.createElement('style');
-//   styleEl.textContent = maximizeCSS;
-//   document.head.appendChild(styleEl);
-
-//   // Получаем все проекты
-//   const projects = document.querySelectorAll('.project');
-  
-//   projects.forEach((project) => {
-//     // Находим заголовок и панель инструментов
-//     const header = project.querySelector('.head');
-//     const toolbar = project.querySelector('.toolbar');
-    
-//     if (!toolbar) {
-//       console.error('Toolbar not found in project', project);
-//       return;
-//     }
-
-//     // Создаем кнопку максимизации
-//     const maximizeButton = document.createElement('button');
-//     maximizeButton.className = 'maximize-button';
-//     maximizeButton.innerHTML = '❒';
-//     maximizeButton.title = 'Maximize';
-//     toolbar.appendChild(maximizeButton);
-
-//     // Функция максимизации/восстановления
-//     function toggleMaximize(event) {
-//       if (event) {
-//         event.stopPropagation();
-//       }
-      
-//       console.log('Toggle maximize called'); // Для отладки
-      
-//       const wrapper = document.querySelector('.project-wrapper');
-//       const wrapperRect = wrapper.getBoundingClientRect();
-      
-//       if (project.classList.contains('maximized')) {
-//         // Восстанавливаем исходное состояние
-//         project.style.transition = 'all 0.3s ease';
-//         project.style.left = project.dataset.preMaximizeLeft + 'px';
-//         project.style.top = project.dataset.preMaximizeTop + 'px';
-//         project.style.width = project.dataset.preMaximizeWidth + 'px';
-//         project.style.height = project.dataset.preMaximizeHeight + 'px';
-//         project.classList.remove('maximized');
-//         maximizeButton.innerHTML = '❒';
-        
-//         console.log('Project restored to:', {
-//           left: project.style.left,
-//           top: project.style.top,
-//           width: project.style.width,
-//           height: project.style.height
-//         });
-//       } else {
-//         // Сохраняем текущие размеры перед максимизацией
-//         project.dataset.preMaximizeLeft = parseInt(project.style.left) || 0;
-//         project.dataset.preMaximizeTop = parseInt(project.style.top) || 0;
-//         project.dataset.preMaximizeWidth = project.offsetWidth;
-//         project.dataset.preMaximizeHeight = project.offsetHeight;
-        
-//         console.log('Saved dimensions:', {
-//           left: project.dataset.preMaximizeLeft,
-//           top: project.dataset.preMaximizeTop,
-//           width: project.dataset.preMaximizeWidth,
-//           height: project.dataset.preMaximizeHeight
-//         });
-        
-//         // Максимизируем окно
-//         project.style.transition = 'all 0.3s ease';
-//         project.style.left = '0px';
-//         project.style.top = '0px';
-//         project.style.width = wrapperRect.width + 'px';
-//         project.style.height = wrapperRect.height + 'px';
-//         project.classList.add('maximized');
-//         maximizeButton.innerHTML = '◱';
-        
-//         // Поднимаем окно на верхний слой
-//         project.style.zIndex = 9999;
-//       }
-//     }
-    
-//     // Обработчик клика по кнопке максимизации
-//     maximizeButton.addEventListener('click', toggleMaximize);
-    
-//     // Обработчик двойного клика по заголовку
-//     header.addEventListener('dblclick', function(event) {
-//       // Игнорируем двойной клик по кнопкам
-//       if (!event.target.classList.contains('hide-button') && 
-//           !event.target.classList.contains('maximize-button')) {
-//         toggleMaximize(event);
-//       }
-//     });
-    
-//     // Сохраняем оригинальные обработчики перетаскивания
-//     const originalMousedownHandler = header._mousedownHandler;
-//     const originalTouchstartHandler = header._touchstartHandler;
-    
-//     // Новый обработчик нажатия мыши
-//     function enhancedMouseDownHandler(event) {
-//       // Игнорируем нажатия на кнопки
-//       if (event.target.classList.contains('hide-button') || 
-//           event.target.classList.contains('maximize-button')) {
-//         return;
-//       }
-      
-//       // Если окно максимизировано, восстанавливаем его перед началом перетаскивания
-//       if (project.classList.contains('maximized')) {
-//         toggleMaximize();
-        
-//         // Даем время для анимации восстановления
-//         setTimeout(() => {
-//           // Центрируем окно под курсором
-//           const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
-//           const newX = event.clientX - wrapperRect.left - (project.offsetWidth / 2);
-//           const newY = event.clientY - wrapperRect.top - 20;
-          
-//           project.style.transition = 'none';
-//           project.style.left = newX + 'px';
-//           project.style.top = newY + 'px';
-          
-//           // Устанавливаем начальные координаты для перетаскивания
-//           if (window.activeProject && window.activeProject === project) {
-//             window.initialX = event.clientX - newX;
-//             window.initialY = event.clientY - newY;
-//           }
-//         }, 10);
-//       }
-//     }
-    
-//     // Новый обработчик для сенсорных устройств
-//     function enhancedTouchStartHandler(event) {
-//       // Игнорируем нажатия на кнопки
-//       if (event.target.classList.contains('hide-button') || 
-//           event.target.classList.contains('maximize-button')) {
-//         return;
-//       }
-      
-//       // Аналогичная логика восстановления окна при начале перетаскивания
-//       if (project.classList.contains('maximized')) {
-//         toggleMaximize();
-        
-//         setTimeout(() => {
-//           const touch = event.touches[0];
-//           const wrapperRect = document.querySelector('.project-wrapper').getBoundingClientRect();
-//           const newX = touch.clientX - wrapperRect.left - (project.offsetWidth / 2);
-//           const newY = touch.clientY - wrapperRect.top - 20;
-          
-//           project.style.transition = 'none';
-//           project.style.left = newX + 'px';
-//           project.style.top = newY + 'px';
-          
-//           if (window.activeProject && window.activeProject === project) {
-//             window.initialX = touch.clientX - newX;
-//             window.initialY = touch.clientY - newY;
-//           }
-//         }, 10);
-//       }
-//     }
-    
-//     // Добавляем улучшенные обработчики
-//     header.addEventListener('mousedown', enhancedMouseDownHandler, true);
-//     header.addEventListener('touchstart', enhancedTouchStartHandler, true);
-//   });
-  
-//   console.log('Maximize functionality added successfully');
-// }
-
-// // Вызываем функцию после полной загрузки DOM
-// document.addEventListener('DOMContentLoaded', function() {
-//   // Задержка для уверенности, что все другие инициализации завершены
-//   setTimeout(addMaximizeFunctionality, 100);
-// });
-
-// // Также можно вызвать функцию сразу
-// if (document.readyState === 'complete' || document.readyState === 'interactive') {
-//   setTimeout(addMaximizeFunctionality, 100);
-// }

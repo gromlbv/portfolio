@@ -62,28 +62,28 @@ img {
   font-family: 'NeutralSans';
   font-weight: 400;
   font-style: normal;
-  src: url("source/font/NeutralSans-Regular.woff2") format('woff2');
+  src: url("/static/font/NeutralSans-Regular.woff2") format('woff2');
 }
 
 @font-face {
   font-family: 'NeutralSans';
   font-weight: 500;
   font-style: normal;
-  src: url("source/font/NeutralSans-Meidum.woff2") format('woff2');
+  src: url("/static/font/NeutralSans-Meidum.woff2") format('woff2');
 }
 
 @font-face {
   font-family: 'NeutralSans';
   font-weight: 700;
   font-style: normal;
-  src: url("source/font/NeutralSans-Bold.woff2") format('woff2');
+  src: url("/static/font/NeutralSans-Bold.woff2") format('woff2');
 }
 
 @font-face {
   font-family: 'NeutralSans';
   font-weight: 900;
   font-style: normal;
-  src: url("source/font/NeutralSans-Black.woff2") format('woff2');
+  src: url("/static/font/NeutralSans-Black.woff2") format('woff2');
 }
 
 
@@ -719,7 +719,7 @@ header.active {
 
       a::after {
         padding-left: 4px;
-        content: url("source/arrow.svg");
+        content: url("static/arrow.svg");
       }
 
       a:hover {
@@ -814,7 +814,7 @@ header.active {
 
   height: 95vh;
 
-  background-image: url(/source/background.png);
+  background-image: url('/static/background.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
