@@ -6,9 +6,9 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 def index():
     return render_template('index.html')
 
-@app.route('/utils/<path:path>')
-def utils(path):
-    return send_from_directory('static/utils', path)
+@app.route('/utils/init.js')
+def utils():
+    return send_from_directory('static/utils', 'init.js')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5200, debug=True)
